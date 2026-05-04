@@ -1,0 +1,179 @@
+/* Tamaño base */
+.reveal {
+  font-size: 34px;
+}
+
+/* Títulos */
+.reveal h1 {
+  font-size: 2.2em;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+}
+
+.reveal h3 {
+  font-size: 1.3em;
+}
+
+/* Texto */
+.reveal p {
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+/* Listas */
+.reveal ul,
+.reveal ol {
+  margin-left: 1.2em;
+}
+
+.reveal li {
+  margin-bottom: 0.25em;
+  font-size: 0.85em;
+}
+
+.reveal p,
+.reveal li {
+  max-width: 900px;
+}
+
+/* Código */
+.reveal code {
+  font-size: 0.9em;
+  font-family: "Courier New", monospace;
+  background: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.reveal pre code {
+  padding: 1em;
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+/* Imágenes */
+.reveal img {
+  border: none;
+  box-shadow: none;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.reveal section {
+  text-align: left;
+}
+
+.reveal .title-slide {
+  text-align: left;
+  padding-top: 140px;
+  padding-left: 140px;
+  max-width: 900px;
+}
+
+.reveal .title-slide h1 {
+  font-size: 2.2em;
+}
+
+.reveal .title-slide p {
+  font-size: 1.1em;
+}
+
+
+/* Header SOLO en slides normales */
+.reveal .slides section:not(.no-header):not(.figure-slide)::before {
+  content: "Computación científica y exploración de modelos complejos";
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 0.6em;
+  color: #666;
+  opacity: 0.8;
+  border-bottom: 1px solid #ddd;
+}
+
+.reveal .slides section.no-header::before {
+  content: none !important;
+}
+
+
+
+.reveal .title-slide .author {
+  font-size: 0.9em;
+  margin-top: 1em;
+}
+
+.reveal .title-slide .date {
+  font-size: 0.7em;
+  color: #777;
+}
+
+.reveal .center {
+  text-align: center;
+}
+
+.reveal .columns {
+  gap: 2rem;
+}
+
+.reveal strong {
+  color: #1f77b4;
+}
+
+.reveal .slides section {
+  padding-top: 2.5rem;
+}
+
+.reveal .footer {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  font-size: 0.85em;
+  color: rgb(56, 56, 56);
+}
+
+
+/* Estilo para diapositivas con figuras */
+
+.reveal .figure-slide {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Figure slide tweaks */
+.reveal .slides section.figure-slide {
+  padding-top: 0.5rem !important;
+  justify-content: flex-start;
+}
+
+.reveal .slides section.figure-slide h2 {
+  font-size: 1.2em;
+  margin-top: 0 !important;
+  margin-bottom: 0.5rem;
+}
+
+/* Contenido central */
+.reveal .figure-slide .content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imágenes */
+.reveal .figure-slide img {
+  max-height: 58vh;
+  object-fit: contain;
+}
+
+/* Footer */
+.reveal .figure-slide .footer {
+  position: relative;
+  text-align: left;
+  align-self: flex-start;
+  font-size: 0.7em;
+  margin-top: 10px;
+}
+
