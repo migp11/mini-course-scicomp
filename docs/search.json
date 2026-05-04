@@ -1,0 +1,1692 @@
+[
+  {
+    "objectID": "references.html#dataset-movilidad-mitma-v1-españa",
+    "href": "references.html#dataset-movilidad-mitma-v1-españa",
+    "title": "Mini Course",
+    "section": "Dataset Movilidad (MITMA v1) España",
+    "text": "Dataset Movilidad (MITMA v1) España\nEste conjunto de datos contiene agregaciones diarias de los datos horarios proporcionados por MITMA, agregadas a diferentes niveles de resolución espacial.\nMaestra 1: Matriz Origen-Destino para la capa de movilidad, con resolución horaria. Cada entrada incluye una fecha y un periodo horario (el intervalo entre dos horas consecutivas), las zonas de origen y destino, y el número de viajes entre el origen y el destino. Las zonas de origen y destino corresponden a geometrías de la capa de movilidad de MITMA, y también se registran los viajes internos (dentro de la misma capa de origen y destino).\nMaestra 2: Matriz de viajes por persona en cada área de movilidad, con datos diarios. Este indicador informa sobre el comportamiento de movilidad diario de la población. Para cada fecha y zona de la capa de movilidad de MITMA, el indicador muestra cuántas personas han realizado 0, 1, 2 o más de 2 viajes. Si bien el indicador no proporciona el destino de los viajes, sí tiene en cuenta la proporción de personas que realizan al menos un viaje o ninguno, así como la población total estimada en esa zona para la fecha indicada (considerando como población a las personas que pernoctan en la zona en esa fecha). Source: https://www.transportes.gob.es/ministerio/proyectos-singulares/estudios-de-movilidad-con-big-data/estudios-de-movilidad-anteriores/covid-19"
+  },
+  {
+    "objectID": "references.html#dataset-covid-19-españa",
+    "href": "references.html#dataset-covid-19-españa",
+    "title": "Mini Course",
+    "section": "Dataset COVID-19 España",
+    "text": "Dataset COVID-19 España\nDescripción: Datos desde el inicio de la pandemia, para todas las edades, hasta el 28 de marzo de 2022. Número de casos, número de hospitalizaciones, número de ingresos en UCI y número de defunciones por sexo, edad y provincia de residencia. Source: https://cnecovid.isciii.es/covid19/#documentaci%C3%B3n-y-datos"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#datos-epidemiológicos",
+    "href": "practical/01_dataframes.html#datos-epidemiológicos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Datos epidemiológicos",
+    "text": "Datos epidemiológicos\nDataset de COVID-19 para España con:\n\ncasos\nhospitalizaciones\nUCI\nfallecidos\n\nDesagregado por:\n\nprovincia\nsexo\ngrupo de edad\n\nEn la celda a continuación se carga el dataset y se aplican transformaciones básica para facilitar el manejo de los datos\nEjercicio 1 - Análisis preliminar\n¿Qué representa cada fila?\nTareas\nInvestigar el dataset y responder las siguientes preguntas 1. ¿Qué dimensiones tiene el dataset? 2. ¿Por qué hay múltiples filas para la misma fecha y provincia? 3. ¿Cuantas categorías de edad hay? 4. ¿Cuantas provincias hay? 5. ¿En que rango de fechas se reportan las varialbes?\nEjercicio 2\nFiltra los datos para:\n\nuna provincia\n\nun grupo de edad\n\n¿Qué se observa?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-3-serie-temporal-nacional",
+    "href": "practical/01_dataframes.html#ejercicio-3-serie-temporal-nacional",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 3 — Serie temporal nacional",
+    "text": "Ejercicio 3 — Serie temporal nacional\nVamos a analizar la evolución de la pandemia a nivel de toda España.\nTareas:\n\nAgrega los datos por fecha (todas las provincias)\nCalcula las siguientes variables:\n\ncasos\nhospitalizaciones\nUCI\nfallecimientos\n\nRepresenta las 4 variables en subplots\n\n¿Qué patrón observas en las curvas?\nAyuda Para la agregación emplear un groupby “date” y sumar en las varaiables de interés: “cases”, “hosp”, “uci”, “deaths” y guardar el resultado en una variable llamada covid_spain\nPara realizar los plots: fig, axes = plt.subplots(2, 2, figsize=(12, 6), sharex=True) Para realizar los distintos gráficos usar el comando de ejemplo modificando la variable de interes (casos, hosp, etc) y los índices de la varable axes: covid_spain[\"cases\"].plot(ax=axes[0, 0], title=\"Casos por día\")"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-4-patrón-semanal",
+    "href": "practical/01_dataframes.html#ejercicio-4-patrón-semanal",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 4 — Patrón semanal",
+    "text": "Ejercicio 4 — Patrón semanal\nObserva las series temporales.\nPreguntas:\n\n¿Las curvas son suaves?\n¿Observas algún patrón repetitivo?\n¿A qué crees que se debe?\n\nPista: piensa en cómo se reportan los datos"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-5-media-móvil-rolling-average",
+    "href": "practical/01_dataframes.html#ejercicio-5-media-móvil-rolling-average",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 5 — Media móvil (rolling average)",
+    "text": "Ejercicio 5 — Media móvil (rolling average)\nPara eliminar el efecto del reporte semanal:\nTareas:\n\nCalcula una media móvil de 7 días\nRepresenta la serie original vs suavizada\n\n¿Qué cambia?\nAyuda\nEmplear la función rolling(window=wsize) con wsize=7"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-6-suavizado-por-provincia",
+    "href": "practical/01_dataframes.html#ejercicio-6-suavizado-por-provincia",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 6 — Suavizado por provincia",
+    "text": "Ejercicio 6 — Suavizado por provincia\nAplica el suavizado a nivel provincial.\nTareas:\n\nAgrupa por provincia y fecha\nAplica rolling average de 7 días por provincia\n\nPista: usa groupby + transform o apply"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-7-visualización-por-provincias",
+    "href": "practical/01_dataframes.html#ejercicio-7-visualización-por-provincias",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 7 — Visualización por provincias",
+    "text": "Ejercicio 7 — Visualización por provincias\nVamos a visualizar la evolución temporal en todas las provincias.\nTareas:\n\nCrear un grid de subplots\nRepresentar la serie suavizada por provincia\n\n¿Observas diferencias entre provincias? ¿Se sincronizan las olas?\n¿Qué provincias presentan mayor incidencia?\nIdentificar los picos y las fechas en cada provincia"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-8-ranking-de-casos-acumulados",
+    "href": "practical/01_dataframes.html#ejercicio-8-ranking-de-casos-acumulados",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 8 — Ranking de casos acumulados",
+    "text": "Ejercicio 8 — Ranking de casos acumulados\nVamos a identificar las provincias con mayor impacto de la pandemia.\nTareas:\n\nCalcula los casos acumulados por provincia\n\nConstruye un ranking (de mayor a menor)\n\n¿Qué provincias aparecen arriba?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-9-interpretación",
+    "href": "practical/01_dataframes.html#ejercicio-9-interpretación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 9 — Interpretación",
+    "text": "Ejercicio 9 — Interpretación\nObserva el ranking anterior.\nPreguntas:\n\n¿Es correcto comparar directamente estos valores?\n¿Qué factores pueden influir en este ranking?\n\nPista: piensa en el tamaño de las provincias"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-10-integración-de-datos",
+    "href": "practical/01_dataframes.html#ejercicio-10-integración-de-datos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 10 — Integración de datos",
+    "text": "Ejercicio 10 — Integración de datos\nDisponemos de datos de población por provincia.\nTareas:\n\nCargar el dataset de población covid19/provincias.parquet usando geopandas\nHacer un merge con los datos de COVID\nDividir la columna de casos por la te población (total) y multiplicar por 1e5 (100K)\nHacer el ranking y comparar con el ranking previo\nRepresentar los caseos escalados en un mapa\n\nPista: usa el identificador de provincia"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-11-comparación",
+    "href": "practical/01_dataframes.html#ejercicio-11-comparación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 11 — Comparación",
+    "text": "Ejercicio 11 — Comparación\nCompara:\n\nranking por casos absolutos\n\nranking por casos por 100K\n\nPreguntas:\n\n¿Qué provincias cambian de posición?\n¿Qué nos dice esto sobre el análisis?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#analisis-de-datos-de-movilidad",
+    "href": "practical/01_dataframes.html#analisis-de-datos-de-movilidad",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Analisis de datos de movilidad",
+    "text": "Analisis de datos de movilidad\nEn esta segunda parte trabajaremos con datos de movilidad poblacional basados en telefonía móvil\nEstos datos describen el número de viajes entre 2850 zonas geográficas en España que corresponden a distritos o municipios\nEl objetivo de esta parte es:\n\nentender la estructura de los datos de movilidad\n\ntransformar los datos en una representación más manejable\n\nconstruir flujos agregados entre regiones\n\nanalizar la movilidad como una red"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#carga-de-datos",
+    "href": "practical/01_dataframes.html#carga-de-datos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Carga de datos",
+    "text": "Carga de datos\nCargamos los datos de movilidad."
+  },
+  {
+    "objectID": "practical/01_dataframes.html#exploración-inicial",
+    "href": "practical/01_dataframes.html#exploración-inicial",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Exploración inicial",
+    "text": "Exploración inicial\nVamos a inspeccionar las columnas del dataset."
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-1",
+    "href": "practical/01_dataframes.html#ejercicio-1",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 1",
+    "text": "Ejercicio 1\n¿Cuantas entradas tiene el dataframe? ¿Qué representa cada fila del dataset?\nPistas: - Observa que hay varias filas con el mismo origen y destino\n- ¿Qué variables cambian entre ellas?\n- ¿Qué significa esto en términos de datos?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#limpieza-y-estandarización",
+    "href": "practical/01_dataframes.html#limpieza-y-estandarización",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Limpieza y estandarización",
+    "text": "Limpieza y estandarización\nRenombramos columnas para facilitar el análisis."
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-2-1",
+    "href": "practical/01_dataframes.html#ejercicio-2-1",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 2",
+    "text": "Ejercicio 2\n¿Cuántas combinaciones únicas de origen-destino hay?\n¿Es un dataset pequeño o grande?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-3",
+    "href": "practical/01_dataframes.html#ejercicio-3",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 3",
+    "text": "Ejercicio 3\nAgregación de datos\nQueremos construir el flujo total entre regiones.\nPara ello, agregamos todas las filas que corresponden a un mismo: - origen\n- destino\n- fecha\n¿Qué problema estamos resolviendo?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-4",
+    "href": "practical/01_dataframes.html#ejercicio-4",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 4",
+    "text": "Ejercicio 4\nConstrucción de matriz OD\nConstruimos la matriz origen-destino (ODM), una matriz cuadrada donde cada entrada \\(x_{ij}\\) representa el total de viajes desde la reigón \\(i\\) a la región \\(j\\)\nPista: hay que hacer un pivot de la tabla\n¿Qué representa esta matriz?\n\n¿Qué son las filas?\n\n¿Qué son las columnas?\n\n¿Qué representan los valores?\n\nAnalizar qué regiones reciben más movilidad."
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-5-matriz-origen-destino",
+    "href": "practical/01_dataframes.html#ejercicio-5-matriz-origen-destino",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 5 — Matriz origen-destino",
+    "text": "Ejercicio 5 — Matriz origen-destino\nConstruye un heatmap de la matriz OD.\nTareas:\n\nConstruir la matriz OD\n\nVisualizar con seaborn (heatmap)"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-6",
+    "href": "practical/01_dataframes.html#ejercicio-6",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 6",
+    "text": "Ejercicio 6\nAnaliza la distribución de la variable flow (viajes):\n\n¿Es uniforme?\n¿Hay valores extremos?\n¿Qué tipo de distribución tiene?\n\nIdentifica los flujos más importantes:\n\n¿Qué pares origen-destino tienen más viajes?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-7-viajes-internos",
+    "href": "practical/01_dataframes.html#ejercicio-7-viajes-internos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 7 — Viajes internos",
+    "text": "Ejercicio 7 — Viajes internos\nLos viajes internos son aquellos en los que el origen y el destino coinciden.\nTareas:\n\nFiltra los viajes internos\n\nCalcula el número total de viajes internos por región\n\nIdentificar las 10 regiones con mayor numero de viajes internos\nRepresentar en un mapa los viajes internos"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-8-movilidad-saliente",
+    "href": "practical/01_dataframes.html#ejercicio-8-movilidad-saliente",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 8 — Movilidad saliente",
+    "text": "Ejercicio 8 — Movilidad saliente\nLa movilidad saliente mide el número total de viajes que salen de cada región.\nTareas:\n\nAgrupa los datos por origen\n\nCalcula el total de viajes\n\nIdentificar las 10 regiones con mayor numero de viajes\nRepresentar en un mapa los flujos salientes"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-9-movilidad-entrante",
+    "href": "practical/01_dataframes.html#ejercicio-9-movilidad-entrante",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 9 — Movilidad entrante",
+    "text": "Ejercicio 9 — Movilidad entrante\nLa movilidad entrante mide el número total de viajes que llegan a cada región.\nTareas:\n\nAgrupa los datos por destino\n\nCalcula el total de viajes\n\nIdentificar las 10 regiones con mayor numero de viajes\nRepresentar en un mapa los flujos entrantes"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-10-comparación",
+    "href": "practical/01_dataframes.html#ejercicio-10-comparación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 10 — Comparación",
+    "text": "Ejercicio 10 — Comparación\nCompara:\n\nviajes internos\n\nmovilidad entrante\n\nmovilidad saliente\n\nPregunta:\n¿Qué diferencias observas entre regiones?"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-11-visualización-geográfica",
+    "href": "practical/01_dataframes.html#ejercicio-11-visualización-geográfica",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 11 — Visualización geográfica",
+    "text": "Ejercicio 11 — Visualización geográfica\nVamos a visualizar la movilidad sobre un mapa.\nTareas:\n\nCargar la geometría (data/mitma_v1/zonificacion.parquet)\nCalcular los viajes totales/internos/externos por región\nUnir vaijes totales con las geometrías\nRepresentar en un mapa"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-11-agregación-a-nivel-provincial",
+    "href": "practical/01_dataframes.html#ejercicio-11-agregación-a-nivel-provincial",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 11 — Agregación a nivel provincial",
+    "text": "Ejercicio 11 — Agregación a nivel provincial\nHasta ahora hemos trabajado a nivel de zonas de movilidad (alta resolución).\nEn este ejercicio vamos a agregar los viajes a nivel de provincias.\nDisponemos de un GeoDataFrame (gdf) que contiene:\n\nzone_id → identificador de la zona (ej. 01001_AM)\n\nprovince_id → identificador de la provincia"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#ejercicio-final-riesgo-asociado-a-la-movilidad",
+    "href": "practical/01_dataframes.html#ejercicio-final-riesgo-asociado-a-la-movilidad",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio final — Riesgo asociado a la movilidad",
+    "text": "Ejercicio final — Riesgo asociado a la movilidad\n\nEn este ejercicio vamos a combinar:\n\ndatos epidemiológicos (COVID-19)\ndatos de movilidad\n\npara construir un indicador simple del riesgo de propagación."
+  },
+  {
+    "objectID": "practical/01_dataframes.html#idea",
+    "href": "practical/01_dataframes.html#idea",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Idea",
+    "text": "Idea\nQueremos estimar:\ncuántas personas infectadas se están desplazando entre regiones"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#aproximación",
+    "href": "practical/01_dataframes.html#aproximación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Aproximación",
+    "text": "Aproximación\n\nEstimar el número de personas infectadas por región\n\nConvertirlo en una densidad (probabilidad de estar infectado)\n\nCombinarlo con los flujos de movilidad"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#paso-1-incidencia-acumulada-a-10-días",
+    "href": "practical/01_dataframes.html#paso-1-incidencia-acumulada-a-10-días",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 1 — Incidencia acumulada a 10 días",
+    "text": "Paso 1 — Incidencia acumulada a 10 días\nVamos a usar la suma de casos en los últimos 10 días como una aproximación del número de personas infectadas.\nTareas:\n\nTrabajar con los datos agregados por:\n\nfecha\nprovincia\n\nCalcula la incidencia acumulada a 10 días usando una suma móvil.\n\nEsto será nuestro proxy de infectados\nAyuda: aplicar la misma estrategia que en el ejercicio 6 para aplicar la media deslizante"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#paso-2-densidad-de-infectados",
+    "href": "practical/01_dataframes.html#paso-2-densidad-de-infectados",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 2 — Densidad de infectados",
+    "text": "Paso 2 — Densidad de infectados\nPara comparar entre regiones necesitamos normalizar por población.\nTareas:\n\nCombinar con el dataset de población\n\nCalcula la densidad de infectados como:\n\ndensidad = cases_10d / total_population"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#paso-3-selección-temporal",
+    "href": "practical/01_dataframes.html#paso-3-selección-temporal",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 3 — Selección temporal",
+    "text": "Paso 3 — Selección temporal\nSelecciona un día concreto para el análisis (ver ejemplo a continuación).\nd = pd.to_datetime(\"2020-03-31\")\ncovid_pop[covid_pop[\"date\"] == d]"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#paso-5-cálculo-del-riesgo",
+    "href": "practical/01_dataframes.html#paso-5-cálculo-del-riesgo",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 5 — Cálculo del riesgo",
+    "text": "Paso 5 — Cálculo del riesgo\nQueremos combinar:\n\ntrips(date, source, target)\ndensity(date, id)\n\nCalcula:\nrisk = trips × density"
+  },
+  {
+    "objectID": "practical/01_dataframes.html#paso-6-agregación",
+    "href": "practical/01_dataframes.html#paso-6-agregación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 6 — Agregación",
+    "text": "Paso 6 — Agregación\nCalcula:\n\nriesgo total saliente por región\nriesgo total entrante por región"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#motivación",
+    "href": "practical/03_xarray_flowmaps.html#motivación",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Motivación",
+    "text": "Motivación\nHasta ahora hemos trabajado con dataframes.\nSin embargo, este tipo de problema tiene una estructura naturalmente multidimensional:\n\nmovilidad → (t, origen, destino)\ncasos → (t, región)\n\nCon xarray podemos representar esta estructura directamente."
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-1-exploración",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-1-exploración",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 1 — Exploración",
+    "text": "Ejercicio 1 — Exploración\n\n¿Qué columnas tiene cada dataset?\n¿Qué representa cada variable?\n¿Qué dimensiones implícitas puedes identificar?\n¿Qué rango de fechas tiene cada dataset?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-2-conversión-a-xarray",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-2-conversión-a-xarray",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 2 — Conversión a xarray",
+    "text": "Ejercicio 2 — Conversión a xarray\nConvierte los tres dataframes a estructuras xarray adecuadas.\nPrimero vamos a intentar hacerlo de forma manual, es decir: 1. creando las coordinadas 2. estructurando los datos\nDe esta forma vamos a entender mejor el funcionamiento. Para la segunda parte del ejercicio, vamos a volver a crear los xarray pero empleando funciones específicas Pistas: - usa .set_index(...) - luego .to_xarray()"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-3-dimensiones-y-coordenadas",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-3-dimensiones-y-coordenadas",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 3 — Dimensiones y coordenadas",
+    "text": "Ejercicio 3 — Dimensiones y coordenadas\nPara cada dataset:\n\nidentifica dimensiones\nidentifica coordenadas\ncomprueba que están alineadas"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-4-incidencia-acumulada",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-4-incidencia-acumulada",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 4 — Incidencia acumulada",
+    "text": "Ejercicio 4 — Incidencia acumulada\nCalcula una incidencia acumulada a 10 días usando rolling sum.\nPregunta:\n\n¿por qué usamos esto como proxy?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-5-normalización",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-5-normalización",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 5 — Normalización",
+    "text": "Ejercicio 5 — Normalización\nCalcula la densidad de infectados:\ndensity(t, i) = casos / población\nPregunta:\n\n¿qué dimensiones tiene el resultado?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-6-cálculo-del-riesgo",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-6-cálculo-del-riesgo",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 6 — Cálculo del riesgo",
+    "text": "Ejercicio 6 — Cálculo del riesgo\nQueremos calcular:\nrisk(t, i, j)\na partir de:\n\ntrips(t, i, j)\ndensity(t, i)\n\n👉 intenta hacerlo directamente"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-7-análisis",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-7-análisis",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 7 — Análisis",
+    "text": "Ejercicio 7 — Análisis\nCalcula:\n\nriesgo total saliente por región\nriesgo total entrante\n\nPregunta:\n\n¿qué regiones destacan?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-8-riesgo-y-propagación-de-la-epidemia",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-8-riesgo-y-propagación-de-la-epidemia",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 8 — Riesgo y propagación de la epidemia",
+    "text": "Ejercicio 8 — Riesgo y propagación de la epidemia\nEn este ejercicio analizaremos si el riesgo asociado a la movilidad entre regiones puede estar relacionado con la aparición de nuevos casos en la región de destino.\nLa idea es explorar si:\n\nun aumento en el riesgo desde i → j\nprecede a un aumento en la incidencia en j\n\nEsto podría indicar que los viajes desde i han contribuido a la propagación hacia j.\nSelecciona dos provincias (i, j) y analiza:\n\nel riesgo asociado a los viajes desde i → j\nla incidencia en la región j"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-1-construcción-de-un-dataset",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-1-construcción-de-un-dataset",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 1 — Construcción de un Dataset",
+    "text": "Ejercicio 1 — Construcción de un Dataset\nCrea un objeto xarray.Dataset que contenga:\n\nincidencia: casos y densidad\npoblación\nmovilidad (trips)\nriesgo\n\nAsegúrate de que:\n\ncomparten coordenadas\nlas dimensiones están alineadas\n\nPregunta:\n\n¿qué ventajas tiene agrupar variables en un Dataset?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-2-validación",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-2-validación",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 2 — Validación",
+    "text": "Ejercicio 2 — Validación\nComprueba:\n\nque las coordenadas de tiempo coinciden\nque las regiones están alineadas\n\nPregunta:\n\n¿qué problemas podrían surgir si no lo estuvieran?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-3-guardado",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-3-guardado",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 3 — Guardado",
+    "text": "Ejercicio 3 — Guardado\nGuarda el dataset en formato NetCDF.\nLuego:\n\nvuelve a cargarlo\nverifica que es igual al original\n\nPregunta:\n\n¿qué ventajas tiene NetCDF frente a CSV o Parquet?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-4-reducción",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-4-reducción",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 4 — Reducción",
+    "text": "Ejercicio 4 — Reducción\nCalcula:\n\nriesgo total saliente por región\nriesgo total entrante por región\nriesgo medio en el tiempo\n\nPregunta:\n\n¿cómo interpretas cada uno?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-5-subconjuntos",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-5-subconjuntos",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 5 — Subconjuntos",
+    "text": "Ejercicio 5 — Subconjuntos\nSelecciona:\n\nun subconjunto de fechas\nun subconjunto de regiones\n\nPregunta:\n\n¿cómo cambia la estructura del dataset?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-6-agregación-temporal",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-6-agregación-temporal",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio 6 — Agregación temporal",
+    "text": "Ejercicio 6 — Agregación temporal\nAgrupa los datos por:\n\nsemana o\nmes\n\ny calcula el riesgo medio\nPregunta:\n\n¿qué patrones emergen?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-matriz-de-riesgo-neto",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-matriz-de-riesgo-neto",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio — Matriz de riesgo neto",
+    "text": "Ejercicio — Matriz de riesgo neto\nPara una fecha concreta:\n\nrepresenta la matriz risk(i, j)\n\nPregunta:\n\n¿qué estructura observas?"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-avanzado-correlación-temporal",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-avanzado-correlación-temporal",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio avanzado — Correlación temporal",
+    "text": "Ejercicio avanzado — Correlación temporal\nQueremos estudiar la relación entre:\n\nriesgo desde i → j\nincidencia en j\n\na lo largo del tiempo."
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#de-matrices-a-redes",
+    "href": "practical/03_xarray_flowmaps.html#de-matrices-a-redes",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "De matrices a redes",
+    "text": "De matrices a redes\nLa matriz de riesgo risk(i, j) puede interpretarse como una red dirigida:\n\nnodos → regiones\naristas → flujo de riesgo entre regiones"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#riesgo-neto",
+    "href": "practical/03_xarray_flowmaps.html#riesgo-neto",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Riesgo neto",
+    "text": "Riesgo neto\nDefinimos el riesgo neto como (usar transpose):\nnet(i, j) = risk(i, j) - risk(j, i)"
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#ejercicio-red-de-riesgo-dirigida",
+    "href": "practical/03_xarray_flowmaps.html#ejercicio-red-de-riesgo-dirigida",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Ejercicio — Red de riesgo dirigida",
+    "text": "Ejercicio — Red de riesgo dirigida\nA partir de la matriz risk(i, j), construye una red dirigida basada en el riesgo neto."
+  },
+  {
+    "objectID": "practical/03_xarray_flowmaps.html#interpretación",
+    "href": "practical/03_xarray_flowmaps.html#interpretación",
+    "title": "Parte II — Análisis multidimensional con xarray",
+    "section": "Interpretación",
+    "text": "Interpretación\n\n¿Qué regiones son emisores netos?\n¿Qué regiones reciben más riesgo?\n¿Hay estructura geográfica?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#datos-epidemiológicos",
+    "href": "practical/solutions/01_dataframes.html#datos-epidemiológicos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Datos epidemiológicos",
+    "text": "Datos epidemiológicos\nDataset de COVID-19 para España con:\n\ncasos\nhospitalizaciones\nUCI\nfallecidos\n\nDesagregado por:\n\nprovincia\nsexo\ngrupo de edad\n\nEn la celda a continuación se carga el dataset y se aplican transformaciones básica para facilitar el manejo de los datos\nEjercicio 1 - Análisis preliminar\n¿Qué representa cada fila?\nTareas\nInvestigar el dataset y responder las siguientes preguntas 1. ¿Qué dimensiones tiene el dataset? 2. ¿Por qué hay múltiples filas para la misma fecha y provincia? 3. ¿Cuantas categorías de edad hay? 4. ¿Cuantas provincias hay? 5. ¿En que rango de fechas se reportan las varialbes?\nEjercicio 2\nFiltra los datos para:\n\nuna provincia\n\nun grupo de edad\n\n¿Qué se observa?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-3-serie-temporal-nacional",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-3-serie-temporal-nacional",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 3 — Serie temporal nacional",
+    "text": "Ejercicio 3 — Serie temporal nacional\nVamos a analizar la evolución de la pandemia a nivel de toda España.\nTareas:\n\nAgrega los datos por fecha (todas las provincias)\nCalcula las siguientes variables:\n\ncasos\nhospitalizaciones\nUCI\nfallecimientos\n\nRepresenta las 4 variables en subplots\n\n¿Qué patrón observas en las curvas?\nAyuda Para la agregación emplear un groupby “date” y sumar en las varaiables de interés: “cases”, “hosp”, “uci”, “deaths” y guardar el resultado en una variable llamada covid_spain\nPara realizar los plots: fig, axes = plt.subplots(2, 2, figsize=(12, 6), sharex=True) Para realizar los distintos gráficos usar el comando de ejemplo modificando la variable de interes (casos, hosp, etc) y los índices de la varable axes: covid_spain[\"cases\"].plot(ax=axes[0, 0], title=\"Casos por día\")"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-4-patrón-semanal",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-4-patrón-semanal",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 4 — Patrón semanal",
+    "text": "Ejercicio 4 — Patrón semanal\nObserva las series temporales.\nPreguntas:\n\n¿Las curvas son suaves?\n¿Observas algún patrón repetitivo?\n¿A qué crees que se debe?\n\nPista: piensa en cómo se reportan los datos"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-5-media-móvil-rolling-average",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-5-media-móvil-rolling-average",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 5 — Media móvil (rolling average)",
+    "text": "Ejercicio 5 — Media móvil (rolling average)\nPara eliminar el efecto del reporte semanal:\nTareas:\n\nCalcula una media móvil de 7 días\nRepresenta la serie original vs suavizada\n\n¿Qué cambia?\nAyuda\nEmplear la función rolling(window=wsize) con wsize=7"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-6-suavizado-por-provincia",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-6-suavizado-por-provincia",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 6 — Suavizado por provincia",
+    "text": "Ejercicio 6 — Suavizado por provincia\nAplica el suavizado a nivel provincial.\nTareas:\n\nAgrupa por provincia y fecha\nAplica rolling average de 7 días por provincia\n\nPista: usa groupby + transform o apply"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-7-visualización-por-provincias",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-7-visualización-por-provincias",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 7 — Visualización por provincias",
+    "text": "Ejercicio 7 — Visualización por provincias\nVamos a visualizar la evolución temporal en todas las provincias.\nTareas:\n\nCrear un grid de subplots\nRepresentar la serie suavizada por provincia\n\n¿Observas diferencias entre provincias? ¿Se sincronizan las olas?\n¿Qué provincias presentan mayor incidencia?\nIdentificar los picos y las fechas en cada provincia"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-8-ranking-de-casos-acumulados",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-8-ranking-de-casos-acumulados",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 8 — Ranking de casos acumulados",
+    "text": "Ejercicio 8 — Ranking de casos acumulados\nVamos a identificar las provincias con mayor impacto de la pandemia.\nTareas:\n\nCalcula los casos acumulados por provincia\n\nConstruye un ranking (de mayor a menor)\n\n¿Qué provincias aparecen arriba?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-9-interpretación",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-9-interpretación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 9 — Interpretación",
+    "text": "Ejercicio 9 — Interpretación\nObserva el ranking anterior.\nPreguntas:\n\n¿Es correcto comparar directamente estos valores?\n¿Qué factores pueden influir en este ranking?\n\nPista: piensa en el tamaño de las provincias"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-10-integración-de-datos",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-10-integración-de-datos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 10 — Integración de datos",
+    "text": "Ejercicio 10 — Integración de datos\nDisponemos de datos de población por provincia.\nTareas:\n\nCargar el dataset de población covid19/provincias.parquet usando geopandas\nHacer un merge con los datos de COVID\nDividir la columna de casos por la te población (total) y multiplicar por 1e5 (100K)\nHacer el ranking y comparar con el ranking previo\nRepresentar los caseos escalados en un mapa\n\nPista: usa el identificador de provincia"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-11-comparación",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-11-comparación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 11 — Comparación",
+    "text": "Ejercicio 11 — Comparación\nCompara:\n\nranking por casos absolutos\n\nranking por casos por 100K\n\nPreguntas:\n\n¿Qué provincias cambian de posición?\n¿Qué nos dice esto sobre el análisis?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#analisis-de-datos-de-movilidad",
+    "href": "practical/solutions/01_dataframes.html#analisis-de-datos-de-movilidad",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Analisis de datos de movilidad",
+    "text": "Analisis de datos de movilidad\nEn esta segunda parte trabajaremos con datos de movilidad poblacional basados en telefonía móvil\nEstos datos describen el número de viajes entre 2850 zonas geográficas en España que corresponden a distritos o municipios\nEl objetivo de esta parte es:\n\nentender la estructura de los datos de movilidad\n\ntransformar los datos en una representación más manejable\n\nconstruir flujos agregados entre regiones\n\nanalizar la movilidad como una red"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#carga-de-datos",
+    "href": "practical/solutions/01_dataframes.html#carga-de-datos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Carga de datos",
+    "text": "Carga de datos\nCargamos los datos de movilidad."
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#exploración-inicial",
+    "href": "practical/solutions/01_dataframes.html#exploración-inicial",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Exploración inicial",
+    "text": "Exploración inicial\nVamos a inspeccionar las columnas del dataset."
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-1",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-1",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 1",
+    "text": "Ejercicio 1\n¿Cuantas entradas tiene el dataframe? ¿Qué representa cada fila del dataset?\nPistas: - Observa que hay varias filas con el mismo origen y destino\n- ¿Qué variables cambian entre ellas?\n- ¿Qué significa esto en términos de datos?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#limpieza-y-estandarización",
+    "href": "practical/solutions/01_dataframes.html#limpieza-y-estandarización",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Limpieza y estandarización",
+    "text": "Limpieza y estandarización\nRenombramos columnas para facilitar el análisis."
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-2-1",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-2-1",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 2",
+    "text": "Ejercicio 2\n¿Cuántas combinaciones únicas de origen-destino hay?\n¿Es un dataset pequeño o grande?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-3",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-3",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 3",
+    "text": "Ejercicio 3\nAgregación de datos\nQueremos construir el flujo total entre regiones.\nPara ello, agregamos todas las filas que corresponden a un mismo: - origen\n- destino\n- fecha\n¿Qué problema estamos resolviendo?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-4",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-4",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 4",
+    "text": "Ejercicio 4\nConstrucción de matriz OD\nConstruimos la matriz origen-destino (ODM), una matriz cuadrada donde cada entrada \\(x_{ij}\\) representa el total de viajes desde la reigón \\(i\\) a la región \\(j\\)\nPista: hay que hacer un pivot de la tabla\n¿Qué representa esta matriz?\n\n¿Qué son las filas?\n\n¿Qué son las columnas?\n\n¿Qué representan los valores?\n\nAnalizar qué regiones reciben más movilidad."
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-5-matriz-origen-destino",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-5-matriz-origen-destino",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 5 — Matriz origen-destino",
+    "text": "Ejercicio 5 — Matriz origen-destino\nConstruye un heatmap de la matriz OD.\nTareas:\n\nConstruir la matriz OD\n\nVisualizar con seaborn (heatmap)"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-6",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-6",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 6",
+    "text": "Ejercicio 6\nAnaliza la distribución de la variable flow (viajes):\n\n¿Es uniforme?\n¿Hay valores extremos?\n¿Qué tipo de distribución tiene?\n\nIdentifica los flujos más importantes:\n\n¿Qué pares origen-destino tienen más viajes?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-7-viajes-internos",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-7-viajes-internos",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 7 — Viajes internos",
+    "text": "Ejercicio 7 — Viajes internos\nLos viajes internos son aquellos en los que el origen y el destino coinciden.\nTareas:\n\nFiltra los viajes internos\n\nCalcula el número total de viajes internos por región\n\nIdentificar las 10 regiones con mayor numero de viajes internos\nRepresentar en un mapa los viajes internos"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-8-movilidad-saliente",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-8-movilidad-saliente",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 8 — Movilidad saliente",
+    "text": "Ejercicio 8 — Movilidad saliente\nLa movilidad saliente mide el número total de viajes que salen de cada región.\nTareas:\n\nAgrupa los datos por origen\n\nCalcula el total de viajes\n\nIdentificar las 10 regiones con mayor numero de viajes\nRepresentar en un mapa los flujos salientes"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-9-movilidad-entrante",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-9-movilidad-entrante",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 9 — Movilidad entrante",
+    "text": "Ejercicio 9 — Movilidad entrante\nLa movilidad entrante mide el número total de viajes que llegan a cada región.\nTareas:\n\nAgrupa los datos por destino\n\nCalcula el total de viajes\n\nIdentificar las 10 regiones con mayor numero de viajes\nRepresentar en un mapa los flujos entrantes"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-10-comparación",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-10-comparación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 10 — Comparación",
+    "text": "Ejercicio 10 — Comparación\nCompara:\n\nviajes internos\n\nmovilidad entrante\n\nmovilidad saliente\n\nPregunta:\n¿Qué diferencias observas entre regiones?"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-11-visualización-geográfica",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-11-visualización-geográfica",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 11 — Visualización geográfica",
+    "text": "Ejercicio 11 — Visualización geográfica\nVamos a visualizar la movilidad sobre un mapa.\nTareas:\n\nCargar la geometría (data/mitma_v1/zonificacion.parquet)\nCalcular los viajes totales/internos/externos por región\nUnir vaijes totales con las geometrías\nRepresentar en un mapa"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-11-agregación-a-nivel-provincial",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-11-agregación-a-nivel-provincial",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio 11 — Agregación a nivel provincial",
+    "text": "Ejercicio 11 — Agregación a nivel provincial\nHasta ahora hemos trabajado a nivel de zonas de movilidad (alta resolución).\nEn este ejercicio vamos a agregar los viajes a nivel de provincias.\nDisponemos de un GeoDataFrame (gdf) que contiene:\n\nzone_id → identificador de la zona (ej. 01001_AM)\n\nprovince_id → identificador de la provincia"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#ejercicio-final-riesgo-asociado-a-la-movilidad",
+    "href": "practical/solutions/01_dataframes.html#ejercicio-final-riesgo-asociado-a-la-movilidad",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Ejercicio final — Riesgo asociado a la movilidad",
+    "text": "Ejercicio final — Riesgo asociado a la movilidad\nEn este ejercicio vamos a combinar:\n\ndatos epidemiológicos (COVID-19)\ndatos de movilidad\n\npara construir un indicador simple del riesgo de propagación."
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#idea",
+    "href": "practical/solutions/01_dataframes.html#idea",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Idea",
+    "text": "Idea\nQueremos estimar:\ncuántas personas infectadas se están desplazando entre regiones"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#aproximación",
+    "href": "practical/solutions/01_dataframes.html#aproximación",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Aproximación",
+    "text": "Aproximación\n\nEstimar el número de personas infectadas por región\n\nConvertirlo en una densidad (probabilidad de estar infectado)\n\nCombinarlo con los flujos de movilidad"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#paso-1-incidencia-acumulada-a-10-días",
+    "href": "practical/solutions/01_dataframes.html#paso-1-incidencia-acumulada-a-10-días",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 1 — Incidencia acumulada a 10 días",
+    "text": "Paso 1 — Incidencia acumulada a 10 días\nVamos a usar la suma de casos en los últimos 10 días como una aproximación del número de personas infectadas.\nTareas:\n\nTrabajar con los datos agregados por:\n\nfecha\nprovincia\n\nCalcular una rolling sum de 10 días\n\nEsto será nuestro proxy de infectados\nAyuda: aplicar la misma estrategia que en el ejercicio 6 para aplicar la media deslizante"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#paso-2-densidad-de-infectados",
+    "href": "practical/solutions/01_dataframes.html#paso-2-densidad-de-infectados",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 2 — Densidad de infectados",
+    "text": "Paso 2 — Densidad de infectados\nPara comparar entre regiones necesitamos normalizar por población.\nTareas:\n\nCombinar con el dataset de población\n\nCalcular:\n\ndensidad = infectados / población"
+  },
+  {
+    "objectID": "practical/solutions/01_dataframes.html#paso-3-selección-temporal",
+    "href": "practical/solutions/01_dataframes.html#paso-3-selección-temporal",
+    "title": "Día 1 — Introducción a datos espacio temporales de movilidad y epidemias",
+    "section": "Paso 3 — Selección temporal",
+    "text": "Paso 3 — Selección temporal\nSelecciona un día concreto para el análisis (ver ejemplo a continuación).\nd = pd.to_datetime(\"2020-03-31\")\ncovid_pop[covid_pop[\"date\"] == d]"
+  },
+  {
+    "objectID": "lectures/L05_emews.html#simple-workflows-with-abm",
+    "href": "lectures/L05_emews.html#simple-workflows-with-abm",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Simple Workflows with ABM",
+    "text": "Simple Workflows with ABM\nThe sweep workflow reads an input file, and runs an application using each line of the input file as input to an application run. We call this input file an unrolled parameter file or UPF file. The following is the EMEWS sweep workflow structure:",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L05_emews.html#workflow-control-with-python",
+    "href": "lectures/L05_emews.html#workflow-control-with-python",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Workflow control with Python",
+    "text": "Workflow control with Python",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#datos-científicos-tablas",
+    "href": "lectures/L02_nd_arrays.html#datos-científicos-tablas",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Datos científicos ≠ tablas",
+    "text": "Datos científicos ≠ tablas\nMuchos problemas científicos tienen estructura en múltiples dimensiones:\n\ntiempo\n\nespacio\n\nvariables\n\nEjemplos:\n\nepidemiología: región × tiempo × edad × variable (casos, muertes, etc)\n\nmovilidad: origen × destino × tiempo …\nsimulaciones: espacio × tiempo × estado …\n\nEstos datos NO son naturalmente tabulares",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#dataframe-formato-largo",
+    "href": "lectures/L02_nd_arrays.html#dataframe-formato-largo",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Dataframe (formato largo)",
+    "text": "Dataframe (formato largo)\n\nRepresentación de la incidencia\n\n\n\ndate\nregion\nage\nsex\ncases\n\n\n\n\nt1\nA\n26-35\nM\n35\n\n\nt1\nA\n26-35\nH\n39\n\n\n\n\nRepresentación de la movilidad\n\n\n\ndate\norigin\ndestination\nflow\n\n\n\n\nt1\nA\nB\n100\n\n\nt1\nA\nC\n50\n\n\n\n\n¿Dónde está la estructura?",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#problema-con-dataframes",
+    "href": "lectures/L02_nd_arrays.html#problema-con-dataframes",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Problema con dataframes",
+    "text": "Problema con dataframes\n\nPara representar datos multidimensionales:\n\nduplicamos filas (cada combinación)\nusamos joins para combinar datos\nalineamos manualmente\n\nEsto introduce complejidad, errores y dificula el análisis y la escalabilidad",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#problema-con-dataframes-1",
+    "href": "lectures/L02_nd_arrays.html#problema-con-dataframes-1",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Problema con dataframes",
+    "text": "Problema con dataframes\n\nEjemplo real\nPara calcular riesgo:\n\ncalcular densidad de casos:\n\n(casos(t, i) / población(i))\n\nmerge movilidad + densidad de casos (alinear por fecha y región)\nmultiplicar por flujo de movilidad (flow(t, i, j)) por densidad\n\nriesgo(t, i, j) = flow(t, i, j) · density(t, i)\n\nrepetir para cada fecha t\n\n\nConlusión: código complejo para algo simple (poco escalable)",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#idea-clave",
+    "href": "lectures/L02_nd_arrays.html#idea-clave",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Idea clave",
+    "text": "Idea clave\n\nLa estructura del dato debe reflejar la estructura del problema\n\nArray\nflow(t, i, j)\nLa estructura es explícita\n\ndimensión tiempo\n\ndimensión origen\n\ndimensión destino",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#arrays-multidimensionales",
+    "href": "lectures/L02_nd_arrays.html#arrays-multidimensionales",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Arrays multidimensionales",
+    "text": "Arrays multidimensionales\n\nUn array es una colección de valores organizados en una estructura regular.\nDependiendo de la cantidad de dimensiones:\n\n0D → escalar\n1D → vector\n\n2D → matriz\n\nnD → tensor\n\n\n\nFigure source: https://medium.com/@fathahka/scalar-vector-matrix-tensor-in-linear-algr-f1bc673fa4eb",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#notación",
+    "href": "lectures/L02_nd_arrays.html#notación",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Notación",
+    "text": "Notación\n\nUn tensor de dimensión \\(n\\) se denota como:\n\\(X \\in \\mathbb{R}^{d_1 \\times d_2 \\times \\cdots \\times d_n}\\)\ndonde \\(d_i\\) es la dimensión \\(i\\)-ésima\n\nEjemplo: matriz origen-destino\n\\(X(t, i, j)\\): tensor de dimensión 3 con dimensiones:\n\nt → tiempo: \\({t_1, t_2, ..., t_T}\\)\ni → origen: \\({i_1, i_2, ..., i_M}\\)\nj → destino: \\({j_1, j_2, ..., j_M}\\)",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#dimensiones",
+    "href": "lectures/L02_nd_arrays.html#dimensiones",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Dimensiones",
+    "text": "Dimensiones\n\nLas dimensiones definen la estructura del array:\n\ntiempo: \\(t \\in \\lbrace t_1, t_2, ..., t_T \\rbrace\\)\n\nregión: \\(i \\in \\lbrace i_1, i_2, ..., i_M \\rbrace\\)\n\norigen/destino: \\(j \\in \\lbrace j_1, j_2, ..., j_M \\rbrace\\)\nsexo: \\(s \\in \\lbrace M, H \\rbrace\\)\netc\n\n\nCada dimensión tiene un significado específico y puede ser manipulada de forma independiente",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#operaciones-básicas-en-arrays-indexado",
+    "href": "lectures/L02_nd_arrays.html#operaciones-básicas-en-arrays-indexado",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Operaciones básicas en arrays: indexado",
+    "text": "Operaciones básicas en arrays: indexado\n\nLos índices permiten acceder a los valores específicos dentro del array\nAcceder a un elemento:\n\nNotación matemática: \\(X(t, i, j)\\) o \\(X_{t, i, j}\\)\nNotación en código: X[t, i, j]\n\n\nSeleccionar un subconjunto (slice):\nX[t, :, :] → todos los orígenes y destinos en el tiempo \\(t\\)\n\nLos índices pueden entenderse como coordenadas en un espacio multidimensional",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#operaciones-básicas-en-arrays-transposición-i",
+    "href": "lectures/L02_nd_arrays.html#operaciones-básicas-en-arrays-transposición-i",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Operaciones básicas en arrays: Transposición (I)",
+    "text": "Operaciones básicas en arrays: Transposición (I)\n\nLa transposición es una operación que reordena las dimensiones de un array.\nEn el caso de una matriz (2D), la transposición intercambia filas por columnas.\n\n\nMatriz original (2×3)\n\\(A = \\begin{bmatrix}\n1 & 2 & 3 \\\\\n4 & 5 & 6\n\\end{bmatrix}\\)\n\nMatriz transpuesta (3×2)\n\\(A^T =\n\\begin{bmatrix}\n1 & 4 \\\\\n2 & 5 \\\\\n3 & 6\n\\end{bmatrix}\\)",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#operaciones-básicas-en-arrays-transposición-ii",
+    "href": "lectures/L02_nd_arrays.html#operaciones-básicas-en-arrays-transposición-ii",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Operaciones básicas en arrays: Transposición (II)",
+    "text": "Operaciones básicas en arrays: Transposición (II)\n\nEn nd-arrays, la transposición puede reordenar cualquier combinación de dimensiones.\n\n\\(X(t, i, j)\\) → \\(X(t, j, i)\\)\nEn código: X.transpose(0, 2, 1)\n\nEjemplo:\n\n\nArray original \\(X(t, i, j)\\)\n\\(X =\n\\begin{bmatrix}\n\\begin{bmatrix}\n1 & 2 \\\\\n3 & 4\n\\end{bmatrix}\n,\n\\begin{bmatrix}\n5 & 6 \\\\\n7 & 8\n\\end{bmatrix}\n\\end{bmatrix}\\)\nDimensiones: \\((t, i, j)\\)\n\nTransposición \\(X^T\\)\n\\(X^T =\n\\begin{bmatrix}\n\\begin{bmatrix}\n1 & 3 \\\\\n2 & 4\n\\end{bmatrix}\n,\n\\begin{bmatrix}\n5 & 7 \\\\\n6 & 8\n\\end{bmatrix}\n\\end{bmatrix}\\)\nDimensiones: \\((t, j, i)\\)\n\nImportante: la transposición reordena las dimensiones de un array",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#reorganización-de-dimensiones-reshape",
+    "href": "lectures/L02_nd_arrays.html#reorganización-de-dimensiones-reshape",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Reorganización de dimensiones (reshape)",
+    "text": "Reorganización de dimensiones (reshape)\nA veces necesitamos:\n\ncambiar orden de dimensiones\nañadir/eliminar dimensiones\n\nEl reshape permite cambiar la forma del array sin modificar los datos (e.g. convertir una matriz esparsa en una matriz densa)\nEjemplo: (10, 5) → (5, 10)\nEl flatten convierte un array multidimensional en un vector (útil para machine learning y almacenamiento):\nEjemplo: (10, 5) → (50,)",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#reducciones",
+    "href": "lectures/L02_nd_arrays.html#reducciones",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Reducciones",
+    "text": "Reducciones\nOperaciones sobre dimensiones específicas:\n\nsuma\n\nmedia\n\nmáximo\n\n\nEjemplos\n\\(\\sum_j X(t, i, j)\\) → nº total de viajes saliente desde \\(i\\)\nX.sum(axis=2) → en código\n\\(\\frac{1}{N} \\sum_j X(t, i, j)\\) → promedio saliente desde \\(i\\)\nX.mean(axis=2) → en código",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#producto-elemento-a-elemento-product-wise",
+    "href": "lectures/L02_nd_arrays.html#producto-elemento-a-elemento-product-wise",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Producto elemento a elemento (product wise)",
+    "text": "Producto elemento a elemento (product wise)\nNos sirve para combinar información de dos arrays con la misma forma (shape)\nY(t, i, j) = A(t, i, j) · B(t, i, j)\n\nEjemplo: casos normalizados por población\n\nLos caso tiene dimensión \\(t \\times i\\) y la población tiene dimensión \\(i\\), donde \\(t\\) es la fecha (o tiempo) e \\(i\\) es la región.\nPara obtener casos por población, necesitamos dividir cada elemento de casos por el elemento correspondiente de población\ncasos(t) por 100.000 habitantes = casos(t) / población\n\nPero, ¿que pasa si los arrays tienen dimensiones distintas?",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#broadcasting",
+    "href": "lectures/L02_nd_arrays.html#broadcasting",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Broadcasting",
+    "text": "Broadcasting\n\nPermite combinar datos con distinta dimensionalidad sin necesidad de reestructurar explícitamente\nEsto se logra extendiendo automáticamente las dimensiones más pequeñas para que coincidan con las más grandes\n\nEjemplo: riesgo asociado a la movildiad\n\nflow(t, i, j) (viajes entre \\(i\\) y \\(j\\) en el tiempo \\(t\\))\ndensity(t, i) (casos activos en \\(i\\) por población en el tiempo \\(t\\))\n\nResultado:\nrisk(t, i, j) = flow(t, i, j) · density(t, i)",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#broadcasting-1",
+    "href": "lectures/L02_nd_arrays.html#broadcasting-1",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Broadcasting",
+    "text": "Broadcasting\n\n\n\n\nSource: https://jakevdp.github.io/PythonDataScienceHandbook/",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#broadcasting-reglas",
+    "href": "lectures/L02_nd_arrays.html#broadcasting-reglas",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Broadcasting: reglas",
+    "text": "Broadcasting: reglas\n\nLa difusión de datos en NumPy sigue un conjunto estricto de reglas para determinar la interacción entre dos arreglos:\n\nSi los dos arreglos difieren en su número de dimensiones, el arreglo con menos dimensiones se rellena con unos en su lado izquierdo.\nSi el tamaño de los dos arreglos no coincide en ninguna dimensión, el arreglo con un tamaño igual a 1 en esa dimensión se expande para que coincida con el otro.\nSi en alguna dimensión los tamaños no coinciden y ninguno es igual a 1, se genera un error.\n\nDe momento no entraremos en detalles, pero es importante saber que existen estas reglas",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#comparación",
+    "href": "lectures/L02_nd_arrays.html#comparación",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Comparación",
+    "text": "Comparación\n\n\n\nDataframes\n\nestructura implícita\noperaciones indirectas\njoins necesarios\n\ntabla larga → difícil de razonar\n\nArrays\n\nestructura explícita\n\noperaciones directas\n\nbroadcasting\n\nestructura explícita → fácil de razonar\n\n\nAdemás los arrays se almacenan de forma contigua en memoria lo que permite realizar:\n\noperaciones rápidas\nvectorización",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#representación-del-problema",
+    "href": "lectures/L02_nd_arrays.html#representación-del-problema",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Representación del problema",
+    "text": "Representación del problema\n\nElegir cómo representamos los datos:\n\ndefine cómo pensamos\n\ndefine qué errores cometemos\n\ndefine qué código escribimos\n\nimportante para escribir código más claro y con menos errores\nCoordenadas. Cada dimensión tiene valores asociados:\n\ntiempo → fechas\n\nregión → nombres\n\nedad → rangos\n\nEsto convierte índices en información interpretable!",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#problema",
+    "href": "lectures/L02_nd_arrays.html#problema",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Problema",
+    "text": "Problema\n\nLos arrays de NumPy:\n\nusan índices numéricos\n\nno tienen etiquetas\n\nson propensos a errores\n\nX[3, 5, 2] ¿qué significa 3?\n\n¿fecha?\n¿región?\n\nno lo sabemos, y es fácil confundir el orden de las dimensiones. X[3, 5, 2] es difícil de interpretar y propenso a errores.",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#errores-comunes",
+    "href": "lectures/L02_nd_arrays.html#errores-comunes",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Errores comunes",
+    "text": "Errores comunes\n\nconfundir dimensiones\nasumir orden incorrecto\nperder estructura al transformar\nescribir código complejo para manejar estas confusiones",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#índices-vs-coordenadas",
+    "href": "lectures/L02_nd_arrays.html#índices-vs-coordenadas",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Índices vs coordenadas",
+    "text": "Índices vs coordenadas\n\nEn NumPy:\nX[3, 5, 2]\nno sabemos qué significa cada dimensión\nEn problemas reales:\n\nt = “2020-03-15”\n\ni = “Madrid”\n\nj = “Barcelona”\n\nnecesitamos coordenadas con significado",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#la-solución",
+    "href": "lectures/L02_nd_arrays.html#la-solución",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "La solución",
+    "text": "La solución\n\nNecesitamos\n\narrays multidimensionales\n\ncon significado semántico\n\nEs decir, necesitamos:\n\ndimensiones con nombre\n\níndices con etiquetas\n\n\nEsto es xarray!!",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#que-es-xarray",
+    "href": "lectures/L02_nd_arrays.html#que-es-xarray",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Que es Xarray?",
+    "text": "Que es Xarray?\n\n\nes una biblioteca de Python para trabajar con arrays multidimensionales etiquetados.\nintroduce etiquetas en forma de dimensiones, coordenadas y atributos sobre matrices multidimensionales (similares a NumPy)\npermite una experiencia de desarrollo más intuitiva, concisa y con menos errores.\n\nProporciona:\n\nDataArray que combina la eficiencia de los arrays de numpy con la flexibilidad de las etiquetas.\nDataset que es una colección de DataArrays con dimensiones compartidas.",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#xarray-estructuras-de-datos",
+    "href": "lectures/L02_nd_arrays.html#xarray-estructuras-de-datos",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Xarray: estructuras de datos",
+    "text": "Xarray: estructuras de datos\n\n  \n\n\nSource: https://xarray.dev/",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#xarray-ecosystem",
+    "href": "lectures/L02_nd_arrays.html#xarray-ecosystem",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Xarray ecosystem",
+    "text": "Xarray ecosystem\n\n\n\n\n\nSource: https://xarray.dev/",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#problema-almacenamiento-de-datos-multidimensionales",
+    "href": "lectures/L02_nd_arrays.html#problema-almacenamiento-de-datos-multidimensionales",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Problema: almacenamiento de datos multidimensionales",
+    "text": "Problema: almacenamiento de datos multidimensionales\n\n¿Cómo guardamos:\n\nflow(t, i, j)\n\nen un fichero?\nCSV:\n\nno tiene dimensiones\n\npierde estructura\n\ndifícil de reconstruir\n\n\nno es es un formato adecuado",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#formatos-multidimensionales",
+    "href": "lectures/L02_nd_arrays.html#formatos-multidimensionales",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Formatos multidimensionales",
+    "text": "Formatos multidimensionales\n\nFormatos diseñados para arrays:\n\nNetCDF\n\nHDF5\n\nZarr\n\nPermiten:\n\nalmacenar dimensiones\n\nguardar coordenadas\n\nacceder parcialmente a los datos",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#netcdf",
+    "href": "lectures/L02_nd_arrays.html#netcdf",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "NetCDF",
+    "text": "NetCDF\n\nFormato utilizado para el almacenamiento y procesamiento de grandes cantidades de datos, especialmente en meteorología y ciencias de la tierra.\nSus características son: \n\nAutodescribiente: contiene una descripción de su contenido.\nPortable: es accesible por sistemas operativos con diferentes maneras de almacenar enteros, caracteres y números de punto flotante.\nEscalable: subconjuntos de grandes bases de datos son accesibles incluso desde máquinas remotas.\nComplementable: datos nuevos pueden ser agregados sin modificaciones extremas a los datos anteriores de un archivo.\nCompartible: mientras un editor agrega datos otros varios editores del archivo pueden continuar su lectura de datos.\nCompatible: la compatibilidad con versiones anteriores será conservada.",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#xarray-y-netcdf",
+    "href": "lectures/L02_nd_arrays.html#xarray-y-netcdf",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Xarray y NetCDF",
+    "text": "Xarray y NetCDF\n\nXarray trabaja directamente con NetCDF:\n\nleer datasets\n\nmanipular arrays\n\nguardar resultados\n\n\nEntonces la integración directa",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#parte-práctica",
+    "href": "lectures/L02_nd_arrays.html#parte-práctica",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Parte práctica",
+    "text": "Parte práctica\n\nEl objetivo de la parte práctica es aplicar los conceptos vistos en clase a un problema real.\n\nTrabajaremos con datos de:\n\nmovilidad poblacional\n\nepidemiología",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#estructura-de-la-práctica",
+    "href": "lectures/L02_nd_arrays.html#estructura-de-la-práctica",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Estructura de la práctica",
+    "text": "Estructura de la práctica\n\nLa práctica se divide en dos partes:\n\nWarm-up con xarray\n\nCaso de estudio del curso",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#parte-i-warm-up",
+    "href": "lectures/L02_nd_arrays.html#parte-i-warm-up",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Parte I — Warm-up",
+    "text": "Parte I — Warm-up\n\nIntroducción práctica a xarray utilizando ejemplos simples.\nObjetivos:\n\nentender DataArray y Dataset\n\ntrabajar con dimensiones y coordenadas\n\naprender operaciones básicas\n\nintroducir broadcasting",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#por-qué-un-warm-up",
+    "href": "lectures/L02_nd_arrays.html#por-qué-un-warm-up",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "¿Por qué un warm-up?",
+    "text": "¿Por qué un warm-up?\n\nxarray introduce una forma distinta de trabajar con datos.\nAntes de aplicarlo a un problema real, necesitamos:\n\nfamiliarizarnos con la sintaxis\n\nentender los conceptos básicos\n\nevitar errores comunes\n\nEn esta parte vamos a introducir las ideas básicas de xarray con ejemplos simples, y luego las aplicaremos a nuestro problema real.",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#parte-ii-caso-de-estudio",
+    "href": "lectures/L02_nd_arrays.html#parte-ii-caso-de-estudio",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Parte II — Caso de estudio",
+    "text": "Parte II — Caso de estudio\nAplicaremos xarray a un problema real:\n\ndatos de movilidad\n\ndatos epidemiológicos\n\nObjetivo\nCalcular un indicador de riesgo asociado a la movilidad:\n\nincidencia 10 días\ndensidad\nbroadcasting\nrisk(t, i, j) = flow(t, i, j) · density(t, i)",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#flujo-de-trabajo",
+    "href": "lectures/L02_nd_arrays.html#flujo-de-trabajo",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Flujo de trabajo",
+    "text": "Flujo de trabajo\n\n\nConvertir dataframes → xarray\n\nDefinir dimensiones y coordenadas\n\nAplicar broadcasting\n\nCalcular métricas\nGuardar dataset\nCargar dataset",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#qué-cambia-respecto-a-pandas",
+    "href": "lectures/L02_nd_arrays.html#qué-cambia-respecto-a-pandas",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "¿Qué cambia respecto a pandas?",
+    "text": "¿Qué cambia respecto a pandas?\n\nEn lugar de:\n\nmerges\n\ngroupby\n\nalineación manual\n\nTrabajaremos con:\n\narrays multidimensionales\n\noperaciones directas",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L02_nd_arrays.html#resultado-esperado",
+    "href": "lectures/L02_nd_arrays.html#resultado-esperado",
+    "title": "Introducción a los Arrays multidimensionales",
+    "section": "Resultado esperado",
+    "text": "Resultado esperado\n\nAl finalizar la práctica serás capaz de:\n\ntrabajar con datos multidimensionales\n\nusar xarray de forma efectiva\n\nsimplificar problemas complejos mediante una mejor representación",
+    "crumbs": [
+      "Introducción a los Arrays multidimensionales"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#que-son-los-datos-masivos",
+    "href": "lectures/L03_massive_data.html#que-son-los-datos-masivos",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "¿Que son los datos masivos?",
+    "text": "¿Que son los datos masivos?\n\nDatos que no pueden ser procesados con herramientas tradicionales debido a su volumen, velocidad o variedad.\nRequieren técnicas y tecnologías específicas para su almacenamiento, procesamiento y análisis.\nEjemplos: datos de redes sociales, datos de sensores, datos genómicos, etc.",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#desafíos-de-los-datos-masivos",
+    "href": "lectures/L03_massive_data.html#desafíos-de-los-datos-masivos",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Desafíos de los datos masivos",
+    "text": "Desafíos de los datos masivos\n\nAlmacenamiento: Necesidad de sistemas de almacenamiento escalables y eficientes.\nProcesamiento: Requiere algoritmos y herramientas que puedan manejar grandes volúmenes de datos de manera eficiente.\nAnálisis: Necesidad de técnicas de análisis que puedan extraer información útil de grandes conjuntos de datos.\nVisualización: Dificultad para visualizar grandes conjuntos de datos de manera efectiva.",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#tbula",
+    "href": "lectures/L03_massive_data.html#tbula",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Tbula",
+    "text": "Tbula",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#parquet-arrow-y-dask",
+    "href": "lectures/L03_massive_data.html#parquet-arrow-y-dask",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Parquet, Arrow y Dask",
+    "text": "Parquet, Arrow y Dask\n\nParquet: formato de almacenamiento columnar eficiente para grandes volúmenes de datos.\nArrow: formato de memoria para datos tabulares, optimizado para velocidad y eficiencia.\nDask: biblioteca de Python para computación paralela, que permite trabajar con grandes conjuntos de datos distribuidos.",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#digital-twins",
+    "href": "lectures/L03_massive_data.html#digital-twins",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Digital Twins",
+    "text": "Digital Twins\n“There are differences between the way a physicist looks at a problem compared to a computer scientist,” says Hugo Barbosa, a post-doctoral researcher in Ghoshal’s lab, whose PhD is in computer science. “Physicists are more interested in the fundamental rules, the things that are universal, regardless of the populations. They want to understand the basic components of those models and make those components as general and universal as possible.”\nImagine, for instance, you want to figure out how people walk on a campus. One way of approaching this problem would be to gather all the data possible about every single person on the campus: what they ate that morning, what classes they have at what times, who their friends are, where the buildings are located on the campus, and so on.\n“It would, first of all, be virtually impossible to collect all this data,” Ghoshal says, “plus you wouldn’t be able to apply the same conclusions to the ways people walk on other campuses. The buildings are different, the geography is different.”\nA second way of approaching the problem involves using the methods Ghoshal and his lab members employ: distilling a system to it basics and applying physics, mathematics, and statistics.” Source: https://www.scientificamerican.com/article/why-we-have-so-many-problems-with-predicting-the-future1/",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#information-and-communication-technology-ict-data",
+    "href": "lectures/L03_massive_data.html#information-and-communication-technology-ict-data",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Information and Communication Technology (ICT) data",
+    "text": "Information and Communication Technology (ICT) data\n\nDatos generados por dispositivos y sistemas de comunicación, como teléfonos móviles, redes sociales, sensores, etc.\nEjemplos: datos de llamadas telefónicas, datos de redes sociales, datos de sensores, etc.",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#ejemplo-datos-de-movilidad-urbana",
+    "href": "lectures/L03_massive_data.html#ejemplo-datos-de-movilidad-urbana",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Ejemplo: Datos de movilidad urbana",
+    "text": "Ejemplo: Datos de movilidad urbana\n\nDatos de movilidad urbana: datos generados por dispositivos móviles, sensores de tráfico, etc., que pueden ser utilizados para entender patrones de movilidad en ciudades.\nAplicaciones prácticas: planificación urbana (reducción emisiones), gestión del tráfico, respuesta a emergencias, etc.\nCiencia básica: teoría de ciudades, modelos de movilidad, etc.",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L03_massive_data.html#referencias",
+    "href": "lectures/L03_massive_data.html#referencias",
+    "title": "Taller de computación científica y exploración de modelos complejos",
+    "section": "Referencias",
+    "text": "Referencias\nBatty, M. (2024). Digital twins in city planning. Nature Computational Science, 4(3), 192-199.",
+    "crumbs": [
+      "Taller de computación científica y exploración de modelos complejos"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#motivación",
+    "href": "lectures/L01_intro.html#motivación",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Motivación",
+    "text": "Motivación\n\nEl estudio de sistemas complejos es fundamental para entender fenómenos en diversas áreas, como:\n\nDinámica de epidemias\n\nCrecimiento y evolución de tumores\n\nLas ciudades\n\n¿Cómo entendemos y predecimos estos sistemas?",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#sistemas-complejos-i",
+    "href": "lectures/L01_intro.html#sistemas-complejos-i",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Sistemas complejos (I)",
+    "text": "Sistemas complejos (I)\n\nUn sistema complejo es un sistema compuesto por muchos componentes que interactúan entre sí [1].\n\nEjemplos:\n\nClima\nOrganismos\nEcosistemas\nInfraestructuras (red eléctrica, transporte)\nOrganizaciones sociales y económicas (como las ciudades )\n\n\n[1] https://en.wikipedia.org/wiki/Complex_system",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#el-cancer-como-un-sistema-complejo-adaptativo",
+    "href": "lectures/L01_intro.html#el-cancer-como-un-sistema-complejo-adaptativo",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "El cancer como un sistema complejo adaptativo",
+    "text": "El cancer como un sistema complejo adaptativo\n\n\n\n\nSource: Aguadé-Gorgorió G, Anderson A, Solé R. Modeling tumors as complex ecosystems iScience, 2024; 27",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#mobilidad-urbana",
+    "href": "lectures/L01_intro.html#mobilidad-urbana",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Mobilidad urbana",
+    "text": "Mobilidad urbana\n\n\n\nEl tráfico en Londres\n\n\nTaxistas en Nueva York\n\n\n\n\nSources: [1] https://phys.org/news/2019-03-laws-physics-untangle-traffic-stock.html [2]https://medium.com/data-science/new-york-city-taxi-data-visualization-eda-1c8e9b0a7c5",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#las-ciudades-como-sistemas-complejo-adaptativos",
+    "href": "lectures/L01_intro.html#las-ciudades-como-sistemas-complejo-adaptativos",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Las ciudades como sistemas complejo adaptativos",
+    "text": "Las ciudades como sistemas complejo adaptativos\n\n\n\n\nSource: Caldarelli, G et al. The role of complexity for digital twins of cities. Nat Comput Sci (2023)",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#como-se-propagan-las-epidemias",
+    "href": "lectures/L01_intro.html#como-se-propagan-las-epidemias",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "¿Como se propagan las epidemias?",
+    "text": "¿Como se propagan las epidemias?\n\n\n\n\nSource: https://www.wired.com/2015/04/see-diseases-spread-mesmerizing-graphics/",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#como-se-difunde-la-información-en-la-www",
+    "href": "lectures/L01_intro.html#como-se-difunde-la-información-en-la-www",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "¿Como se difunde la información en la WWW?",
+    "text": "¿Como se difunde la información en la WWW?\n\n\n\n\nSource: https://www.wired.com/2015/04/see-diseases-spread-mesmerizing-graphics/",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#sistemas-complejos-ii",
+    "href": "lectures/L01_intro.html#sistemas-complejos-ii",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Sistemas complejos (II)",
+    "text": "Sistemas complejos (II)\n\nAlgunas propiedades\n\nNo lineales\n\nMulti-escala\n\nPropiedades emergentes\nAdaptativos\n\n\nEjemplos:\ndinámica de un ecosistema\n\ncrecimiento tumoral\npropagación epidémica\nlas ciudades",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#la-revolución-de-los-datos",
+    "href": "lectures/L01_intro.html#la-revolución-de-los-datos",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "La revolución de los datos",
+    "text": "La revolución de los datos\n\nLa terória de sistemas complejos se ha desarrollado durante décadas, pero en los últimos años ha habido una revolución:\nHa aumentado exponencialmente\n\nLa disponibilidad de datos (de todo tipo)\nLa capacidad de procesamiento y almacenamiento\n\nEsto ha transformado la forma en que estudiamos los sistemas complejos",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#tipos-de-datos-en-ciencia",
+    "href": "lectures/L01_intro.html#tipos-de-datos-en-ciencia",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Tipos de datos en ciencia",
+    "text": "Tipos de datos en ciencia\nTrabajamos con distintos tipos de datos:\n\nSeries temporales\n\nDatos espaciales (geográficos)\n\nImágenes\n\nDatos ómicos\n\nDatos de sensores\n\nRedes (interacciones)\n\nCada tipo de dato tiene estructura propia",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#datos-estructurados-vs-no-estructurados",
+    "href": "lectures/L01_intro.html#datos-estructurados-vs-no-estructurados",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Datos estructurados vs no estructurados",
+    "text": "Datos estructurados vs no estructurados\nEstructurados\n\norganización clara\n\ndimensiones definidas\n\nejemplos:\n\ntablas\nseries temporales\nmatrices",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#dos-enfoques-en-el-estudio-de-sistemas-complejos",
+    "href": "lectures/L01_intro.html#dos-enfoques-en-el-estudio-de-sistemas-complejos",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Dos enfoques en el estudio de sistemas complejos",
+    "text": "Dos enfoques en el estudio de sistemas complejos\n\nEl problema: Tenemos datos… pero también queremos entender el sistema para poder simular escenarios futuros o evaluar intervenciones.\n\n\n\nEnfoque inductivo (data-driven)\n- basado en datos - estadistica descriptiva\n- machine learning - caja negra\n\nEnfoque deductivo (model-driven)\n- basado en hipótesis\n- inferencias causales - modelos mecanísticos - simulación",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#enfoque-inductivo",
+    "href": "lectures/L01_intro.html#enfoque-inductivo",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Enfoque inductivo",
+    "text": "Enfoque inductivo\n\n\nBasado en datos\n\nMachine learning\n\nPredicción\n\nReconocimiento de patrones\n\n\nEjemplos:\n\npredicción de nuevos casos (forecasting)\n\nclasificación (prediccion de tratamientos)",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#enfoque-deductivo",
+    "href": "lectures/L01_intro.html#enfoque-deductivo",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Enfoque deductivo",
+    "text": "Enfoque deductivo\n\n\nBasado en hipótesis\n\nModelos mecanísticos\n\nSimulación\n\n\nEjemplos:\n\nmodelos SIR\n\nmodelos celulares\nmodelos de agentes",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#limitaciones",
+    "href": "lectures/L01_intro.html#limitaciones",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Limitaciones",
+    "text": "Limitaciones\n\nMachine learning - Necesita muchos datos\n- Difícil de interpretar\n- El problema de la generalización\nModelos - Parámetros desconocidos\n- Simplificaciones\n- Dificultad para ajustarse a datos reales - Validación",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#convergencia",
+    "href": "lectures/L01_intro.html#convergencia",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Convergencia",
+    "text": "Convergencia\n\nExiste una convergencia entre ambos enfoques:\n\nSimulation-based inference\n\nSurrogate models\n\nNeural ODEs\n\nEstos enfoques combinan la capacidad de los modelos para representar mecanismos con la capacidad de los datos para ajustar y validar esos modelos.",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#gemelos-digitales",
+    "href": "lectures/L01_intro.html#gemelos-digitales",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Gemelos digitales",
+    "text": "Gemelos digitales\nModelo + datos + actualización continua\nEjemplos:\n\nsistemas biológicos\n\nepidemias\n\nciudades\nIndustria",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#estructura-del-curso",
+    "href": "lectures/L01_intro.html#estructura-del-curso",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Estructura del curso",
+    "text": "Estructura del curso\nMódulo 1: - Procesamiento de datos\nMódulo 2: - Simulación de sistemas complejos\nMódulo 3: - Exploración de modelos e inferencia",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#metodología",
+    "href": "lectures/L01_intro.html#metodología",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Metodología",
+    "text": "Metodología\n\nClases teórico-prácticas\nUn caso de estudio común durante todo el curso:\n\nMovilidad y epidemias\nDatos espacio-temporales (masivos)\n\nTrabajo progresivo hacia un proyecto final",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#evaluación",
+    "href": "lectures/L01_intro.html#evaluación",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Evaluación",
+    "text": "Evaluación\nProyecto individual:\n\nDefinición del problema\nDiseño del experimento\nImplementación\nAnálisis de resultados\nInforme final reproducible",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#herramientas-python-ecosystem",
+    "href": "lectures/L01_intro.html#herramientas-python-ecosystem",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Herramientas (Python ecosystem)",
+    "text": "Herramientas (Python ecosystem)\nDatos - pandas, polars, dask, pyarrow, xarray\nModelado - numpy, xarray, scipy\nVisualización - seaborn, matplotlib\nMachine learning - scikit-learn, statsmodels\nEntorno - Jupyter notebooks / JupyterLab",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#datos-y-modelos-del-curso",
+    "href": "lectures/L01_intro.html#datos-y-modelos-del-curso",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Datos y modelos del curso",
+    "text": "Datos y modelos del curso\nTrabajaremos con datos espacio-temporales: - Matrices de movilidad\n- Series temporales (incidencia)\n- Mapas y capas geográficas\n- Simulaciones de epimdemias\nDatos reales y simulados",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#objetivo",
+    "href": "lectures/L01_intro.html#objetivo",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Objetivo",
+    "text": "Objetivo\nConstruir un pipeline completo:\ndatos → simulación → análisis → exploración → inferencia",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#qué-haremos-hoy",
+    "href": "lectures/L01_intro.html#qué-haremos-hoy",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "¿Qué haremos hoy?",
+    "text": "¿Qué haremos hoy?\n\nTrabajar con datos reales:\n\nDatos de COVID-19 en España\nDatos de movilidad basados en teléfonos móviles\n\nExplorar y procesar datos\n\nRealizar algunos análisis básicos",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#transición-a-práctica",
+    "href": "lectures/L01_intro.html#transición-a-práctica",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Transición a práctica",
+    "text": "Transición a práctica\nEmpezamos con datos observados",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#datos-de-movilidad",
+    "href": "lectures/L01_intro.html#datos-de-movilidad",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Datos de movilidad",
+    "text": "Datos de movilidad\nEn esta segunda parte trabajaremos con datos de movilidad poblacional.\nEstos datos describen el número de viajes entre zonas geográficas en España.\nCada fila del dataset representa:\n\nun origen\nun destino\nuna fecha\ny un número de viajes\n\nAl igual que los datos de COVID, estos datos están segmentados por distintas dimensiones:\n\ngrupo de edad\ndistancia recorrida\ntipo de actividad (origen/destino)\n\nPor tanto, no representan directamente los flujos totales entre regiones",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#problema",
+    "href": "lectures/L01_intro.html#problema",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Problema",
+    "text": "Problema\nQueremos construir una representación más simple:\nuna matriz origen-destino (OD)\nPara ello, necesitaremos:\n\nentender la estructura de los datos\n\nagregar correctamente\n\ninterpretar el resultado",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/L01_intro.html#conexión-con-sistemas-complejos",
+    "href": "lectures/L01_intro.html#conexión-con-sistemas-complejos",
+    "title": "Motivación general, sistemas complejos y la estructura del curso",
+    "section": "Conexión con sistemas complejos",
+    "text": "Conexión con sistemas complejos\nEstos datos pueden interpretarse como:\n\nuna red dinámica\n\ndonde los nodos son regiones\n\ny las aristas representan flujos de personas\n\nEsta red será clave para modelar la propagación de enfermedades",
+    "crumbs": [
+      "Motivación general, sistemas complejos y la estructura del curso"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#covid-19-flow-maps",
+    "href": "lectures/flowmaps_intro.html#covid-19-flow-maps",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "COVID-19 Flow-Maps",
+    "text": "COVID-19 Flow-Maps\n\nSistema abierto de información geográfica\n\nDatos de COVID-19 y movilidad en España\n\n🔗 https://flowmaps.life.bsc.es\n🔗 https://github.com/bsc-flowmaps",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#problema",
+    "href": "lectures/flowmaps_intro.html#problema",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Problema",
+    "text": "Problema\nDiferentes fuentes de datos:\n\nCasos de COVID\n\nMovilidad poblacional\n\nReportados en diferentes niveles espaciales",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#distintas-capas-geográficas",
+    "href": "lectures/flowmaps_intro.html#distintas-capas-geográficas",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Distintas capas geográficas",
+    "text": "Distintas capas geográficas",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#datos-de-covid-19",
+    "href": "lectures/flowmaps_intro.html#datos-de-covid-19",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Datos de COVID-19",
+    "text": "Datos de COVID-19\n\nIncidencia diaria\n\nDiferentes resoluciones:\n\nProvincias\n\nComunidades autónomas\n\nRegiones sanitarias\n\n\nHeterogeneidad espacial",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#integración-de-datos",
+    "href": "lectures/flowmaps_intro.html#integración-de-datos",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Integración de datos",
+    "text": "Integración de datos",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#datos-de-movilidad",
+    "href": "lectures/flowmaps_intro.html#datos-de-movilidad",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Datos de movilidad",
+    "text": "Datos de movilidad\n\nMatrices origen-destino (OD)\n\n~2850 áreas (municipios/distritos)\nNumeros de viajes por hora entre areas\nActividad en origen y destino\n\nTipos de métricas:\n\nnúmero de viajes\n\nmovilidad intra/inter-regional",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#movilidad-como-red",
+    "href": "lectures/flowmaps_intro.html#movilidad-como-red",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Movilidad como red",
+    "text": "Movilidad como red",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#movilidad-como-red-1",
+    "href": "lectures/flowmaps_intro.html#movilidad-como-red-1",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Movilidad como red",
+    "text": "Movilidad como red\n\nnodos → regiones\n\naristas → flujos\n\nRed dinámica en el tiempo",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "lectures/flowmaps_intro.html#inegración-riesgo-asociadao-a-la-movilidad",
+    "href": "lectures/flowmaps_intro.html#inegración-riesgo-asociadao-a-la-movilidad",
+    "title": "Flow-Maps: datos de movilidad y COVID-19",
+    "section": "Inegración: riesgo asociadao a la movilidad",
+    "text": "Inegración: riesgo asociadao a la movilidad",
+    "crumbs": [
+      "Flow-Maps: datos de movilidad y COVID-19"
+    ]
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#objetivos",
+    "href": "practical/00_plot_basisc.html#objetivos",
+    "title": "Introducción a la visualización de datos",
+    "section": "Objetivos",
+    "text": "Objetivos\n\nRepresentar series temporales\n\nComparar valores entre categorías\n\nVisualizar matrices de datos\n\nCrear múltiples gráficos (subplots)\n\n\n\n\n\n\n\n\n\n\nprovince\nsexo\ngrupo_edad\ndate\ncases\nnum_hosp\nnum_uci\nnum_def\n\n\n\n\n0\nA\nH\n0-9\n2020-01-01\n0\n0\n0\n0\n\n\n1\nA\nH\n10-19\n2020-01-01\n0\n0\n0\n0\n\n\n2\nA\nH\n20-29\n2020-01-01\n0\n0\n0\n0\n\n\n3\nA\nH\n30-39\n2020-01-01\n0\n0\n0\n0\n\n\n4\nA\nH\n40-49\n2020-01-01\n0\n0\n0\n0"
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#series-temporales",
+    "href": "practical/00_plot_basisc.html#series-temporales",
+    "title": "Introducción a la visualización de datos",
+    "section": "Series temporales",
+    "text": "Series temporales"
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#comparación-entre-regiones",
+    "href": "practical/00_plot_basisc.html#comparación-entre-regiones",
+    "title": "Introducción a la visualización de datos",
+    "section": "Comparación entre regiones",
+    "text": "Comparación entre regiones"
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#ejercicio-1",
+    "href": "practical/00_plot_basisc.html#ejercicio-1",
+    "title": "Introducción a la visualización de datos",
+    "section": "Ejercicio",
+    "text": "Ejercicio\nSelecciona 3 provincias y compara sus curvas."
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#comparación-con-barras",
+    "href": "practical/00_plot_basisc.html#comparación-con-barras",
+    "title": "Introducción a la visualización de datos",
+    "section": "Comparación con barras",
+    "text": "Comparación con barras"
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#múltiples-gráficos",
+    "href": "practical/00_plot_basisc.html#múltiples-gráficos",
+    "title": "Introducción a la visualización de datos",
+    "section": "Múltiples gráficos",
+    "text": "Múltiples gráficos"
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#ejercicio-2",
+    "href": "practical/00_plot_basisc.html#ejercicio-2",
+    "title": "Introducción a la visualización de datos",
+    "section": "Ejercicio",
+    "text": "Ejercicio\nCrea 2 subplots: - casos\n- hospitalizaciones"
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#matriz-como-heatmap",
+    "href": "practical/00_plot_basisc.html#matriz-como-heatmap",
+    "title": "Introducción a la visualización de datos",
+    "section": "Matriz como heatmap",
+    "text": "Matriz como heatmap"
+  },
+  {
+    "objectID": "practical/00_plot_basisc.html#visualización-por-múltiples-regiones",
+    "href": "practical/00_plot_basisc.html#visualización-por-múltiples-regiones",
+    "title": "Introducción a la visualización de datos",
+    "section": "Visualización por múltiples regiones",
+    "text": "Visualización por múltiples regiones"
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#whats-in-a-dataset",
+    "href": "practical/02_xarray_in_45_min.html#whats-in-a-dataset",
+    "title": "Mini Course",
+    "section": "What’s in a Dataset?",
+    "text": "What’s in a Dataset?\nMany DataArrays!\nDatasets are dictionary-like containers of “DataArray”s. They are a mapping of variable name to DataArray:\nYou can save some typing by using the “attribute” or “dot” notation. This won’t work for variable names that clash with a built-in method name (like mean for example)."
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#whats-in-a-dataarray",
+    "href": "practical/02_xarray_in_45_min.html#whats-in-a-dataarray",
+    "title": "Mini Course",
+    "section": "What’s in a DataArray?",
+    "text": "What’s in a DataArray?\ndata + (a lot of) metadata\nName (optional)\nNamed dimensions\n.dims correspond to the axes of your data.\nIn this case we have 2 spatial dimensions (latitude and longitude are stored with shorthand names lat and lon) and one temporal dimension (time).\nCoordinate variables\n.coords is a simple data container for coordinate variables.\nHere we see the actual timestamps and spatial positions of our air temperature data:\nCoordinates objects support similar indexing notation\nIt is useful to think of the values in these coordinate variables as axis “labels” such as “tick labels” in a figure. These are coordinate locations on a grid at which you have data.\nArbitrary attributes\n.attrs is a dictionary that can contain arbitrary Python objects (strings, lists, integers, dictionaries, etc.) Your only limitation is that some attributes may not be writeable to certain file formats.\nUnderlying data\n.data contains the numpy array storing air temperature values.\n\nXarray structures wrap underlying simpler array-like data structures. This part of Xarray is quite extensible allowing for distributed array, GPU arrays, sparse arrays, arrays with units etc. We’ll briefly look at this later in this tutorial.\nReview\nXarray provides two main data structures:\n\nDataArrays that wrap underlying data containers (e.g. numpy arrays) and contain associated metadata\nDatasets that are dictionary-like containers of DataArrays\n\nDataArrays contain underlying arrays and associated metadata: 1. Name 2. Dimension names 3. Coordinate variables 4. and arbitrary attributes."
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#why-xarray",
+    "href": "practical/02_xarray_in_45_min.html#why-xarray",
+    "title": "Mini Course",
+    "section": "Why Xarray?",
+    "text": "Why Xarray?\nMetadata provides context and provides code that is more legible. This reduces the likelihood of errors from typos and makes analysis more intuitive and fun!\nAnalysis without xarray: X(\nAnalysis with xarray =)\nHow readable is this code?\nUse dimension names instead of axis numbers"
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#extracting-data-or-indexing",
+    "href": "practical/02_xarray_in_45_min.html#extracting-data-or-indexing",
+    "title": "Mini Course",
+    "section": "Extracting data or “indexing”",
+    "text": "Extracting data or “indexing”\nXarray supports\n\nlabel-based indexing using .sel\nposition-based indexing using .isel\n\nSee the user guide for more.\nLabel-based indexing\nXarray inherits its label-based indexing rules from pandas; this means great support for dates and times!\nPosition-based indexing\nThis is similar to your usual numpy array[0, 2, 3] but with the power of named dimensions!"
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#concepts-for-computation",
+    "href": "practical/02_xarray_in_45_min.html#concepts-for-computation",
+    "title": "Mini Course",
+    "section": "Concepts for computation",
+    "text": "Concepts for computation\nConsider calculating the mean air temperature per unit surface area for this dataset. Because latitude and longitude correspond to spherical coordinates for Earth’s surface, each 2.5x2.5 degree grid cell actually has a different surface area as you move away from the equator! This is because latitudinal length is fixed ($ Lat = R \\(), but *longitudinal length varies with latitude* (\\) Lon = R () $)\nSo the area element for lat-lon coordinates is\n\\[ \\delta A = R^2 \\delta\\phi \\, \\delta\\lambda \\cos(\\phi) \\]\nwhere \\(\\phi\\) is latitude, \\(\\delta \\phi\\) is the spacing of the points in latitude, \\(\\delta \\lambda\\) is the spacing of the points in longitude, and \\(R\\) is Earth’s radius. (In this formula, \\(\\phi\\) and \\(\\lambda\\) are measured in radians)\nThere are two concepts here: 1. you can call functions like np.cos and np.deg2rad (“numpy ufuncs”) on Xarray objects and receive an Xarray object back. 2. We used ones_like to create a DataArray that looks like ds.air.lon in all respects, except that the data are all ones\nBroadcasting: expanding data\nOur longitude and latitude length DataArrays are both 1D with different dimension names. If we multiply these DataArrays together the dimensionality is expanded to 2D by broadcasting:\nThe result has two dimensions because xarray realizes that dimensions lon and lat are different so it automatically “broadcasts” to get a 2D result. See the last row in this image from Jake VanderPlas Python Data Science Handbook\n\nBecause xarray knows about dimension names we avoid having to create unnecessary size-1 dimensions using np.newaxis or .reshape. For more, see the user guide"
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#high-level-computation",
+    "href": "practical/02_xarray_in_45_min.html#high-level-computation",
+    "title": "Mini Course",
+    "section": "High level computation",
+    "text": "High level computation\n(groupby, resample, rolling, coarsen, weighted)\nXarray has some very useful high level objects that let you do common computations:\n\ngroupby : Bin data in to groups and reduce\nresample : Groupby specialized for time axes. Either downsample or upsample your data.\nrolling : Operate on rolling windows of your data e.g. running mean\ncoarsen : Downsample your data\nweighted : Weight your data before reducing\n\nBelow we quickly demonstrate these patterns. See the user guide links above and the tutorial for more.\ngroupby\nThe seasons are out of order (they are alphabetically sorted). This is a common annoyance. The solution is to use .sel to change the order of labels\nresample\nweighted"
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#visualization",
+    "href": "practical/02_xarray_in_45_min.html#visualization",
+    "title": "Mini Course",
+    "section": "Visualization",
+    "text": "Visualization\n(.plot)\nWe have seen very simple plots earlier. Xarray also lets you easily visualize 3D and 4D datasets by presenting multiple facets (or panels or subplots) showing variations across rows and/or columns.\nFor more see the user guide, the gallery, and the tutorial material."
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#reading-and-writing-files",
+    "href": "practical/02_xarray_in_45_min.html#reading-and-writing-files",
+    "title": "Mini Course",
+    "section": "Reading and writing files",
+    "text": "Reading and writing files\nXarray supports many disk formats. Below is a small example using netCDF. For more see the documentation\nTo avoid the `SerializationWarning` you can assign a _FillValue for any NaNs in 'air' array by adding the keyword argument `encoding=dict(air=dict(_FillValue=-9999))`\nA common use case to read datasets that are a collection of many netCDF\nfiles. See the [documentation](https://docs.xarray.dev/en/stable/user-guide/io.html#reading-multi-file-datasets) for how\nto handle that.\nFinally to read other file formats, you might find yourself reading in the data using a different library and then creating a DataArray(docs, tutorial) from scratch. For example, you might use h5py to open an HDF5 file and then create a Dataset from that. For MATLAB files you might use scipy.io.loadmat or h5py depending on the version of MATLAB file you’re opening and then construct a Dataset."
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#the-scientific-python-ecosystem",
+    "href": "practical/02_xarray_in_45_min.html#the-scientific-python-ecosystem",
+    "title": "Mini Course",
+    "section": "The scientific python ecosystem",
+    "text": "The scientific python ecosystem\nXarray ties in to the larger scientific python ecosystem and in turn many packages build on top of xarray. A long list of such packages is here: https://docs.xarray.dev/en/stable/user-guide/ecosystem.html.\nNow we will demonstrate some cool features.\nPandas: tabular data structures\nYou can easily convert between xarray and pandas structures. This allows you to conveniently use the extensive pandas ecosystem of packages (like seaborn) for your work.\nAlternative array types\nThis notebook has focused on Numpy arrays. Xarray can wrap other array types! For example:\n distributed parallel arrays & Xarray user guide on Dask\n pydata/sparse : sparse arrays\n GPU arrays & cupy-xarray\n pint : unit-aware arrays & pint-xarray\nDask\nDask cuts up NumPy arrays into blocks and parallelizes your analysis code across these blocks\n\nAll computations with dask-backed xarray objects are lazy, allowing you to build up a complicated chain of analysis steps quickly\nTo get concrete values, call .compute or .load\nHoloViz\nQuickly generate interactive plots from your data!\nThe hvplot package attaches itself to all xarray objects under the .hvplot namespace. So instead of using .plot use .hvplot\nThe time slider will only work if you're executing the notebook, rather than viewing the website\ncf_xarray\ncf_xarray is a project that tries to let you make use of other CF attributes that xarray ignores. It attaches itself to all xarray objects under the .cf namespace.\nWhere xarray allows you to specify dimension names for analysis, cf_xarray lets you specify logical names like \"latitude\" or \"longitude\" instead as long as the appropriate CF attributes are set.\nFor example, the \"longitude\" dimension in different files might be labelled as: (lon, LON, long, x…), but cf_xarray let’s you always refer to the logical name \"longitude\" in your code:\nThe following mean operation will work with any dataset that has appropriate attributes set that allow detection of the “latitude” variable (e.g. units: \"degress_north\" or standard_name: \"latitude\")\nOther cool packages\n\nxgcm : grid-aware operations with xarray objects\nxrft : fourier transforms with xarray\nxclim : calculating climate indices with xarray objects\nintake-xarray : forget about file paths\nrioxarray : raster files and xarray\nxesmf : regrid using ESMF\nMetPy : tools for working with weather data\n\nCheck the Xarray Ecosystem page and this tutorial for even more packages and demonstrations."
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#next",
+    "href": "practical/02_xarray_in_45_min.html#next",
+    "title": "Mini Course",
+    "section": "Next",
+    "text": "Next\n\nRead the tutorial material and user guide\nSee the description of common terms used in the xarray documentation:\nAnswers to common questions on “how to do X” with Xarray are here\nRyan Abernathey has a book on data analysis with a chapter on Xarray\nProject Pythia has foundational and more advanced material on Xarray. Pythia also aggregates other Python learning resources.\nThe Xarray Github Discussions and Pangeo Discourse are good places to ask questions.\nTell your friends! Tweet!"
+  },
+  {
+    "objectID": "practical/02_xarray_in_45_min.html#welcome",
+    "href": "practical/02_xarray_in_45_min.html#welcome",
+    "title": "Mini Course",
+    "section": "Welcome!",
+    "text": "Welcome!\nXarray is an open-source project and gladly welcomes all kinds of contributions. This could include reporting bugs, discussing new enhancements, contributing code, helping answer user questions, contributing documentation (even small edits like fixing spelling mistakes or rewording to make the text clearer). Welcome!"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#objetivos",
+    "href": "practical/00_pandas_basics.html#objetivos",
+    "title": "Introducción a pandas",
+    "section": "Objetivos",
+    "text": "Objetivos\n\nLeer datos desde ficheros\nEntender la estructura de un DataFrame\nAcceder a filas y columnas\nFiltrar datos\nAgregar información\nCombinar datasets (merge)\nReestructurar datos (pivot)"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#leer-datos",
+    "href": "practical/00_pandas_basics.html#leer-datos",
+    "title": "Introducción a pandas",
+    "section": "Leer datos",
+    "text": "Leer datos\n\n\n\n\n\n\n\n\n\nprovincia_iso\nsexo\ngrupo_edad\nfecha\nnum_casos\nnum_hosp\nnum_uci\nnum_def\n\n\n\n\n0\n03\nH\n0-9\n2020-01-01\n0\n0\n0\n0\n\n\n1\n03\nH\n10-19\n2020-01-01\n0\n0\n0\n0\n\n\n2\n03\nH\n20-29\n2020-01-01\n0\n0\n0\n0\n\n\n3\n03\nH\n30-39\n2020-01-01\n0\n0\n0\n0\n\n\n4\n03\nH\n40-49\n2020-01-01\n0\n0\n0\n0\n\n\n\n\n\n\n\n\n\nDataframe shape: (1299030, 8)\n\n- provincia_iso\n- sexo\n- grupo_edad\n- fecha\n- num_casos\n- num_hosp\n- num_uci\n- num_def\n\n\n\n\n\n\n\n\n\n\nprovincia_iso\nsexo\ngrupo_edad\nfecha\nnum_casos\nnum_hosp\nnum_uci\nnum_def\n\n\n\n\n0\nA\nH\n0-9\n2020-01-01\n0\n0\n0\n0\n\n\n1\nA\nH\n10-19\n2020-01-01\n0\n0\n0\n0\n\n\n2\nA\nH\n20-29\n2020-01-01\n0\n0\n0\n0\n\n\n3\nA\nH\n30-39\n2020-01-01\n0\n0\n0\n0\n\n\n4\nA\nH\n40-49\n2020-01-01\n0\n0\n0\n0"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#selección-de-columnas",
+    "href": "practical/00_pandas_basics.html#selección-de-columnas",
+    "title": "Introducción a pandas",
+    "section": "Selección de columnas",
+    "text": "Selección de columnas\n\n\n\n\n\n\n\n\n\nprovincia_iso\nnum_casos\n\n\n\n\n0\nA\n0\n\n\n1\nA\n0\n\n\n2\nA\n0\n\n\n3\nA\n0\n\n\n4\nA\n0"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#filtrado-de-datos",
+    "href": "practical/00_pandas_basics.html#filtrado-de-datos",
+    "title": "Introducción a pandas",
+    "section": "Filtrado de datos",
+    "text": "Filtrado de datos\n\n\n\n\n\n\n\n\n\nprovincia_iso\nsexo\ngrupo_edad\nfecha\nnum_casos\nnum_hosp\nnum_uci\nnum_def\n\n\n\n\n0\nA\nH\n0-9\n2020-01-01\n0\n0\n0\n0\n\n\n1\nA\nH\n10-19\n2020-01-01\n0\n0\n0\n0\n\n\n2\nA\nH\n20-29\n2020-01-01\n0\n0\n0\n0\n\n\n3\nA\nH\n30-39\n2020-01-01\n0\n0\n0\n0\n\n\n4\nA\nH\n40-49\n2020-01-01\n0\n0\n0\n0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nprovincia_iso\nsexo\ngrupo_edad\nfecha\nnum_casos\nnum_hosp\nnum_uci\nnum_def\n\n\n\n\n116887\nM\nH\n70-79\n2020-03-14\n106\n103\n18\n11\n\n\n118477\nM\nH\n70-79\n2020-03-15\n105\n117\n13\n10\n\n\n118478\nM\nH\n80+\n2020-03-15\n106\n105\n2\n31\n\n\n120066\nM\nH\n60-69\n2020-03-16\n106\n95\n14\n5\n\n\n120067\nM\nH\n70-79\n2020-03-16\n171\n199\n22\n19"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#indexado",
+    "href": "practical/00_pandas_basics.html#indexado",
+    "title": "Introducción a pandas",
+    "section": "Indexado",
+    "text": "Indexado\nExiste distintas formas de indexado\n\n\n\n\n\n\n\n\n\nprovincia_iso\nsexo\ngrupo_edad\nfecha\nnum_casos\nnum_hosp\nnum_uci\nnum_def\n\n\n\n\n0\nA\nH\n0-9\n2020-01-01\n0\n0\n0\n0\n\n\n1\nA\nH\n10-19\n2020-01-01\n0\n0\n0\n0\n\n\n2\nA\nH\n20-29\n2020-01-01\n0\n0\n0\n0\n\n\n3\nA\nH\n30-39\n2020-01-01\n0\n0\n0\n0\n\n\n4\nA\nH\n40-49\n2020-01-01\n0\n0\n0\n0"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#agrupación-de-datos",
+    "href": "practical/00_pandas_basics.html#agrupación-de-datos",
+    "title": "Introducción a pandas",
+    "section": "Agrupación de datos",
+    "text": "Agrupación de datos\n\n\nprovincia_iso\nA      467681\nAB      88633\nAL     136438\nAV      39809\nB     1756208\nName: num_casos, dtype: int64"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#agrupación-por-varias-columnas",
+    "href": "practical/00_pandas_basics.html#agrupación-por-varias-columnas",
+    "title": "Introducción a pandas",
+    "section": "Agrupación por varias columnas",
+    "text": "Agrupación por varias columnas\n\n\nfecha       provincia_iso\n2020-01-01  A                0\n            AB               0\n            AL               0\n            AV               0\n            B                0\nName: num_casos, dtype: int64"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#reset-index",
+    "href": "practical/00_pandas_basics.html#reset-index",
+    "title": "Introducción a pandas",
+    "section": "Reset index",
+    "text": "Reset index\n\n\n\n\n\n\n\n\n\nfecha\nprovincia_iso\nnum_casos\n\n\n\n\n0\n2020-01-01\nA\n0\n\n\n1\n2020-01-01\nAB\n0\n\n\n2\n2020-01-01\nAL\n0\n\n\n3\n2020-01-01\nAV\n0\n\n\n4\n2020-01-01\nB\n0"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#combinar-datasets-merge",
+    "href": "practical/00_pandas_basics.html#combinar-datasets-merge",
+    "title": "Introducción a pandas",
+    "section": "Combinar datasets (merge)",
+    "text": "Combinar datasets (merge)\n\n\n\n\n\n\n\n\n\nprovincia_iso\nnum_casos\n\n\n\n\n0\n01\n94121\n\n\n1\n02\n88633\n\n\n2\n03\n467681\n\n\n3\n04\n136438\n\n\n4\n05\n39809\n\n\n5\n06\n164385\n\n\n6\n07\n275395\n\n\n7\n08\n1756208\n\n\n8\n09\n106301\n\n\n9\n10\n87156\n\n\n10\n11\n190471\n\n\n11\n12\n160337\n\n\n12\n13\n116027\n\n\n13\n14\n144025\n\n\n14\n15\n240841\n\n\n15\n16\n52008\n\n\n16\n17\n235528\n\n\n17\n18\n172876\n\n\n18\n19\n68244\n\n\n19\n20\n242603\n\n\n20\n21\n83545\n\n\n21\n22\n69536\n\n\n22\n23\n113256\n\n\n23\n24\n108921\n\n\n24\n25\n140398\n\n\n25\n26\n93686\n\n\n26\n27\n61831\n\n\n27\n28\n1640993\n\n\n28\n29\n273038\n\n\n29\n30\n395292\n\n\n30\n31\n39953\n\n\n31\n32\n69003\n\n\n32\n33\n206528\n\n\n33\n34\n50708\n\n\n34\n35\n176780\n\n\n35\n36\n210717\n\n\n36\n37\n88015\n\n\n37\n38\n166024\n\n\n38\n39\n130272\n\n\n39\n40\n42144\n\n\n40\n41\n286156\n\n\n41\n42\n24779\n\n\n42\n43\n231218\n\n\n43\n44\n39962\n\n\n44\n45\n171963\n\n\n45\n46\n728346\n\n\n46\n47\n159874\n\n\n47\n48\n335126\n\n\n48\n49\n40906\n\n\n49\n50\n296372\n\n\n50\n51\n19744\n\n\n51\n52\n20680"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#reestructurar-datos-pivot",
+    "href": "practical/00_pandas_basics.html#reestructurar-datos-pivot",
+    "title": "Introducción a pandas",
+    "section": "Reestructurar datos (pivot)",
+    "text": "Reestructurar datos (pivot)\n\n\n\n\n\n\n\n\nprovincia_iso\nA\nAB\nAL\nAV\nB\nBA\nBI\nBU\nC\nCA\n...\nSS\nT\nTE\nTF\nTO\nV\nVA\nVI\nZ\nZA\n\n\nfecha\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2020-01-01\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n...\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\n2020-01-02\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n...\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\n2020-01-03\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n...\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\n2020-01-04\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n...\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\n2020-01-05\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n...\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\n\n\n5 rows × 52 columns"
+  },
+  {
+    "objectID": "practical/00_pandas_basics.html#para-una-introducción-más-profunda-revisar-los-siguientes-recursos",
+    "href": "practical/00_pandas_basics.html#para-una-introducción-más-profunda-revisar-los-siguientes-recursos",
+    "title": "Introducción a pandas",
+    "section": "Para una introducción más profunda revisar los siguientes recursos:",
+    "text": "Para una introducción más profunda revisar los siguientes recursos:\n\nhttps://pandas.pydata.org/docs/user_guide/10min.html\nhttps://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-pandas.ipynb\nhttps://colab.research.google.com/github/waterhackweek/learning-resources/blob/master/notebooks/pandas-intro.ipynb"
+  }
+]
