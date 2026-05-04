@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs   # important for GitHub Pages (optional)
+
+website:
+  title: "Mini Course"
+  sidebar:
+    style: "docked"
+    contents:
+      - lectures/L01_intro.qmd
+      - lectures/L02_nd_arrays.qmd
+      - lectures/L03_massive_data.qmd
+      - lectures/flowmaps_intro.qmd
+      - lectures/L05_emews.qmd
+
+format:
+  revealjs:
+    theme: simple
+    css: lectures/css/styles.css
+    slide-number: true
+    toc: false
+    transition: fade
+    title-slide-attributes:
+      data-background-image: lectures/img/bsc_logo.jpg
+      data-background-size: 280px
+      data-background-position: top left
+
+# 👇 shared across all lectures
+author: "Miguel Ponce de Leon miguel.ponce@bsc.es"
+date: "05-05-2026"
