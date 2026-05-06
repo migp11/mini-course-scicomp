@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -189,6 +189,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -282,7 +285,353 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <li>¿A qué crees que se debe?</li>
 </ul>
 <p>Pista: piensa en cómo se reportan los datos</p>
-</section>
+<div id="1b9dc6a9-e37a-4f75-8f89-5880ddb66673" class="cell" data-execution_count="35">
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">province</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">poblacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>35</td>
+<td>Las Palmas</td>
+<td>1101410</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>38</td>
+<td>Santa Cruz de Tenerife</td>
+<td>1004206</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>02</td>
+<td>Albacete</td>
+<td>394793</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>03</td>
+<td>Alacant/Alicante</td>
+<td>1842182</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>04</td>
+<td>Almería</td>
+<td>709199</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>05</td>
+<td>Ávila</td>
+<td>162890</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>18</td>
+<td>Granada</td>
+<td>905505</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>06</td>
+<td>Badajoz</td>
+<td>691222</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>10</td>
+<td>Cáceres</td>
+<td>403339</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>07</td>
+<td>Illes Balears</td>
+<td>1124087</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>08</td>
+<td>Barcelona</td>
+<td>5532083</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>11</td>
+<td>Cádiz</td>
+<td>1246371</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>09</td>
+<td>Burgos</td>
+<td>357712</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>12</td>
+<td>Castelló/Castellón</td>
+<td>583639</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>13</td>
+<td>Ciudad Real</td>
+<td>517150</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>14</td>
+<td>Córdoba</td>
+<td>800936</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>15</td>
+<td>A Coruña</td>
+<td>1123516</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>30</td>
+<td>Murcia</td>
+<td>1470497</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>16</td>
+<td>Cuenca</td>
+<td>202266</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>17</td>
+<td>Girona</td>
+<td>760012</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>52</td>
+<td>Melilla</td>
+<td>84575</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>19</td>
+<td>Guadalajara</td>
+<td>258664</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>21</td>
+<td>Huelva</td>
+<td>527096</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>22</td>
+<td>Huesca</td>
+<td>224233</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">24</th>
+<td>23</td>
+<td>Jaén</td>
+<td>649705</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25</th>
+<td>24</td>
+<td>León</td>
+<td>471380</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">26</th>
+<td>25</td>
+<td>Lleida</td>
+<td>426312</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">27</th>
+<td>26</td>
+<td>La Rioja</td>
+<td>315224</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">28</th>
+<td>27</td>
+<td>Lugo</td>
+<td>338300</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">29</th>
+<td>28</td>
+<td>Madrid</td>
+<td>6354674</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">30</th>
+<td>29</td>
+<td>Málaga</td>
+<td>1633206</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">31</th>
+<td>31</td>
+<td>Navarra</td>
+<td>638305</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">32</th>
+<td>32</td>
+<td>Ourense</td>
+<td>314698</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">33</th>
+<td>33</td>
+<td>Asturias</td>
+<td>1032966</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34</th>
+<td>34</td>
+<td>Palencia</td>
+<td>164928</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">35</th>
+<td>36</td>
+<td>Pontevedra</td>
+<td>954050</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">36</th>
+<td>37</td>
+<td>Salamanca</td>
+<td>327087</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">37</th>
+<td>39</td>
+<td>Cantabria</td>
+<td>591693</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">38</th>
+<td>40</td>
+<td>Segovia</td>
+<td>153391</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">39</th>
+<td>41</td>
+<td>Sevilla</td>
+<td>1931443</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">40</th>
+<td>42</td>
+<td>Soria</td>
+<td>85262</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">41</th>
+<td>43</td>
+<td>Tarragona</td>
+<td>801684</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">42</th>
+<td>44</td>
+<td>Teruel</td>
+<td>132190</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">43</th>
+<td>45</td>
+<td>Toledo</td>
+<td>721336</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">44</th>
+<td>46</td>
+<td>València/Valencia</td>
+<td>2527323</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">45</th>
+<td>47</td>
+<td>Valladolid</td>
+<td>517460</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">46</th>
+<td>49</td>
+<td>Zamora</td>
+<td>181684</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">47</th>
+<td>50</td>
+<td>Zaragoza</td>
+<td>947524</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">48</th>
+<td>51</td>
+<td>Ceuta</td>
+<td>83791</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">49</th>
+<td>01</td>
+<td>Araba/Álava</td>
+<td>323893</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">50</th>
+<td>48</td>
+<td>Bizkaia</td>
+<td>1123859</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">51</th>
+<td>20</td>
+<td>Gipuzkoa</td>
+<td>708929</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+<img data-src="01_dataframes_files/figure-revealjs/cell-9-output-1.png" class="r-stretch"></section>
 <section id="ejercicio-5-media-móvil-rolling-average" class="slide level2">
 <h2>Ejercicio 5 — Media móvil (rolling average)</h2>
 <p>Para eliminar el efecto del reporte semanal:</p>
@@ -296,7 +645,7 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <p>Emplear la función <code>rolling(window=wsize)</code> con <code>wsize=7</code></p>
 </section>
 <section id="ejercicio-6-suavizado-por-provincia" class="slide level2">
-<h2>Ejercicio 6 — Suavizado por provincia</h2>
+<h2>Ejercicio 6 — Suavizado por provincia (*)</h2>
 <p>Aplica el suavizado a nivel provincial.</p>
 <h3 id="tareas-2">Tareas:</h3>
 <ol type="1">
@@ -351,19 +700,9 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 </ol>
 <p>Pista: usa el identificador de provincia</p>
 </section>
-<section id="ejercicio-11-comparación" class="slide level2">
-<h2>Ejercicio 11 — Comparación</h2>
-<p>Compara:</p>
-<ul>
-<li>ranking por casos absolutos<br>
-</li>
-<li>ranking por casos por 100K</li>
-</ul>
-<h3 id="preguntas-2">Preguntas:</h3>
-<ul>
-<li>¿Qué provincias cambian de posición?</li>
-<li>¿Qué nos dice esto sobre el análisis?</li>
-</ul>
+<section id="ejercicio-11-incidencia-escalada" class="slide level2">
+<h2>Ejercicio 11 — Incidencia escalada (*)</h2>
+<p>Parte 1. Agregar los casos diarios por provincia y fecha. Parte 2. Aplicar una media deslizante con una ventana de 7 días para remover el efecto del reporte semana y guardar el resultado en una nueva variable. Parte 3. Hacer un merge con los datos de población y calcular los casos cada 100.000 habitantes</p>
 </section></section>
 <section>
 <section id="parte-ii" class="title-slide slide level1 center">
@@ -388,6 +727,74 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <section id="carga-de-datos" class="slide level2">
 <h2>Carga de datos</h2>
 <p>Cargamos los datos de movilidad.</p>
+<div id="d6be06d4" class="cell" data-execution_count="41">
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>(4106354, 11)</code></pre>
+</div>
+</div>
+<div id="a4580bd1-0ba2-49af-ab5c-7d329f1d9f2f" class="cell" data-execution_count="45">
+<div class="cell-output cell-output-display" data-execution_count="45">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">origen</th>
+<th data-quarto-table-cell-role="th">destino</th>
+<th data-quarto-table-cell-role="th">viajes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>01001_AM</td>
+<td>01001_AM</td>
+<td>2764.599121</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>01001_AM</td>
+<td>01002</td>
+<td>25.153000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>01001_AM</td>
+<td>01010_AM</td>
+<td>11.291000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>01001_AM</td>
+<td>01031_AM</td>
+<td>11.291000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>01001_AM</td>
+<td>01036</td>
+<td>7.162000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 <section id="exploración-inicial" class="slide level2">
 <h2>Exploración inicial</h2>
@@ -410,7 +817,7 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <p>¿Es un dataset pequeño o grande?</p>
 </section>
 <section id="ejercicio-3" class="slide level2">
-<h2>Ejercicio 3</h2>
+<h2>Ejercicio 3 (*)</h2>
 <h3 id="agregación-de-datos">Agregación de datos</h3>
 <p>Queremos construir el flujo total entre regiones.</p>
 <p>Para ello, agregamos todas las filas que corresponden a un mismo: - origen<br>
@@ -419,7 +826,7 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <p>¿Qué problema estamos resolviendo?</p>
 </section>
 <section id="ejercicio-4" class="slide level2">
-<h2>Ejercicio 4</h2>
+<h2>Ejercicio 4 (*)</h2>
 <h3 id="construcción-de-matriz-od">Construcción de matriz OD</h3>
 <p>Construimos la matriz origen-destino (ODM), una matriz cuadrada donde cada entrada <span class="math inline">\(x_{ij}\)</span> representa el total de viajes desde la reigón <span class="math inline">\(i\)</span> a la región <span class="math inline">\(j\)</span></p>
 <p>Pista: hay que hacer un pivot de la tabla</p>
@@ -518,9 +925,324 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <li>Unir vaijes totales con las geometrías</li>
 <li>Representar en un mapa</li>
 </ol>
+<div id="b3a480e8-b909-4960-8ca2-f4014fef1f50" class="cell" data-execution_count="52">
+<div class="cell-output cell-output-display" data-execution_count="52">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">origen</th>
+<th data-quarto-table-cell-role="th">destino</th>
+<th data-quarto-table-cell-role="th">viajes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>01001_AM</td>
+<td>01001_AM</td>
+<td>2764.599121</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>01001_AM</td>
+<td>01002</td>
+<td>25.153000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>01001_AM</td>
+<td>01010_AM</td>
+<td>11.291000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>01001_AM</td>
+<td>01031_AM</td>
+<td>11.291000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>01001_AM</td>
+<td>01036</td>
+<td>7.162000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="9f4c9aee-e43b-48de-9d4f-b5d0c233d473" class="cell" data-execution_count="73">
+<div class="cell-output cell-output-display" data-execution_count="73">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">O</th>
+<th data-quarto-table-cell-role="th">D</th>
+<th data-quarto-table-cell-role="th">viajes</th>
+<th data-quarto-table-cell-role="th">province</th>
+<th data-quarto-table-cell-role="th">prob_infected</th>
+<th data-quarto-table-cell-role="th">risk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>01</td>
+<td>09</td>
+<td>10616.675781</td>
+<td>01</td>
+<td>0.000777</td>
+<td>8.246095</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">12</th>
+<td>01</td>
+<td>20</td>
+<td>3684.967041</td>
+<td>01</td>
+<td>0.000777</td>
+<td>2.862156</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">17</th>
+<td>01</td>
+<td>26</td>
+<td>8409.075195</td>
+<td>01</td>
+<td>0.000777</td>
+<td>6.531426</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>01</td>
+<td>31</td>
+<td>3443.333984</td>
+<td>01</td>
+<td>0.000777</td>
+<td>2.674477</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">35</th>
+<td>01</td>
+<td>48</td>
+<td>12322.723633</td>
+<td>01</td>
+<td>0.000777</td>
+<td>9.571202</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">102</th>
+<td>03</td>
+<td>30</td>
+<td>39469.257812</td>
+<td>03</td>
+<td>0.000033</td>
+<td>1.319185</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">311</th>
+<td>08</td>
+<td>17</td>
+<td>51731.164062</td>
+<td>08</td>
+<td>0.000062</td>
+<td>3.218121</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">337</th>
+<td>08</td>
+<td>43</td>
+<td>35143.359375</td>
+<td>08</td>
+<td>0.000062</td>
+<td>2.186217</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">346</th>
+<td>09</td>
+<td>01</td>
+<td>9771.359375</td>
+<td>09</td>
+<td>0.000173</td>
+<td>1.685804</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">643</th>
+<td>15</td>
+<td>36</td>
+<td>45207.121094</td>
+<td>15</td>
+<td>0.000042</td>
+<td>1.914140</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">706</th>
+<td>17</td>
+<td>08</td>
+<td>51535.023438</td>
+<td>17</td>
+<td>0.000028</td>
+<td>1.423972</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">814</th>
+<td>19</td>
+<td>28</td>
+<td>35387.539062</td>
+<td>19</td>
+<td>0.000219</td>
+<td>7.739475</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1099</th>
+<td>26</td>
+<td>01</td>
+<td>8129.366211</td>
+<td>26</td>
+<td>0.000679</td>
+<td>5.518883</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1105</th>
+<td>26</td>
+<td>09</td>
+<td>1752.831055</td>
+<td>26</td>
+<td>0.000679</td>
+<td>1.189966</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1124</th>
+<td>26</td>
+<td>31</td>
+<td>17344.408203</td>
+<td>26</td>
+<td>0.000679</td>
+<td>11.774812</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1180</th>
+<td>28</td>
+<td>05</td>
+<td>5818.612793</td>
+<td>28</td>
+<td>0.000458</td>
+<td>2.667530</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1188</th>
+<td>28</td>
+<td>13</td>
+<td>2616.551025</td>
+<td>28</td>
+<td>0.000458</td>
+<td>1.199552</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1191</th>
+<td>28</td>
+<td>16</td>
+<td>3484.097168</td>
+<td>28</td>
+<td>0.000458</td>
+<td>1.597276</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1194</th>
+<td>28</td>
+<td>19</td>
+<td>37447.687500</td>
+<td>28</td>
+<td>0.000458</td>
+<td>17.167806</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1215</th>
+<td>28</td>
+<td>40</td>
+<td>3891.725098</td>
+<td>28</td>
+<td>0.000458</td>
+<td>1.784152</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1220</th>
+<td>28</td>
+<td>45</td>
+<td>70596.000000</td>
+<td>28</td>
+<td>0.000458</td>
+<td>32.364574</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1353</th>
+<td>31</td>
+<td>26</td>
+<td>17393.220703</td>
+<td>31</td>
+<td>0.000092</td>
+<td>1.592125</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1946</th>
+<td>45</td>
+<td>28</td>
+<td>67245.250000</td>
+<td>45</td>
+<td>0.000056</td>
+<td>3.755563</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2101</th>
+<td>48</td>
+<td>39</td>
+<td>17018.199219</td>
+<td>48</td>
+<td>0.000066</td>
+<td>1.124882</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 <section id="ejercicio-11-agregación-a-nivel-provincial" class="slide level2">
-<h2>Ejercicio 11 — Agregación a nivel provincial</h2>
+<h2>Ejercicio 11 — Agregación a nivel provincial (*)</h2>
 <p>Hasta ahora hemos trabajado a nivel de zonas de movilidad (alta resolución).</p>
 <p>En este ejercicio vamos a <strong>agregar los viajes a nivel de provincias</strong>.</p>
 <p>Disponemos de un <code>GeoDataFrame</code> (<code>gdf</code>) que contiene:</p>
@@ -570,7 +1292,7 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 </section>
 <section class="slide level2">
 
-<h3 id="preguntas-3">Preguntas:</h3>
+<h3 id="preguntas-2">Preguntas:</h3>
 <ul>
 <li>¿Qué diferencias observas respecto a la matriz original?<br>
 </li>
@@ -578,7 +1300,7 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 </ul>
 </section>
 <section id="ejercicio-final-riesgo-asociado-a-la-movilidad" class="slide level2">
-<h2>Ejercicio final — Riesgo asociado a la movilidad</h2>
+<h2>Ejercicio final — Riesgo asociado a la movilidad (*)</h2>
 
 <img data-src="img/mobility_associated_risk.png" class="r-stretch"><p>En este ejercicio vamos a combinar:</p>
 <ul>
@@ -640,8 +1362,8 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <section id="paso-3-selección-temporal" class="slide level2">
 <h2>Paso 3 — Selección temporal</h2>
 <p>Selecciona un día concreto para el análisis (ver ejemplo a continuación).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>d <span class="op">=</span> pd.to_datetime(<span class="st">"2020-03-31"</span>)</span>
-<span id="cb1-2"><a></a>covid_pop[covid_pop[<span class="st">"date"</span>] <span class="op">==</span> d]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>d <span class="op">=</span> pd.to_datetime(<span class="st">"2020-03-31"</span>)</span>
+<span id="cb2-2"><a></a>covid_pop[covid_pop[<span class="st">"date"</span>] <span class="op">==</span> d]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="paso-5-cálculo-del-riesgo" class="slide level2">
 <h2>Paso 5 — Cálculo del riesgo</h2>

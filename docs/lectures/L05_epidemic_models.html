@@ -11,7 +11,7 @@
 
   <meta name="author" content="Miguel Ponce de Leon miguel.ponce@bsc.es">
   <meta name="dcterms.date" content="2026-05-05">
-  <title>Mini Course – xarray_in_45_min</title>
+  <title>Mini Course – Introducción a los modelos de epidemias</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,209 +194,397 @@
   <div class="reveal">
     <div class="slides">
 
+<section id="title-slide" data-background-image="../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
+  <h1 class="title">Introducción a los modelos de epidemias</h1>
+  <p class="subtitle">Modelos SIR y modelos de metapoblaciones</p>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Miguel Ponce de Leon miguel.ponce@bsc.es 
+</div>
+</div>
+</div>
+
+  <p class="date">2026-05-05</p>
+</section>
+<section id="modelo-sir-clásico" class="slide level2">
+<h2>Modelo SIR clásico</h2>
+<hr>
+<ul>
+<li><p>Divide la población en tres compartimentos:</p>
+<ul>
+<li><span class="math inline">\(S\)</span>: susceptibles<br>
+</li>
+<li><span class="math inline">\(I\)</span>: infectados<br>
+</li>
+<li><span class="math inline">\(R\)</span>: recuperados</li>
+</ul></li>
+<li><p>Población total constante:</p></li>
+</ul>
+<p><span class="math display">\[
+N = S + I + R
+\]</span></p>
+</section>
+<section id="dinámica-del-modelo-sir" class="slide level2">
+<h2>Dinámica del modelo SIR</h2>
+<hr>
+<img data-src="img/SIR.png" width="680">
+<hr>
+<p><span class="math inline">\(\frac{dS}{dt} = -\beta \frac{S I}{N}\)</span></p>
+<p><br></p>
+<p><span class="math inline">\(\frac{dI}{dt} = \beta \frac{S I}{N} - \gamma I\)</span></p>
+<p><br></p>
+<p><span class="math inline">\(\frac{dR}{dt} = \gamma I\)</span></p>
+</section>
+<section id="intuición" class="slide level2">
+<h2>Intuición</h2>
+<hr>
+<ul>
+<li>La infección ocurre por contacto entre <span class="math inline">\(S\)</span> e <span class="math inline">\(I\)</span></li>
+<li>Recuperación ocurre a tasa constante <span class="math inline">\(\gamma\)</span></li>
+<li>Mezcla homogénea (todos con todos)</li>
+</ul>
+<h3 id="número-reproductivo-básico">Número reproductivo básico</h3>
+<p><span class="math display">\[
+R_0 = \frac{\beta}{\gamma}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(R_0 &gt; 1\)</span>: epidemia crece<br>
+</li>
+<li><span class="math inline">\(R_0 &lt; 1\)</span>: epidemia desaparece</li>
+</ul>
+</section>
+<section id="dinámica-típica" class="slide level2">
+<h2>Dinámica típica</h2>
+<hr>
+<ul>
+<li>Crecimiento inicial exponencial</li>
+<li>Pico epidémico</li>
+<li>Disminución por agotamiento de susceptibles</li>
+</ul>
+
+<img data-src="img/SIR_dynamics.png" class="r-stretch"></section>
+<section id="limitaciones-del-modelo-sir" class="slide level2">
+<h2>Limitaciones del modelo SIR</h2>
+<hr>
+<ul>
+<li>No hay estructura espacial</li>
+<li>Mezcla homogénea poco realista</li>
+<li>No incluye movilidad</li>
+</ul>
+<h3 id="pregunta-clave">Pregunta clave</h3>
+<blockquote>
+<p>¿Qué pasa si las personas se mueven entre regiones?</p>
+</blockquote>
+</section>
+<section id="hacia-modelos-más-realistas" class="slide level2">
+<h2>Hacia modelos más realistas</h2>
+<ul>
+<li>Introducir estructura espacial</li>
+<li>Introducir movilidad</li>
+<li>Modelar interacciones entre regiones (datos!)</li>
+</ul>
+<blockquote>
+<p>Esto nos lleva al modelo metapoblacional</p>
+</blockquote>
+</section>
+<section id="modelo-metapoblacional-sir-con-movilidad" class="slide level2">
+<h2>Modelo metapoblacional SIR con movilidad</h2>
+<h3 id="objetivo">Objetivo</h3>
+<ul>
+<li>Modelar propagación epidémica en múltiples regiones</li>
+<li>Incorporar movilidad realista (commuting)</li>
+<li>Capturar acoplamiento entre regiones</li>
+</ul>
+</section>
+<section id="estructura-metapoblacional" class="slide level2">
+<h2>Estructura metapoblacional</h2>
+<ul>
+<li><span class="math inline">\(m\)</span> regiones (condados)</li>
+<li>Cada región tiene población total:</li>
+</ul>
+<p><span class="math display">\[
+N_i^{(\mathrm{pop})} = S_i + I_i + R_i
+\]</span></p>
+</section>
+<section id="subpoblaciones-por-movilidad" class="slide level2">
+<h2>Subpoblaciones por movilidad</h2>
+<ul>
+<li>Individuos definidos por origen-destino: <span class="math inline">\(i \to j\)</span></li>
+</ul>
+<p><span class="math display">\[
+N_{ji}^{(\mathrm{pop})} = p_{ji} \, N_i^{(\mathrm{pop})}
+\]</span></p>
+<ul>
+<li>Probabilidad de commuting:</li>
+</ul>
+<p><span class="math display">\[
+p_{ji} = \frac{F_{ji}}{\sum_j F_{ji}}, \quad \sum_j p_{ji} = 1
+\]</span></p>
+</section>
+<section id="variables-del-modelo" class="slide level2">
+<h2>Variables del modelo</h2>
+<p>Para cada subpoblación <span class="math inline">\(i \to j\)</span>:</p>
+<ul>
+<li><span class="math inline">\(S_{ji}\)</span>: susceptibles</li>
+<li><span class="math inline">\(I_{ji}\)</span>: infectados</li>
+<li><span class="math inline">\(R_{ji}\)</span>: recuperados</li>
+</ul>
+</section>
+<section id="idea-clave" class="slide level2">
+<h2>Idea clave</h2>
+<ul>
+<li>Cada individuo:
+<ul>
+<li>Vive en <span class="math inline">\(i\)</span></li>
+<li>Se desplaza a <span class="math inline">\(j\)</span></li>
+</ul></li>
+<li>Mezcla en dos entornos:
+<ul>
+<li>Hogar</li>
+<li>Trabajo</li>
+</ul></li>
+</ul>
+</section>
+<section id="fuerza-de-infección" class="slide level2">
+<h2>Fuerza de infección</h2>
+<h3 id="en-el-hogar">En el hogar</h3>
+<hr>
+<p><span class="math display">\[
+\lambda_i^{\text{home}} = \frac{\beta}{2} \frac{\sum_k I_{ki}}{\sum_k N_{ki}^{(\mathrm{pop})}}
+\]</span></p>
+<h3 id="en-el-destino">En el destino</h3>
+<hr>
+<p><span class="math display">\[
+\lambda_j^{\text{work}} = \frac{\beta}{2} \frac{\sum_k I_{jk}}{\sum_k N_{jk}^{(\mathrm{pop})}}
+\]</span></p>
+</section>
+<section id="dinámica-de-la-epidemia" class="slide level2">
+<h2>Dinámica de la epidemia</h2>
+<hr>
+<h3 id="susceptibles">Susceptibles</h3>
+<p><span class="math inline">\(\frac{dS_{ji}}{dt} = - S_{ji} (\lambda_i^{\text{home}} + \lambda_j^{\text{work}})\)</span></p>
+<hr>
+<h3 id="infectados">Infectados</h3>
+<p><span class="math inline">\(\frac{dI_{ji}}{dt} = -\gamma I_{ji} + S_{ji}(\lambda_i^{\text{home}} + \lambda_j^{\text{work}})\)</span></p>
+<hr>
+<h3 id="dinámica-de-recuperados">Dinámica de recuperados</h3>
+<p><span class="math inline">\(\frac{dR_{ji}}{dt} = \gamma I_{ji}\)</span></p>
+</section>
+<section id="interpretación" class="slide level2">
+<h2>Interpretación</h2>
+<ul>
+<li>Mezcla homogénea dentro de cada localización</li>
+<li>Incluye residentes y commuters</li>
+<li>Transmisión depende de:
+<ul>
+<li>Prevalencia local</li>
+<li>Flujos de movilidad</li>
+</ul></li>
+</ul>
+<hr>
+<h3 id="rol-de-la-movilidad">Rol de la movilidad</h3>
+<ul>
+<li>Define acoplamiento entre regiones</li>
+<li>Permite transmisión a larga distancia</li>
+<li>Genera estructura de red</li>
+</ul>
+</section>
+<section id="simulación-estocástica" class="slide level2">
+<h2>Simulación estocástica</h2>
+<hr>
+<h3 id="transiciones">Transiciones</h3>
+<p><span class="math display">\[
+\Delta(S_{ji} \to I_{ji}) \sim \text{Binom}(S_{ji}, P(\Delta t; \lambda_{ji}))
+\]</span></p>
+<p><span class="math display">\[
+\Delta(I_{ji} \to R_{ji}) \sim \text{Binom}(I_{ji}, P(\Delta t; \gamma))
+\]</span></p>
+<hr>
+<h3 id="probabilidad-de-infección">Probabilidad de infección:</h3>
+<p><span class="math display">\[
+P(\Delta t; \lambda_{ji}) = 1 - e^{-\lambda_{ji} \Delta t}
+\]</span></p>
+</section>
+<section id="modelando-reducción-de-movilidad" class="slide level2">
+<h2>Modelando reducción de movilidad</h2>
+<p>Factor de reducción:</p>
+<p><span class="math display">\[
+\kappa_i = \frac{\sum_k (F_{ki}(T_L) + F_{ik}(T_L))}{\sum_k (F_{ki}(T_0) + F_{ik}(T_0))}
+\]</span></p>
+<hr>
+<h3 id="escenario-1-aislamiento">Escenario 1: aislamiento</h3>
+<ul>
+<li>Fracción <span class="math inline">\(1 - \kappa_i\)</span> se elimina de la dinámica</li>
+<li>Se mueve a compartimento <span class="math inline">\(R\)</span></li>
+</ul>
+<hr>
+<h3 id="escenario-2-distanciamiento">Escenario 2: distanciamiento</h3>
+<p><span class="math display">\[
+\beta_i = \kappa_i \beta
+\]</span></p>
+</section>
+<section id="nueva-fuerza-de-infección" class="slide level2">
+<h2>Nueva fuerza de infección</h2>
+<p><span class="math display">\[
+\lambda_i^{\text{home}} = \frac{\beta_i}{2} \frac{\sum_k I_{ki}}{\sum_k N_{ki}^{(\mathrm{pop})}}
+\]</span></p>
+<p><span class="math display">\[
+\lambda_j^{\text{work}} = \frac{\beta_j}{2} \frac{\sum_k I_{jk}}{\sum_k N_{jk}^{(\mathrm{pop})}}
+\]</span></p>
+</section>
+<section id="intuición-final" class="slide level2">
+<h2>Intuición final</h2>
+<blockquote>
+<p>La epidemia se propaga porque los individuos viven en un lugar pero interactúan en otro.</p>
+</blockquote>
+</section>
+<section id="mensaje-clave" class="slide level2">
+<h2>Mensaje clave</h2>
+<ul>
+<li>La movilidad estructura la transmisión</li>
+<li>No es solo un modelo SIR</li>
+<li>Es un sistema acoplado en red</li>
+</ul>
+</section>
+<section id="discusión" class="slide level2">
+<h2>Discusión</h2>
+<ul>
+<li>¿Qué pasaría sin commuting?</li>
+<li>¿Qué supuestos son más críticos?</li>
+<li>¿Cómo cambiaría con heterogeneidad?</li>
+</ul>
+</section>
 <section class="slide level2">
 
-
-<img src="https://docs.xarray.dev/en/stable/_static/Xarray_Logo_RGB_Final.svg" align="right" width="30%" class="r-stretch"></section>
-<section>
-<section id="xarray-in-45-minutes" class="title-slide slide level1 center">
-<h1>Xarray in 45 minutes</h1>
-<p>In this lesson, we cover the basics of Xarray data structures. By the end of the lesson, we will be able to:</p>
+</section>
+<section id="del-modelo-a-la-implementación" class="slide level2">
+<h2>Del modelo a la implementación</h2>
 <ul>
-<li>Understand the basic data structures in Xarray</li>
-<li>Inspect <code>DataArray</code> and <code>Dataset</code> objects.</li>
-<li>Read and write netCDF files using Xarray.</li>
-<li>Understand that there are many packages that build on top of xarray</li>
+<li>El código implementa un modelo SIR metapoblacional</li>
+<li>Cada individuo tiene:
+<ul>
+<li>Lugar de residencia (i)</li>
+<li>Lugar de trabajo (j)</li>
+</ul></li>
 </ul>
-<p>We’ll start by reviewing the various components of the Xarray data model, represented here visually:</p>
-
-<img src="https://docs.xarray.dev/en/stable/_images/dataset-diagram.png" align="center" width="50%" class="r-stretch"><div id="cell-1" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-stdout">
-<pre><code>Exception reporting mode: Minimal</code></pre>
-</div>
-</div>
-<p>Xarray has a few small real-world tutorial datasets hosted in the <a href="https://github.com/pydata/xarray-data">xarray-data</a> GitHub repository.</p>
-<p><a href="https://docs.xarray.dev/en/stable/generated/xarray.tutorial.open_dataset.html#xarray.tutorial.open_dataset">xarray.tutorial.load_dataset</a> is a convenience function to download and open DataSets by name (listed at that link).</p>
-<p>Here we’ll use <code>air temperature</code> from the <a href="https://www.weather.gov/ncep/">National Center for Environmental Prediction</a>. Xarray objects have convenient HTML representations to give an overview of what we’re working with:</p>
-<div id="cell-3" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>Coordinates:
-  * lat      (lat) float32 100B 75.0 72.5 70.0 67.5 65.0 ... 22.5 20.0 17.5 15.0
-  * lon      (lon) float32 212B 200.0 202.5 205.0 207.5 ... 325.0 327.5 330.0
-  * time     (time) datetime64[ns] 23kB 2013-01-01 ... 2014-12-31T18:00:00</code></pre>
-</div>
-</div>
-<p>Note that behind the scenes the <code>tutorial.open_dataset</code> downloads a file. It then uses <a href="https://docs.xarray.dev/en/stable/generated/xarray.open_dataset.html#xarray-open-dataset"><code>xarray.open_dataset</code></a> function to open that file (which for this datasets is a <a href="https://www.unidata.ucar.edu/software/netcdf/">netCDF</a> file).</p>
-<p>A few things are done automatically upon opening, but controlled by keyword arguments. For example, try passing the keyword argument <code>mask_and_scale=False</code>… what happens?</p>
+<p>👉 Se modela con una matriz (M M)</p>
 </section>
-<section id="whats-in-a-dataset" class="slide level2">
-<h2>What’s in a Dataset?</h2>
-<p><em>Many DataArrays!</em></p>
-<p>Datasets are dictionary-like containers of “DataArray”s. They are a mapping of variable name to DataArray:</p>
-<p>You can save some typing by using the “attribute” or “dot” notation. This won’t work for variable names that clash with a built-in method name (like <code>mean</code> for example).</p>
+<section id="estructura-de-la-población" class="slide level2">
+<h2>Estructura de la población</h2>
+<ul>
+<li>Matriz:</li>
+</ul>
+<p><span class="math display">\[
+N_{ij}
+\]</span></p>
+<ul>
+<li><p>Interpretación:</p>
+<ul>
+<li>Fila (i): donde vive</li>
+<li>Columna (j): donde trabaja</li>
+</ul></li>
+</ul>
 </section>
-<section id="whats-in-a-dataarray" class="slide level2">
-<h2>What’s in a DataArray?</h2>
-<p><em>data + (a lot of) metadata</em></p>
-<h3 id="name-optional">Name (optional)</h3>
-<h3 id="named-dimensions">Named dimensions</h3>
-<p><code>.dims</code> correspond to the axes of your data.</p>
-<p>In this case we have 2 spatial dimensions (<code>latitude</code> and <code>longitude</code> are stored with shorthand names <code>lat</code> and <code>lon</code>) and one temporal dimension (<code>time</code>).</p>
-<h3 id="coordinate-variables">Coordinate variables</h3>
-<p><code>.coords</code> is a simple <a href="https://docs.xarray.dev/en/stable/user-guide/data-structures.html#coordinates">data container</a> for coordinate variables.</p>
-<p>Here we see the actual timestamps and spatial positions of our air temperature data:</p>
-<p>Coordinates objects support similar indexing notation</p>
-<p>It is useful to think of the values in these coordinate variables as axis “labels” such as “tick labels” in a figure. These are coordinate locations on a grid at which you have data.</p>
-<h3 id="arbitrary-attributes">Arbitrary attributes</h3>
-<p><code>.attrs</code> is a dictionary that can contain arbitrary Python objects (strings, lists, integers, dictionaries, etc.) Your only limitation is that some attributes may not be writeable to certain file formats.</p>
-<h3 id="underlying-data">Underlying data</h3>
-<p><code>.data</code> contains the <a href="https://numpy.org">numpy array</a> storing air temperature values.</p>
-
-<img src="https://raw.githubusercontent.com/numpy/numpy/623bc1fae1d47df24e7f1e29321d0c0ba2771ce0/branding/logo/primary/numpylogo.svg" width="25%" class="r-stretch"><p>Xarray structures wrap underlying simpler array-like data structures. This part of Xarray is quite extensible allowing for distributed array, GPU arrays, sparse arrays, arrays with units etc. We’ll briefly look at this later in this tutorial.</p>
-<h3 id="review">Review</h3>
-<p>Xarray provides two main data structures:</p>
+<section id="ejemplo-conceptual" class="slide level2">
+<h2>Ejemplo conceptual</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Trabajo 1</th>
+<th>Trabajo 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vive 1</td>
+<td>(N_{11})</td>
+<td>(N_{12})</td>
+</tr>
+<tr class="even">
+<td>Vive 2</td>
+<td>(N_{21})</td>
+<td>(N_{22})</td>
+</tr>
+</tbody>
+</table>
+<p>👉 Cada celda es una subpoblación</p>
+</section>
+<section id="dinámica-de-infección" class="slide level2">
+<h2>Dinámica de infección</h2>
+<p>Cada individuo puede infectarse en:</p>
+<ul>
+<li>🏠 Hogar (i)</li>
+<li>🏢 Trabajo (j)</li>
+</ul>
+</section>
+<section id="fuerza-de-infección-1" class="slide level2">
+<h2>Fuerza de infección</h2>
+<p>En el hogar:</p>
+<p><span class="math display">\[
+\lambda_i^{home} \propto \\frac{I \\text{ en } i}{N \\text{ en } i}
+\]</span></p>
+<p>En el trabajo:</p>
+<p><span class="math display">\[
+\lambda_j^{work} \propto \\frac{I \\text{ en } j}{N \\text{ en } j}
+\]</span></p>
+</section>
+<section id="supuesto-clave" class="slide level2">
+<h2>Supuesto clave</h2>
+<ul>
+<li><p>Tiempo dividido en dos:</p></li>
+<li><p>50% hogar<br>
+</p></li>
+<li><p>50% trabajo</p></li>
+</ul>
+<hr>
+<h3 id="implementación-en-código">Implementación en código</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>lambda_home <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> beta <span class="op">*</span> I_home <span class="op">/</span> N_home</span>
+<span id="cb1-2"><a></a>lambda_work <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> beta <span class="op">*</span> I_work <span class="op">/</span> N_work</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="introduciendo-cuarentena-en-el-modelo" class="slide level2">
+<h2>Introduciendo cuarentena en el modelo</h2>
+<ul>
+<li>Queremos modelar reducción de movilidad</li>
+<li>Se define un factor:</li>
+</ul>
+<p><span class="math display">\[
+\kappa = \frac{\text{movilidad actual}}{\text{movilidad base}}
+\]</span></p>
+<ul>
+<li>Valores:
+<ul>
+<li>( = 1 ): sin cambios<br>
+</li>
+<li>( &lt; 1 ): reducción de movilidad</li>
+</ul></li>
+</ul>
+<hr>
+<h3 id="dos-mecanismos-de-lockdown">Dos mecanismos de lockdown</h3>
+<p>El modelo considera dos mecanismos distintos:</p>
 <ol type="1">
-<li><a href="https://docs.xarray.dev/en/stable/user-guide/data-structures.html#dataarray"><code>DataArrays</code></a> that wrap underlying data containers (e.g.&nbsp;numpy arrays) and contain associated metadata</li>
-<li><a href="https://docs.xarray.dev/en/stable/user-guide/data-structures.html#dataset"><code>Datasets</code></a> that are dictionary-like containers of DataArrays</li>
+<li><strong>Aislamiento</strong></li>
+<li><strong>Distanciamiento</strong></li>
 </ol>
-<p>DataArrays contain underlying arrays and associated metadata: 1. Name 2. Dimension names 3. Coordinate variables 4. and arbitrary attributes.</p>
-</section>
-<section id="why-xarray" class="slide level2">
-<h2>Why Xarray?</h2>
-<p>Metadata provides context and provides code that is more legible. This reduces the likelihood of errors from typos and makes analysis more intuitive and fun!</p>
-<h3 id="analysis-without-xarray-x">Analysis without xarray: <code>X(</code></h3>
-<h3 id="analysis-with-xarray">Analysis with xarray <code>=)</code></h3>
-<p>How readable is this code?</p>
-<p>Use dimension names instead of axis numbers</p>
-</section>
-<section id="extracting-data-or-indexing" class="slide level2">
-<h2>Extracting data or “indexing”</h2>
-<p>Xarray supports</p>
-<ul>
-<li>label-based indexing using <code>.sel</code></li>
-<li>position-based indexing using <code>.isel</code></li>
-</ul>
-<p>See the <a href="https://docs.xarray.dev/en/stable/indexing.html">user guide</a> for more.</p>
-<h3 id="label-based-indexing">Label-based indexing</h3>
-<p>Xarray inherits its label-based indexing rules from pandas; this means great support for dates and times!</p>
-<h3 id="position-based-indexing">Position-based indexing</h3>
-<p>This is similar to your usual numpy <code>array[0, 2, 3]</code> but with the power of named dimensions!</p>
-</section>
-<section id="concepts-for-computation" class="slide level2">
-<h2>Concepts for computation</h2>
-<p>Consider calculating the <em>mean air temperature per unit surface area</em> for this dataset. Because latitude and longitude correspond to spherical coordinates for Earth’s surface, each 2.5x2.5 degree grid cell actually has a different surface area as you move away from the equator! This is because <em>latitudinal length</em> is fixed ($ Lat = R <span class="math inline">\(), but *longitudinal length varies with latitude* (\)</span> Lon = R () $)</p>
-<p>So the <a href="https://en.wikipedia.org/wiki/Spherical_coordinate_system#Integration_and_differentiation_in_spherical_coordinates">area element for lat-lon coordinates</a> is</p>
-<p><span class="math display">\[ \delta A = R^2 \delta\phi \, \delta\lambda \cos(\phi) \]</span></p>
-<p>where <span class="math inline">\(\phi\)</span> is latitude, <span class="math inline">\(\delta \phi\)</span> is the spacing of the points in latitude, <span class="math inline">\(\delta \lambda\)</span> is the spacing of the points in longitude, and <span class="math inline">\(R\)</span> is Earth’s radius. (In this formula, <span class="math inline">\(\phi\)</span> and <span class="math inline">\(\lambda\)</span> are measured in radians)</p>
-<p>There are two concepts here: 1. you can call functions like <code>np.cos</code> and <code>np.deg2rad</code> (<a href="https://numpy.org/doc/stable/reference/ufuncs.html">“numpy ufuncs”</a>) on Xarray objects and receive an Xarray object back. 2. We used <a href="https://docs.xarray.dev/en/stable/generated/xarray.ones_like.html">ones_like</a> to create a DataArray that looks like <code>ds.air.lon</code> in all respects, except that the data are all ones</p>
-<h3 id="broadcasting-expanding-data">Broadcasting: expanding data</h3>
-<p>Our longitude and latitude length DataArrays are both 1D with different dimension names. If we multiply these DataArrays together the dimensionality is expanded to 2D by <em>broadcasting</em>:</p>
-<p>The result has two dimensions because xarray realizes that dimensions <code>lon</code> and <code>lat</code> are different so it automatically “broadcasts” to get a 2D result. See the last row in this image from <em>Jake VanderPlas Python Data Science Handbook</em></p>
-
-<img src="https://jakevdp.github.io/PythonDataScienceHandbook/figures/02.05-broadcasting.png" align="center" class="r-stretch"><p>Because xarray knows about dimension names we avoid having to create unnecessary size-1 dimensions using <code>np.newaxis</code> or <code>.reshape</code>. For more, see the <a href="https://docs.xarray.dev/en/stable/user-guide/computation.html#broadcasting-by-dimension-name">user guide</a></p>
+<blockquote>
+<p>Importante: representan procesos físicos diferentes</p>
+</blockquote>
 </section>
 <section class="slide level2">
 
-<h3 id="alignment-putting-data-on-the-same-grid">Alignment: putting data on the same grid</h3>
-<p>When doing arithmetic operations xarray automatically “aligns” i.e.&nbsp;puts the data on the same grid. In this case <code>cell_area</code> and <code>ds.air</code> are at the same lat, lon points we end up with a result with the same shape (25x53):</p>
-<p>Now lets make <code>cell_area</code> unaligned i.e.&nbsp;change the coordinate labels</p>
-<p>The result is an empty array with no latitude coordinates because none of them were aligned!</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource {tip} number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a></a>If you notice extra NaNs or missing points after xarray computation, it</span>
-<span id="cb3-2"><a></a>means that your xarray coordinates were not aligned _exactly_.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>To make sure variables are aligned as you think they are, do the following:</p>
-<p>The above statement raises an error since the two are not aligned.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource {seealso} number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a></a>For more, see</span>
-<span id="cb4-2"><a></a>[the Xarray documentation](https://docs.xarray.dev/en/stable/user-guide/computation.html#automatic-alignment). [This tutorial notebook](https://tutorial.xarray.dev/fundamentals/02.3_aligning_data_objects.html) also covers alignment and broadcasting (*highly recommended*)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="high-level-computation" class="slide level2">
-<h2>High level computation</h2>
-<p>(<code>groupby</code>, <code>resample</code>, <code>rolling</code>, <code>coarsen</code>, <code>weighted</code>)</p>
-<p>Xarray has some very useful high level objects that let you do common computations:</p>
-<ol type="1">
-<li><code>groupby</code> : <a href="https://docs.xarray.dev/en/stable/groupby.html">Bin data in to groups and reduce</a></li>
-<li><code>resample</code> : <a href="https://docs.xarray.dev/en/stable/user-guide/time-series.html#resampling-and-grouped-operations">Groupby specialized for time axes. Either downsample or upsample your data.</a></li>
-<li><code>rolling</code> : <a href="https://docs.xarray.dev/en/stable/user-guide/computation.html#rolling-window-operations">Operate on rolling windows of your data e.g.&nbsp;running mean</a></li>
-<li><code>coarsen</code> : <a href="https://docs.xarray.dev/en/stable/user-guide/computation.html#coarsen-large-arrays">Downsample your data</a></li>
-<li><code>weighted</code> : <a href="https://docs.xarray.dev/en/stable/user-guide/computation.html#weighted-array-reductions">Weight your data before reducing</a></li>
-</ol>
-<p>Below we quickly demonstrate these patterns. See the user guide links above and <a href="https://tutorial.xarray.dev/intermediate/01-high-level-computation-patterns.html">the tutorial</a> for more.</p>
-<h3 id="groupby">groupby</h3>
-<p>The seasons are out of order (they are alphabetically sorted). This is a common annoyance. The solution is to use <code>.sel</code> to change the order of labels</p>
-<h3 id="resample">resample</h3>
-<h3 id="weighted">weighted</h3>
-</section>
-<section id="visualization" class="slide level2">
-<h2>Visualization</h2>
-<p>(<code>.plot</code>)</p>
-<p>We have seen very simple plots earlier. Xarray also lets you easily visualize 3D and 4D datasets by presenting multiple facets (or panels or subplots) showing variations across rows and/or columns.</p>
-<p>For more see the <a href="https://docs.xarray.dev/en/stable/plotting.html">user guide</a>, the <a href="https://docs.xarray.dev/en/stable/examples/visualization_gallery.html">gallery</a>, and <a href="https://tutorial.xarray.dev/fundamentals/04.0_plotting.html">the tutorial material</a>.</p>
-</section>
-<section id="reading-and-writing-files" class="slide level2">
-<h2>Reading and writing files</h2>
-<p>Xarray supports many disk formats. Below is a small example using netCDF. For more see the <a href="https://docs.xarray.dev/en/stable/user-guide/io.html">documentation</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource {note} number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a></a>To avoid the `SerializationWarning` you can assign a _FillValue for any NaNs in 'air' array by adding the keyword argument `encoding=dict(air=dict(_FillValue=-9999))`</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource {tip} number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a></a>A common use case to read datasets that are a collection of many netCDF</span>
-<span id="cb6-2"><a></a>files. See the [documentation](https://docs.xarray.dev/en/stable/user-guide/io.html#reading-multi-file-datasets) for how</span>
-<span id="cb6-3"><a></a>to handle that.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Finally to read other file formats, you might find yourself reading in the data using a different library and then creating a DataArray(<a href="https://docs.xarray.dev/en/stable/user-guide/data-structures.html#creating-a-dataarray">docs</a>, <a href="https://tutorial.xarray.dev/fundamentals/01.1_creating_data_structures.html">tutorial</a>) from scratch. For example, you might use <code>h5py</code> to open an HDF5 file and then create a Dataset from that. For MATLAB files you might use <code>scipy.io.loadmat</code> or <code>h5py</code> depending on the version of MATLAB file you’re opening and then construct a Dataset.</p>
-</section>
-<section id="the-scientific-python-ecosystem" class="slide level2">
-<h2>The scientific python ecosystem</h2>
-<p>Xarray ties in to the larger scientific python ecosystem and in turn many packages build on top of xarray. A long list of such packages is here: <a href="https://docs.xarray.dev/en/stable/user-guide/ecosystem.html" class="uri">https://docs.xarray.dev/en/stable/user-guide/ecosystem.html</a>.</p>
-<p>Now we will demonstrate some cool features.</p>
-<h3 id="pandas-tabular-data-structures">Pandas: tabular data structures</h3>
-<p>You can easily <a href="https://docs.xarray.dev/en/stable/pandas.html">convert</a> between xarray and <a href="https://pandas.pydata.org/">pandas</a> structures. This allows you to conveniently use the extensive pandas ecosystem of packages (like <a href="https://seaborn.pydata.org/">seaborn</a>) for your work.</p>
-<h3 id="alternative-array-types">Alternative array types</h3>
-<p>This notebook has focused on Numpy arrays. Xarray can wrap <a href="https://docs.xarray.dev/en/stable/user-guide/duckarrays.html">other array</a> types! For example:</p>
-<p><img src="https://docs.dask.org/en/stable/_images/dask_horizontal.svg" width="20%"> <a href="https://docs.dask.org/en/latest/array.html">distributed parallel arrays</a> &amp; <a href="https://docs.xarray.dev/en/stable/user-guide/dask.html">Xarray user guide on Dask</a></p>
-<p><img src="https://raw.githubusercontent.com/pydata/sparse/master/docs/logo.svg" width="15%"> <strong>pydata/sparse</strong> : <a href="https://sparse.pydata.org">sparse arrays</a></p>
-<p><img src="https://raw.githubusercontent.com/cupy/cupy.dev/master/images/cupy_logo.png" width="22%"> <a href="https://cupy.dev">GPU arrays</a> &amp; <a href="https://cupy-xarray.readthedocs.io/">cupy-xarray</a></p>
-<p><img src="https://pint.readthedocs.io/en/stable/_static/logo-full.jpg" width="10%"> <strong>pint</strong> : <a href="https://pint.readthedocs.io">unit-aware arrays</a> &amp; <a href="https://github.com/xarray-contrib/pint-xarray">pint-xarray</a></p>
-<h3 id="dask">Dask</h3>
-<p>Dask cuts up NumPy arrays into blocks and parallelizes your analysis code across these blocks</p>
-<p><img src="https://raw.githubusercontent.com/dask/dask/main/docs/source/images/dask-array.svg" style="width:45%"></p>
-<p>All computations with dask-backed xarray objects are lazy, allowing you to build up a complicated chain of analysis steps quickly</p>
-<p>To get concrete values, call <code>.compute</code> or <code>.load</code></p>
-<h3 id="holoviz">HoloViz</h3>
-<p>Quickly generate interactive plots from your data!</p>
-<p>The <a href="https://hvplot.holoviz.org/user_guide/Gridded_Data.html"><code>hvplot</code> package</a> attaches itself to all xarray objects under the <code>.hvplot</code> namespace. So instead of using <code>.plot</code> use <code>.hvplot</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource {note} number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a></a>The time slider will only work if you're executing the notebook, rather than viewing the website</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<h3 id="cf_xarray">cf_xarray</h3>
-<p><a href="https://cf-xarray.readthedocs.io/">cf_xarray</a> is a project that tries to let you make use of other CF attributes that xarray ignores. It attaches itself to all xarray objects under the <code>.cf</code> namespace.</p>
-<p>Where xarray allows you to specify dimension names for analysis, <code>cf_xarray</code> lets you specify logical names like <code>"latitude"</code> or <code>"longitude"</code> instead as long as the appropriate CF attributes are set.</p>
-<p>For example, the <code>"longitude"</code> dimension in different files might be labelled as: (lon, LON, long, x…), but cf_xarray let’s you always refer to the logical name <code>"longitude"</code> in your code:</p>
-<p>The following <code>mean</code> operation will work with any dataset that has appropriate attributes set that allow detection of the “latitude” variable (e.g. <code>units: "degress_north"</code> or <code>standard_name: "latitude"</code>)</p>
-<h3 id="other-cool-packages">Other cool packages</h3>
-<ul>
-<li><a href="https://xgcm.readthedocs.io/">xgcm</a> : grid-aware operations with xarray objects</li>
-<li><a href="https://xrft.readthedocs.io/">xrft</a> : fourier transforms with xarray</li>
-<li><a href="https://xclim.readthedocs.io/">xclim</a> : calculating climate indices with xarray objects</li>
-<li><a href="https://intake-xarray.readthedocs.io/">intake-xarray</a> : forget about file paths</li>
-<li><a href="https://corteva.github.io/rioxarray/stable/index.html">rioxarray</a> : raster files and xarray</li>
-<li><a href="https://xesmf.readthedocs.io/">xesmf</a> : regrid using ESMF</li>
-<li><a href="https://unidata.github.io/MetPy/latest/index.html">MetPy</a> : tools for working with weather data</li>
-</ul>
-<p>Check the Xarray <a href="https://docs.xarray.dev/en/stable/user-guide/ecosystem.html">Ecosystem</a> page and <a href="https://tutorial.xarray.dev/intermediate/xarray_ecosystem.html">this tutorial</a> for even more packages and demonstrations.</p>
-</section>
-<section id="next" class="slide level2">
-<h2>Next</h2>
-<ol type="1">
-<li>Read the <a href="https://tutorial.xarray.dev">tutorial</a> material and <a href="https://docs.xarray.dev/en/stable/user-guide/index.html">user guide</a></li>
-<li>See the description of <a href="https://docs.xarray.dev/en/stable/terminology.html">common terms</a> used in the xarray documentation:</li>
-<li>Answers to common questions on “how to do X” with Xarray are <a href="https://docs.xarray.dev/en/stable/get-help/howdoi.html">here</a></li>
-<li>Ryan Abernathey has a book on data analysis with a <a href="https://earth-env-data-science.github.io/lectures/xarray/xarray_intro.html">chapter on Xarray</a></li>
-<li><a href="https://projectpythia.org/">Project Pythia</a> has <a href="https://foundations.projectpythia.org">foundational</a> and more <a href="https://cookbooks.projectpythia.org/">advanced</a> material on Xarray. Pythia also aggregates other <a href="https://projectpythia.org/resource-gallery">Python learning resources</a>.</li>
-<li>The <a href="https://github.com/pydata/xarray/discussions">Xarray Github Discussions</a> and <a href="https://discourse.pangeo.io/">Pangeo Discourse</a> are good places to ask questions.</li>
-<li>Tell your friends! Tweet!</li>
-</ol>
-</section>
-<section id="welcome" class="slide level2">
-<h2>Welcome!</h2>
-<p>Xarray is an open-source project and gladly welcomes all kinds of contributions. This could include reporting bugs, discussing new enhancements, contributing code, helping answer user questions, contributing documentation (even small edits like fixing spelling mistakes or rewording to make the text clearer). Welcome!</p>
+<h3 id="dos-mecanismos-de-lockdown-1">Dos mecanismos de lockdown</h3>
+<h3 id="escenario-1-aislamiento-1">Escenario 1: Aislamiento</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="va">self</span>.S <span class="op">=</span> population <span class="op">*</span> kappa</span>
+<span id="cb2-2"><a></a><span class="va">self</span>.R <span class="op">=</span> population <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> kappa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<h3 id="escenario-1-distanciamiento">Escenario 1: Distanciamiento</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>lambda_home_eff <span class="op">=</span> kappa <span class="op">*</span> lambda_home</span>
+<span id="cb3-2"><a></a>lambda_work_eff <span class="op">=</span> kappa <span class="op">*</span> lambda_work</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
