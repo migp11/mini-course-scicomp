@@ -7,11 +7,13 @@ website:
   sidebar:
     style: "docked"
     contents:
-      - lectures/L01_intro.qmd
-      - lectures/L02_nd_arrays.qmd
-      - lectures/L03_massive_data.qmd
-      - lectures/flowmaps_intro.qmd
-      - lectures/L05_emews.qmd
+      - lectures/lectures/L01_intro.qmd
+      - lectures/lectures/L02_nd_arrays.qmd
+      - lectures/lectures/L03_massive_data.qmd
+      - lectures/lectures/L04_simulations.qmd
+      - lectures/lectures/L05_epidemic_models.qmd
+      - lectures/lectures/L06_intro_parallel_computing.qmd
+      - lectures/lectures/L07_emews.qmd
 
 format:
   revealjs:
