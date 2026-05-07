@@ -1,0 +1,66 @@
+---
+title: "Taller de computación científica y exploración de modelos complejos"
+subtitle: |
+  Miguel Ponce de León \<<miguel.ponce@bsc.es>\>\ 
+  _Barcelona Supercomputing Center_  
+  
+date: "05-05-2026"
+format:
+  revealjs:
+    theme: "simple"
+    slide-number: true
+    toc: false
+    center: true
+    transition: fade
+    title-slide-attributes:
+        data-background-image: img/bsc_logo.jpg
+        data-background-size: 280px
+        data-background-position: top left
+---
+
+## ¿Que son los datos masivos?
+- Datos que no pueden ser procesados con herramientas tradicionales debido a su volumen, velocidad o variedad.
+- Requieren técnicas y tecnologías específicas para su almacenamiento, procesamiento y análisis.
+- Ejemplos: datos de redes sociales, datos de sensores, datos genómicos, etc.
+
+## Desafíos de los datos masivos
+- Almacenamiento: Necesidad de sistemas de almacenamiento escalables y eficientes.
+- Procesamiento: Requiere algoritmos y herramientas que puedan manejar grandes volúmenes de datos de manera eficiente.
+- Análisis: Necesidad de técnicas de análisis que puedan extraer información útil de grandes conjuntos de datos.
+- Visualización: Dificultad para visualizar grandes conjuntos de datos de manera efectiva.
+
+
+---
+
+## Parquet, Arrow y Dask
+- Parquet: formato de almacenamiento columnar eficiente para grandes volúmenes de datos.
+- Arrow: formato de memoria para datos tabulares, optimizado para velocidad y eficiencia.
+- Dask: biblioteca de Python para computación paralela, que permite trabajar con grandes conjuntos de datos distribuidos.
+
+---
+
+## Digital Twins
+"There are differences between the way a physicist looks at a problem compared to a computer scientist," says Hugo Barbosa, a post-doctoral researcher in Ghoshal's lab, whose PhD is in computer science. "Physicists are more interested in the fundamental rules, the things that are universal, regardless of the populations. They want to understand the basic components of those models and make those components as general and universal as possible."
+
+Imagine, for instance, you want to figure out how people walk on a campus. One way of approaching this problem would be to gather all the data possible about every single person on the campus: what they ate that morning, what classes they have at what times, who their friends are, where the buildings are located on the campus, and so on.
+
+"It would, first of all, be virtually impossible to collect all this data," Ghoshal says, "plus you wouldn't be able to apply the same conclusions to the ways people walk on other campuses. The buildings are different, the geography is different."
+
+A second way of approaching the problem involves using the methods Ghoshal and his lab members employ: distilling a system to it basics and applying physics, mathematics, and statistics."
+Source: https://www.scientificamerican.com/article/why-we-have-so-many-problems-with-predicting-the-future1/
+
+---
+
+## Information and Communication Technology (ICT) data
+- Datos generados por dispositivos y sistemas de comunicación, como teléfonos móviles, redes sociales, sensores, etc.
+- Ejemplos: datos de llamadas telefónicas, datos de redes sociales, datos de sensores, etc.
+
+## Ejemplo: Datos de movilidad urbana
+- Datos de movilidad urbana: datos generados por dispositivos móviles, sensores de tráfico, etc., que pueden ser utilizados para entender patrones de movilidad en ciudades.
+- Aplicaciones prácticas: planificación urbana (reducción emisiones), gestión del tráfico, respuesta a emergencias, etc.
+- Ciencia básica: teoría de ciudades, modelos de movilidad, etc.
+
+---
+
+## Referencias
+Batty, M. (2024). Digital twins in city planning. Nature Computational Science, 4(3), 192-199.

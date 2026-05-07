@@ -418,3 +418,39 @@ self.R = population * (1 - kappa)
 lambda_home_eff = kappa * lambda_home
 lambda_work_eff = kappa * lambda_work
 ```
+
+
+---
+
+## Parte práctica
+
+---
+
+## Instrucciones para instalar EpiCommute
+
+1. Abrimos la terminar y nos conectamos al servidor
+2. Entramos en la carpetta del curso (`cd mini-course-scicomp`)
+3. Activamos el venv
+4. Instalar EpiCommute:
+    1. Descargamos Epicommute: <br>
+            `git clone https://github.com/franksh/EpiCommute.git`
+    2. Acedemos a la carpeta del paquete: <br>
+            `cd EpiCommute`
+    3. Instalamos el paquete en el venv: <br>
+             `python setupy.py install`
+    4. Probamos que se instaló de forma correcta: <br>
+            `python -c "import EpiCommute"`
+    5. Si no hay mensajes de erro es que fue todo OK!
+
+---
+
+### Ejercicio 1
+
+Ejecuta la simulación básica.
+
+Preguntas:
+
+- ¿qué representa cada región?
+- ¿cómo se propaga la epidemia?
+
+---

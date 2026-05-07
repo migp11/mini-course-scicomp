@@ -1,0 +1,48 @@
+ ```bash
+ 
+$ curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+ 
+$ chmod +x Miniconda3-latest-Linux-x86_64.sh 
+$ ./Miniconda3-latest-Linux-x86_64.sh
+```
+
+
+ ```bash
+ source miniconda3/bin/activate 
+ curl -L -O https://raw.githubusercontent.com/emews/emews-tutorial/main/code/install/install_emews.sh
+ bash install_emews.sh 3.13 emews_db
+ conda activate emews-py3.13
+ git clone https://github.com/emews/emews-tutorial-code
+ cd emews-tutorial-code/
+ ``` 
+
+
+
+
+ # EMEWS Tutorial Code Repository #
+
+This repository contains the example code for the [EMEWS tutorial][tutorial url].
+
+The easiest way to download the example code is by cloning the repository:
+
+```bash
+$ cd <my_tutorial_code_location>
+$ git clone https://github.com/emews/emews-tutorial-code.git
+```
+
+or 
+
+```bash
+$ cd <my_tutorial_code_location>
+$ git clone git@github.com:emews/emews-tutorial-code.git
+```
+
+To download and install the Repast Simphony Zombies model into the, e.g., UC1 tutorial:
+
+```bash
+$ cd emews-tutorial-code/uc1
+$ curl -L -O https://github.com/emews/emews-tutorial-code/releases/latest/download/complete_model.jar
+$ unzip complete_model.jar -d complete_model 
+```
+
+[tutorial url]: https://emews.org/emews-tutorial/
