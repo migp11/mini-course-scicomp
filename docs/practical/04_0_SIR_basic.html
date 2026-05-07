@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.21">
 
   <meta name="author" content="Miguel Ponce de Leon miguel.ponce@bsc.es">
   <meta name="dcterms.date" content="2026-05-05">
-  <title>Mini Course – 3 Quarantine</title>
+  <title>Mini Course – Parte I — Datos reales</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,12 +30,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
-  <link rel="stylesheet" href="../../../lectures/css/styles.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link rel="stylesheet" href="../lectures/css/styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -123,13 +123,17 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+  <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../../../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
-  <h1 class="title">3 Quarantine</h1>
+<section id="title-slide" data-background-image="../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
+  <h1 class="title">Parte I — Datos reales</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -143,57 +147,194 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 </section>
 <section class="slide level2">
 
-<p>Here we show how quarantine is implemented in the model and how it affects the model.</p>
+<p>Trabajamos con datos de casos en España.</p>
 </section>
-<section>
-<section id="model-setup" class="title-slide slide level1 center">
-<h1>Model setup</h1>
-<p>We again use a simple system, with a random mobility <code>mobility_baseline</code>.</p>
-<p>Now we assume that mobility has been reduced due to lockdown measures. The new mobility is given by the matrix <code>mobility_current</code>, which is simply the baseline mobility flows reduced by random factors.</p>
-</section>
-<section id="quarantine-scenarios" class="slide level2">
-<h2>Quarantine scenarios</h2>
-<p>Quarantine is implemented in two different ways in the model:</p>
+<section class="slide level2">
+
+<h3 id="ejercicio-1">Ejercicio 1</h3>
+<p>Carga los datos agregados y representa la evolución temporal.</p>
+<p>Preguntas:</p>
 <ul>
-<li>The <code>isolation</code> scenario assumes that the reduced mobility means that individual stay at home, and are effectively removed from the dynamices.</li>
-<li>The <code>distancing</code> scenario instead assumes that the reduced mobility corresponds to a reduction in contacts between individuals.</li>
+<li>¿Qué forma tiene la curva?</li>
+<li>¿Dónde está el pico?</li>
 </ul>
-<p>More detailed descriptions of both scenarios are given in the manuscript.</p>
 </section>
-<section id="initialize-and-run-scenarios" class="slide level2">
-<h2>Initialize and run scenarios</h2>
-<p>We now initialize and run three different variations of the model: no quarantine, isolation, and distancing.</p>
-<p>Run simulations</p>
-<div id="cell-10" class="cell" data-tags="[]" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>Starting Simulation ...
-Simulation completed
-Time: 0min 8.99s</code></pre>
-</div>
-</div>
-<div id="cell-11" class="cell" data-tags="[]" data-execution_count="5">
-<div class="cell-output cell-output-stdout">
-<pre><code>Starting Simulation ...
-Simulation completed
-Time: 0min 8.92s</code></pre>
-</div>
-</div>
-<div id="cell-12" class="cell" data-tags="[]" data-execution_count="6">
-<div class="cell-output cell-output-stdout">
-<pre><code>Starting Simulation ...
-Simulation completed
-Time: 0min 9.04s</code></pre>
-</div>
-</div>
+<section id="parte-ii-modelo-sir" class="slide level2">
+<h2>Parte II — Modelo SIR</h2>
+<p>El modelo SIR describe la evolución de:</p>
+<ul>
+<li>S → susceptibles<br>
+</li>
+<li>I → infectados<br>
+</li>
+<li>R → recuperados</li>
+</ul>
 </section>
-<section id="comparison-of-results" class="slide level2">
-<h2>Comparison of results</h2>
-<p>We can see that both quarantine-scenarios “flatten the curve”.</p>
-<p>The <code>isolation</code> scenario shows a flatter curve on average (but as we only run one simulation this doesn’t have to be the case.</p>
+<section class="slide level2">
+
+<h3 id="ejercicio-2">Ejercicio 2</h3>
+<p>Ejecuta el modelo SIR básico.</p>
+<div id="a90a70aa" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"0f7b1d4806ea49f4965f696ca8861f70","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+<h3 id="ejercicio-3-ajuste-de-parámetros">Ejercicio 3 — Ajuste de parámetros</h3>
+<p>Modifica:</p>
+<ul>
+<li>el tamaño de la población (S0+I0+R0)</li>
+<li>la condición inicial (I0)</li>
+<li>beta (tasa de infección)</li>
+<li>gamma (recuperación)</li>
+</ul>
+<p>para aproximar la curva real.</p>
+</section>
+<section class="slide level2">
+
+<p>Preguntas:</p>
+<ul>
+<li>¿qué parámetro cambia el pico?</li>
+<li>¿qué parámetro cambia la duración?</li>
+</ul>
+<details>
+<summary>
+Hint
+</summary>
+<p>beta controla la velocidad de contagio<br>
+gamma controla la duración de la infección</p>
+</details>
+<div id="5bbda5b5-7839-4455-b954-f15f7cade6d2" class="cell" data-execution_count="27">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="04_0_SIR_basic_files/figure-revealjs/cell-8-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="25f3f4be" class="cell" data-execution_count="30">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="04_0_SIR_basic_files/figure-revealjs/cell-9-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<h3 id="ejercicio-4-ajustar-el-modelo-a-los-datos-de-españa">Ejercicio 4 — Ajustar el modelo a los datos de España</h3>
+<p>Modifica:</p>
+<ul>
+<li>el tamaño de la población (S0+I0+R0)</li>
+<li>la condición inicial (I0)</li>
+<li>beta (tasa de infección)</li>
+<li>gamma (recuperación)</li>
+</ul>
+<ol type="1">
+<li>Representar las curvas de infectados simuladas y reales apara diferente parametros</li>
+<li>Calcular alguna métrica de error entre las curvas de forma manual</li>
+</ol>
+</section>
+<section id="limitaciones-del-modelo-sir" class="slide level2">
+<h2>Limitaciones del modelo SIR</h2>
+<p>El modelo SIR:</p>
+<ul>
+<li>asume población homogénea<br>
+</li>
+<li>no incluye estructura espacial<br>
+</li>
+<li>no incluye movilidad</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="pregunta">Pregunta</h3>
+<p>¿Qué falta para modelar mejor una epidemia real?</p>
+</section>
+<section id="parte-iii-movilidad" class="slide level2">
+<h2>Parte III — Movilidad</h2>
+<p>En la práctica anterior calculamos:</p>
+<p>risk(i → j)</p>
+</section>
+<section class="slide level2">
+
+<p>Esto sugiere:</p>
+<ul>
+<li>las regiones están conectadas<br>
+</li>
+<li>los infectados viajan<br>
+</li>
+<li>la epidemia se propaga entre regiones</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<blockquote>
+<p>necesitamos modelos espaciales</p>
+</blockquote>
+</section>
+<section id="instrucciones-para-instalar-epicommute" class="slide level2">
+<h2>Instrucciones para instalar EpiCommute</h2>
+<ol type="1">
+<li>Abrimos la terminar y nos conectamos al servidor</li>
+<li>Entramos en la carpetta del curso (<code>cd mini-course-scicomp</code>)</li>
+<li>Activamos el venv</li>
+<li>Instalar EpiCommute:
+<ol type="1">
+<li>Descargamos Epicommute: <br> <code>git clone https://github.com/franksh/EpiCommute.git</code></li>
+<li>Acedemos a la carpeta del paquete: <br> <code>cd EpiCommute</code></li>
+<li>Instalamos el paquete en el venv: <br> <code>python setupy.py install</code></li>
+<li>Probamos que se instaló de forma correcta: <br> <code>python -c "import EpiCommute"</code></li>
+<li>Si no hay mensajes de erro es que fue todo OK!</li>
+</ol></li>
+</ol>
+</section>
+<section id="que-es-epicommute" class="slide level2">
+<h2>¿Que es EpiCommute?</h2>
+<p>Es un paquete en python que implemta un modelo simple de metapoblaciones y que fue usado en el sigueinte artículo: - <a href="https://www.pnas.org/doi/10.1073/pnas.2012326117">COVID-19 lockdown induces disease-mitigating structural changes in mobility networks</a></p>
+<p>Las idas orginales está desarrolladas en este otro artículo:</p>
+<ul>
+<li><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003716">On the Use of Human Mobility Proxies for Modeling Epidemics</a></li>
+</ul>
+<h3 id="ejercicio-1-simulación-básica">Ejercicio 1 — Simulación básica</h3>
+<p>Ejecuta el modelo básico.</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿cómo evoluciona la epidemia?</li>
+<li>¿qué regiones se infectan primero?</li>
+</ul>
+<blockquote>
+<p>ejecutar 04_1_basic_example.ipynb</p>
+</blockquote>
+<h3 id="ejercicio-2-efecto-de-la-movilidad">Ejercicio 2 — Efecto de la movilidad</h3>
+<p>Ejecuta la simulación:</p>
+<ul>
+<li>sin movilidad<br>
+</li>
+<li>con movilidad</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Preguntas:</p>
+<ul>
+<li>¿qué cambia?</li>
+<li>¿la epidemia se propaga más rápido?</li>
+</ul>
+<blockquote>
+<p>ejecutar 2_lattice_mobility.ipynb</p>
+</blockquote>
+<h3 id="ejercicio-3-efecto-de-la-reducción-de-movilidad.">Ejercicio 3 — Efecto de la reducción de movilidad.</h3>
+<p>Simular los distintos tipos de cuarentenas y observar las diferencias</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿se reduce el pico?</li>
+<li>¿se retrasa la epidemia?</li>
+</ul>
 
 
-
-<img data-src="3_quarantine_files/figure-revealjs/cell-8-output-1.svg" class="r-stretch"></section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -202,19 +343,19 @@ Time: 0min 9.04s</code></pre>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

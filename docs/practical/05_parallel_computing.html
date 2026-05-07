@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.21">
 
   <meta name="author" content="Miguel Ponce de Leon miguel.ponce@bsc.es">
   <meta name="dcterms.date" content="2026-05-05">
-  <title>Mini Course – 1 Basic example</title>
+  <title>Mini Course – Paralelización de simulaciones</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,12 +30,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
-  <link rel="stylesheet" href="../../../lectures/css/styles.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link rel="stylesheet" href="../lectures/css/styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -123,13 +123,16 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../../../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
-  <h1 class="title">1 Basic example</h1>
+<section id="title-slide" data-background-image="../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
+  <h1 class="title">Paralelización de simulaciones</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -143,43 +146,159 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 </section>
 <section class="slide level2">
 
-<p>This notebook runs a basic parametrization of the model.</p>
-<p>We simulate an SIR epidemic in a system of M subpopulations.</p>
+<p>En muchos problemas científicos necesitamos ejecutar el mismo modelo muchas veces con distintos parámetros.</p>
+<p>Ejemplo:</p>
+<ul>
+<li>explorar valores de beta<br>
+</li>
+<li>probar distintos escenarios de movilidad</li>
+</ul>
 </section>
-<section id="initialize-model" class="slide level2">
-<h2>Initialize model</h2>
-<p>Here we set the parameters of the model, and use some dummy data</p>
+<section class="slide level2">
+
+<p>Estas simulaciones son independientes:</p>
+<blockquote>
+<p>podemos ejecutarlas en paralelo</p>
+</blockquote>
 </section>
-<section id="run-simulation" class="slide level2">
-<h2>Run simulation</h2>
-<div id="cell-6" class="cell" data-execution_count="12">
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>np.float64(205.4131776113307)</code></pre>
-</div>
-</div>
-<div id="cell-7" class="cell" data-tags="[]" data-execution_count="9">
+<section id="ejecución-secuencial" class="slide level2">
+<h2>Ejecución secuencial</h2>
+<div id="31d09ddd" class="cell" data-execution_count="35">
 <div class="cell-output cell-output-stdout">
-<pre><code>Starting Simulation ...
+<pre><code>- Running Epicommute using beta=0.2 mu=0.125 outbreak source=0 initial infected=10
+Starting Simulation ...
 Simulation completed
-Time: 0min 2.33s</code></pre>
+Time: 0min 3.88s
+--------------------
+- Running Epicommute using beta=0.35 mu=0.125 outbreak source=0 initial infected=10
+Starting Simulation ...
+Simulation completed
+Time: 0min 2.81s
+--------------------
+- Running Epicommute using beta=0.5 mu=0.125 outbreak source=0 initial infected=10
+Starting Simulation ...
+Simulation completed
+Time: 0min 1.79s
+--------------------
+Tiempo secuencial: 8.49 s</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">beta</th>
+<th data-quarto-table-cell-role="th">peak</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.20</td>
+<td>1.827082</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.35</td>
+<td>6.319341</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.50</td>
+<td>7.751105</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </section>
-<section id="show-results" class="slide level2">
-<h2>Show results</h2>
-<h3 id="epidemic-curve">Epidemic curve</h3>
-
-<img data-src="1_basic_example_files/figure-revealjs/cell-7-output-1.png" class="r-stretch"><h3 id="arrival-times">Arrival times</h3>
-<p>The arrival time of the disease in the subpopulations</p>
-<div id="cell-13" class="cell" data-tags="[]" data-execution_count="8">
+<section id="ejecución-en-paralelo" class="slide level2">
+<h2>Ejecución en paralelo</h2>
+<div id="6af3d3f3" class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[ 7.  1.  9.  8.  3. 14. 14.  4.  2.  3. 10.  9.  5.  2. 12. 10.  1.  9.
-  3.  8.]</code></pre>
+<pre><code>Tiempo paralelo: 15.40 s</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">beta</th>
+<th data-quarto-table-cell-role="th">peak</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.200000</td>
+<td>1.665679</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.215789</td>
+<td>2.021434</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.231579</td>
+<td>2.194995</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>0.247368</td>
+<td>2.777339</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>0.263158</td>
+<td>3.431687</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 
+<img data-src="05_parallel_computing_files/figure-revealjs/cell-8-output-1.png" class="r-stretch"></section>
+<section id="versión-con-múltiples-parámetros" class="title-slide slide level1 center">
+<h1>Versión con múltiples parámetros</h1>
 
-</section>
+
+
+<img data-src="05_parallel_computing_files/figure-revealjs/cell-12-output-1.png" class="r-stretch"></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -188,19 +307,19 @@ Time: 0min 2.33s</code></pre>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

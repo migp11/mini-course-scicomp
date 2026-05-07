@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.21">
 
   <meta name="author" content="Miguel Ponce de Leon miguel.ponce@bsc.es">
   <meta name="dcterms.date" content="2026-05-05">
-  <title>Mini Course – 2 Lattice mobility</title>
+  <title>Mini Course – Algoritmos evolutivos</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,12 +30,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
-  <link rel="stylesheet" href="../../../lectures/css/styles.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link rel="stylesheet" href="../lectures/css/styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -128,8 +128,9 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../../../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
-  <h1 class="title">2 Lattice mobility</h1>
+<section id="title-slide" data-background-image="../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
+  <h1 class="title">Algoritmos evolutivos</h1>
+  <p class="subtitle">Optimización heuristica</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -141,58 +142,139 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 
   <p class="date">2026-05-05</p>
 </section>
-<section class="slide level2">
-
-<p>Example for a setup of the model with non-trivial connectivity between the metapopulations.</p>
-<p>To keep it simple, we use a 2D lattice.</p>
+<section id="por-qué-optimización" class="slide level2">
+<h2>¿Por qué optimización?</h2>
+<p>Queremos encontrar parámetros que reproduzcan datos reales.</p>
+<p><strong>Problema:</strong></p>
+<p>min error(modelo, datos)</p>
+<p><strong>Hasta ahora:</strong></p>
+<ul>
+<li>exploración manual<br>
+</li>
+<li>grid search</li>
+</ul>
+<blockquote>
+<p>¿podemos hacerlo automáticamente?</p>
+</blockquote>
 </section>
-<section>
-<section id="model-setup" class="title-slide slide level1 center">
-<h1>Model setup</h1>
+<section id="idea-general" class="slide level2">
+<h2>Idea general</h2>
+<p><strong>Buscar en un espacio de parámetros:</strong></p>
+<ul>
+<li>beta<br>
+</li>
+<li>movilidad<br>
+</li>
+<li>condiciones iniciales</li>
+</ul>
+<p><strong>Evaluando:</strong></p>
+<ul>
+<li>qué tan bien explica los datos</li>
+</ul>
+</section>
+<section id="optimización-i" class="slide level2">
+<h2>Optimización (I)</h2>
+<p>Paisaje adaptativo simple <img data-src="img/simple_fitness_landscape.jpg"></p>
+<div class="footer">
+<p>Source: Nygaard, T. F., et al (2021). Evolutionary Computation, 29(4), 441-461.</p>
+</div>
+</section>
+<section id="optimización-ii" class="slide level2">
+<h2>Optimización (II)</h2>
+<p>Paisaje adaptativo complejo <img data-src="img/rugged-fitness-landscape.png"></p>
+<div class="footer">
+<p>Source: https://geo.coop/articles/landscape-co-op-development</p>
+</div>
+</section>
+<section id="algoritmos-evolutivos-i" class="slide level2">
+<h2>Algoritmos evolutivos (I)</h2>
+<p><strong>Inspirados en evolución biológica</strong></p>
+<ul>
+<li>población de soluciones<br>
+</li>
+<li>selección<br>
+</li>
+<li>mutación<br>
+</li>
+<li>iteración</li>
+</ul>
+<p><strong>Esquema</strong></p>
+<ol type="1">
+<li>Generar soluciones aleatorias<br>
+</li>
+<li>Evaluarlas<br>
+</li>
+<li>Seleccionar las mejores<br>
+</li>
+<li>Generar nuevas soluciones<br>
+</li>
+<li>Repetir</li>
+</ol>
+</section>
+<section id="algoritmos-evolutivos-ii" class="slide level2">
+<h2>Algoritmos evolutivos (II)</h2>
+<p><strong>Ventajas</strong></p>
+<ul>
+<li>no necesitan gradientes<br>
+</li>
+<li>funcionan con modelos complejos<br>
+</li>
+<li>robustos frente a ruido</li>
+<li>muy paralelizable</li>
+</ul>
+<p><strong>Existen muchos tipos AE</strong></p>
+<ul>
+<li>Algoritmos genéticos</li>
+<li>Covariance Matrix Adaptation Evolutionary Strategy</li>
+</ul>
+</section>
+<section id="algoritmos-genéticos" class="slide level2">
+<h2>Algoritmos genéticos</h2>
+<p><small>Heurística de búsqueda inspirada en la evolución por selección natural, donde se seleccionan los individuos más aptos para la reproducción con el fin de producir descendencia de la siguiente generación.</small></p>
+
+<img data-src="img/genetic_algorithm.png" class="r-stretch"></section>
+<section id="covariance-matrix-adaptation-evolution-strategy" class="slide level2">
+<h2>Covariance Matrix Adaptation Evolution Strategy</h2>
+<p><small>Heurística de búsqueda que explora el espacio de parámetros mediante muestreo adaptativo, ajustando progresivamente una distribución probabilística hacia las soluciones más prometedoras.</small></p>
+
+<img data-src="img/cma.png" class="r-stretch"></section>
+<section id="covariance-matrix-adaptation-evolution-strategy-1" class="slide level2">
+<h2>Covariance Matrix Adaptation Evolution Strategy</h2>
+<p><strong>Algoritmo evolutivo avanzado:</strong></p>
+<ul>
+<li>muestrea parámetros<br>
+</li>
+<li>aprende la estructura del problema<br>
+</li>
+<li>adapta la búsqueda</li>
+</ul>
+<p><strong>Ventajas</strong></p>
+<ul>
+<li>no necesitan gradientes<br>
+</li>
+<li>funcionan con modelos complejos<br>
+</li>
+<li>robustos frente a ruido</li>
+</ul>
+<blockquote>
+<p>muy eficiente en espacios continuos</p>
+</blockquote>
+</section>
+<section id="conectando-las-distitnas-piezas" class="slide level2">
+<h2>Conectando las distitnas piezas</h2>
+<p><strong>Pipeline completo</strong></p>
+<ul>
+<li>datos → análisis<br>
+</li>
+<li>modelo → simulación<br>
+</li>
+<li>paralelización → escala<br>
+</li>
+<li>optimización → calibración</li>
+</ul>
+
 
 </section>
-<section id="create-lattice" class="slide level2">
-<h2>Create lattice</h2>
-<p>We use networkx to create a simple 2D lattice</p>
-
-<img data-src="2_lattice_mobility_files/figure-revealjs/cell-3-output-1.png" class="r-stretch"></section>
-<section id="mobility" class="slide level2">
-<h2>Mobility</h2>
-<p>To add mobility, we use the adjacency matrix of the lattice and add some random noise</p>
-<div id="cell-8" class="cell" data-execution_count="13">
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>36</code></pre>
-</div>
-</div>
-<div id="cell-10" class="cell" data-tags="[]" data-execution_count="16">
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>(36,)</code></pre>
-</div>
-</div>
-</section></section>
-<section>
-<section id="results" class="title-slide slide level1 center">
-<h1>Results</h1>
-
-</section>
-<section id="epidemic-curve" class="slide level2">
-<h2>Epidemic curve</h2>
-
-<img data-src="2_lattice_mobility_files/figure-revealjs/cell-8-output-1.svg" class="r-stretch"></section>
-<section id="spread-of-infected" class="slide level2">
-<h2>Spread of infected</h2>
-
-<img data-src="2_lattice_mobility_files/figure-revealjs/cell-9-output-1.svg" class="r-stretch"></section>
-<section id="susceptibles" class="slide level2">
-<h2>Susceptibles</h2>
-
-<img data-src="2_lattice_mobility_files/figure-revealjs/cell-10-output-1.svg" class="r-stretch"></section>
-<section id="arrival-times" class="slide level2">
-<h2>Arrival times</h2>
-
-
-
-<img data-src="2_lattice_mobility_files/figure-revealjs/cell-11-output-1.svg" class="r-stretch"></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -201,19 +283,19 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

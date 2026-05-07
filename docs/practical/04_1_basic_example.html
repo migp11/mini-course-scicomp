@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.21">
 
   <meta name="author" content="Miguel Ponce de Leon miguel.ponce@bsc.es">
   <meta name="dcterms.date" content="2026-05-05">
-  <title>Mini Course – 4 Test case</title>
+  <title>Mini Course – 1 Basic example</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,12 +30,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
-  <link rel="stylesheet" href="../../../lectures/css/styles.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link rel="stylesheet" href="../lectures/css/styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -123,17 +123,13 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-  
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-  <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../../../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
-  <h1 class="title">4 Test case</h1>
+<section id="title-slide" data-background-image="../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
+  <h1 class="title">1 Basic example</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -150,100 +146,238 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 <p>This notebook runs a basic parametrization of the model.</p>
 <p>We simulate an SIR epidemic in a system of M subpopulations.</p>
 </section>
-<section id="initialize-model" class="slide level2">
-<h2>Initialize model</h2>
-<p>Here we set the parameters of the model, and use some dummy data</p>
-<div id="cell-4" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>[[192  96  72]
- [ 45 135   0]
- [ 20   0 100]]
-[120   0   0]
-[0.18181818 0.         0.        ]</code></pre>
-</div>
-</div>
+<section id="inicialización-de-la-metapoblación" class="slide level2">
+<h2>Inicialización de la metapoblación</h2>
+<p>En este bloque generamos un ejemplo sintético de una metapoblación.</p>
+<ul>
+<li><p>Número de subpoblaciones: <code>M = 20</code><br>
+Define cuántas regiones (nodos) tendrá el sistema.</p></li>
+<li><p>Matriz de movilidad: <code>mobility = np.random.rand(M, M)</code><br>
+Se crea una matriz <span class="math inline">\(M \times M\)</span> con valores aleatorios en ([0,1]), donde cada entrada:</p>
+<p>$(j, i) $</p>
+<p>representa la intensidad del flujo de personas desde la región <span class="math inline">\(i\)</span> hacia la región <span class="math inline">\(j\)</span>.<br>
+En este ejemplo, la movilidad es completamente aleatoria (no basada en datos reales).</p></li>
+<li><p>Tamaños de las subpoblaciones: <code>subpopulation_sizes = np.random.randint(20, 100, M)</code><br>
+Se asigna a cada región un tamaño poblacional entero aleatorio entre 20 y 100.</p></li>
+</ul>
 </section>
-<section id="run-simulation" class="slide level2">
-<h2>Run simulation</h2>
-<div id="cell-6" class="cell" data-execution_count="5">
+<section class="slide level2">
+
+<h3 id="interpretación">Interpretación</h3>
+<ul>
+<li>Tenemos <span class="math inline">\(M\)</span> regiones conectadas entre sí.</li>
+<li>Cada región tiene una población distinta.</li>
+<li>La matriz de movilidad define cómo se conectan las regiones mediante flujos de personas.</li>
+</ul>
+<p>Este bloque construye la estructura básica sobre la que se simulará la dinámica epidémica.</p>
+</section>
+<section id="visualización-de-la-red-de-movilidad" class="slide level2">
+<h2>Visualización de la red de movilidad</h2>
+<p>En este bloque construimos y visualizamos una red dirigida que representa la metapoblación:</p>
+<ul>
+<li><strong>Nodos</strong>: cada nodo corresponde a una subpoblación (región).</li>
+<li><strong>Tamaño del nodo</strong>: proporcional al tamaño de la población de esa región.</li>
+<li><strong>Aristas dirigidas (flechas)</strong>: representan los flujos de movilidad entre regiones.</li>
+<li><strong>Grosor de las aristas</strong>: proporcional a la intensidad del flujo (más grueso = mayor movilidad).</li>
+</ul>
+<p>El grafo se construye con <code>networkx</code> a partir de la matriz de movilidad, donde cada entrada ( (i, j) ) indica el flujo desde la región (i) hacia la región (j).</p>
+<p>Para facilitar la interpretación visual: - Se utiliza un layout tipo <em>spring</em> para distribuir los nodos en el espacio. - Los pesos de las aristas se normalizan para escalar su grosor. - Opcionalmente, se puede aplicar un umbral para mostrar solo las conexiones más relevantes.</p>
+<p>Esta visualización ayuda a entender cómo la estructura de movilidad conecta las subpoblaciones y condiciona la propagación de la epidemia.</p>
+
+<img data-src="04_1_basic_example_files/figure-revealjs/cell-4-output-1.png" class="r-stretch"></section>
+<section id="parámetros-epidemiológicos-e-inicialización" class="slide level2">
+<h2>Parámetros epidemiológicos e inicialización</h2>
+<p>En este bloque definimos los parámetros del modelo SIR y las condiciones iniciales de la simulación.</p>
+<h3 id="parámetros-epidemiológicos">Parámetros epidemiológicos</h3>
+<ul>
+<li><p>Tasa de infección: <code>beta = 0.375</code><br>
+Controla la probabilidad de transmisión por contacto.</p></li>
+<li><p>Tasa de recuperación: <code>mu = 1/8</code><br>
+Representa la fracción de individuos infectados que se recuperan por unidad de tiempo (en este caso, un tiempo medio de infección de 8 días).</p></li>
+<li><p>Número reproductivo básico: <code>R0 = beta / mu</code><br>
+Indica el número medio de infecciones secundarias generadas por un individuo infectado en una población completamente susceptible.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="condiciones-iniciales">Condiciones iniciales</h3>
+<ul>
+<li><p>Número inicial de infectados: <code>initial_infected = 10</code><br>
+Cantidad de individuos con los que comienza la epidemia.</p></li>
+<li><p>Región de inicio: <code>outbreak_source = 9</code><br>
+Índice de la subpoblación donde se introduce la infección (también puede ser <code>'random'</code>).</p></li>
+<li><p>Tiempo total de simulación: <code>T_max = 100</code><br>
+Duración total del experimento <em>in silico</em>.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="inicialización-del-modelo">Inicialización del modelo</h3>
+<p>Se crea una instancia del modelo <code>SIRModel</code> utilizando:</p>
+<ul>
+<li>La estructura de movilidad (<code>mobility</code>)</li>
+<li>Los tamaños poblacionales (<code>subpopulation_sizes</code>)</li>
+<li>Los parámetros epidemiológicos y de simulación</li>
+</ul>
+<p>Además:</p>
+<ul>
+<li><code>dt</code> controla el paso de tiempo de la simulación</li>
+<li><code>dt_save</code> define cada cuánto se guardan los resultados</li>
+<li><code>VERBOSE=True</code> permite seguir el progreso de la simulación</li>
+</ul>
+<p>Finalmente, se ejecuta la simulación con:</p>
+<ul>
+<li><code>model.run_simulation()</code></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="interpretación-1">Interpretación</h3>
+<p>Este bloque define completamente el experimento:</p>
+<ul>
+<li>Qué tan contagiosa es la enfermedad</li>
+<li>Cuánto dura la infección</li>
+<li>Dónde comienza el brote</li>
+<li>Cuánto tiempo se simula</li>
+</ul>
+<p>👉 A partir de aquí, el modelo evoluciona dinámicamente la epidemia en la red de subpoblaciones.</p>
+<div id="cell-8" class="cell" data-execution_count="60">
 <div class="cell-output cell-output-stdout">
-<pre><code>[[63.51 31.9  24.59]
- [ 0.    0.    0.  ]
- [ 0.    0.    0.  ]]
-[0.66666667 0.         0.        ] [0.66666667 0.         0.        ]
-[0.49805447 0.27705628 0.27906977] [0.49805447 0.27705628 0.27906977]
-[[1.16472114 0.94372294 0.94573643]
- [0.49805447 0.27705628 0.27906977]
- [0.49805447 0.27705628 0.27906977]] [[1.16472114 0.94372294 0.94573643]
- [0.49805447 0.27705628 0.27906977]
- [0.49805447 0.27705628 0.27906977]]</code></pre>
+<pre><code>Starting Simulation ...
+Simulation completed
+Time: 0min 1.79s</code></pre>
 </div>
 </div>
 </section>
 <section id="show-results" class="slide level2">
 <h2>Show results</h2>
 <h3 id="epidemic-curve">Epidemic curve</h3>
-<div id="cell-11" class="cell" data-execution_count="8">
 
-<div class="cell-output cell-output-stdout">
-<pre><code>[np.float64(0.18181818181818182), np.float64(0.21515151515151515), np.float64(0.10151515151515152), np.float64(0.025757575757575757), np.float64(0.006060606060606061), np.float64(0.0), np.float64(0.0)]</code></pre>
-</div>
-</div>
-<img data-src="4_test_case_files/figure-revealjs/cell-7-output-1.png" class="r-stretch"><h3 id="arrival-times">Arrival times</h3>
-<p>The arrival time of the disease in the subpopulations</p>
-<div id="cell-15" class="cell" data-execution_count="13">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[13], line 22</span>
-<span class="ansi-green-fg ansi-bold">     10</span> model_kwargs <span style="color:rgb(98,98,98)">=</span> {
-<span class="ansi-green-fg ansi-bold">     11</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">flux_matrix</span><span style="color:rgb(175,0,0)">'</span>: _F,
-<span class="ansi-green-fg ansi-bold">     12</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">population_numbers</span><span style="color:rgb(175,0,0)">'</span>: np<span style="color:rgb(98,98,98)">.</span>array([<span style="color:rgb(98,98,98)">360.</span>,<span style="color:rgb(98,98,98)">180.</span>,<span style="color:rgb(98,98,98)">120.</span>]),
-<span class="ansi-green-fg ansi-bold">     13</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">infection_rate</span><span style="color:rgb(175,0,0)">'</span>: _beta,
-<span class="ansi-green-fg ansi-bold">     14</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">recovery_rate</span><span style="color:rgb(175,0,0)">'</span>: _mu,
-<span class="ansi-green-fg ansi-bold">     15</span>                 }
-<span class="ansi-green-fg ansi-bold">     16</span> init_kwargs <span style="color:rgb(98,98,98)">=</span> {
-<span class="ansi-green-fg ansi-bold">     17</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">outbreak_location</span><span style="color:rgb(175,0,0)">'</span>: <span style="color:rgb(98,98,98)">0</span>,
-<span class="ansi-green-fg ansi-bold">     18</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">i0</span><span style="color:rgb(175,0,0)">'</span>: <span style="color:rgb(98,98,98)">120</span>,
-<span class="ansi-green-fg ansi-bold">     19</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">initial_condition_is_integer_number</span><span style="color:rgb(175,0,0)">'</span>: <span style="font-weight:bold;color:rgb(0,135,0)">True</span>
-<span class="ansi-green-fg ansi-bold">     20</span>             }
-<span class="ansi-green-fg">---&gt; 22</span> model2 <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">SIRModel</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">model_kwargs</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">     23</span> model2<span style="color:rgb(98,98,98)">.</span>set_initial_conditions(<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>init_kwargs)
-<span class="ansi-green-fg ansi-bold">     24</span> t <span style="color:rgb(98,98,98)">=</span> np<span style="color:rgb(98,98,98)">.</span>linspace(<span style="color:rgb(98,98,98)">0</span>,T_max,<span style="color:rgb(0,135,0)">int</span>(T_max<span style="color:rgb(98,98,98)">/</span>dt_save)<span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">1</span>)
-
-<span class="ansi-red-fg">TypeError</span>: SIRModel.__init__() got an unexpected keyword argument 'flux_matrix'</pre>
-</div>
-</div>
-</div>
-<div id="cell-16" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> figure <span style="color:rgb(98,98,98)">=</span> plt<span style="color:rgb(98,98,98)">.</span>figure(figsize<span style="color:rgb(98,98,98)">=</span>(<span style="color:rgb(98,98,98)">3.5</span>,<span style="color:rgb(98,98,98)">2</span>))
-<span class="ansi-green-fg">----&gt; 2</span> plt<span style="color:rgb(98,98,98)">.</span>plot(<span class="ansi-yellow-bg">t</span>, all_frank_I, label<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">I</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">firebrick</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      3</span> plt<span style="color:rgb(98,98,98)">.</span>plot(t, all_ben_I<span style="color:rgb(98,98,98)">/</span>_Npop_home<span style="color:rgb(98,98,98)">.</span>sum(), <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">:</span><span style="color:rgb(175,0,0)">'</span>, lw<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>,label<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">I</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">k</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      4</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(98,98,98)">120</span><span style="color:rgb(98,98,98)">/</span>(<span style="color:rgb(98,98,98)">360</span><span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">180</span><span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">120</span>))
-
-<span class="ansi-red-fg">NameError</span>: name 't' is not defined</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 700x400 with 0 Axes&gt;</code></pre>
-</div>
-</div>
-<div id="cell-17" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"1989d119240147de86e2aa6935b7a221","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-</div>
-
+<img data-src="04_1_basic_example_files/figure-revealjs/cell-6-output-1.png" class="r-stretch"></section>
+<section id="ejercicio-1-infectados-por-región" class="slide level2">
+<h2>Ejercicio 1 — Infectados por región</h2>
+<p>Representa el número de individuos infectados a lo largo del tiempo para cada región.</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿Alcanzan todas las regiones el pico al mismo tiempo?</li>
+<li>¿Qué regiones se infectan primero?</li>
+<li>¿De qué depende el orden de infección?</li>
+</ul>
+</section>
+<section id="ejercicio-2-de-simulación-a-xarray" class="slide level2">
+<h2>Ejercicio 2 — De simulación a xarray</h2>
+<p>Convierte la salida de la simulación en un objeto <code>xarray.Dataset</code>.</p>
+<p>Sugerencias:</p>
+<ul>
+<li>Dimensiones: <code>time</code>, <code>region</code></li>
+<li>Variables: <code>S</code>, <code>I</code>, <code>R</code></li>
+</ul>
+<p>Preguntas:</p>
+<ul>
+<li>¿Cuáles son las dimensiones del dataset?</li>
+<li>¿Qué coordenadas puedes definir?</li>
+<li>¿Qué ventajas tiene esta representación frente a arrays o dataframes?</li>
+</ul>
+</section>
+<section id="ejercicio-3-origen-de-la-epidemia" class="slide level2">
+<h2>Ejercicio 3 — Origen de la epidemia</h2>
+<p>Modifica la región inicial donde comienza la infección.</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿Cómo cambia la propagación?</li>
+<li>¿Influye la posición de la región en la red?</li>
+<li>¿Qué regiones parecen más “centrales”?</li>
+</ul>
+</section>
+<section>
+<section id="ejercicios-intermedios" class="title-slide slide level1 center">
+<h1>Ejercicios intermedios</h1>
 
 </section>
+<section id="ejercicio-4-origen-de-la-epidemia" class="slide level2">
+<h2>Ejercicio 4 — Origen de la epidemia</h2>
+<p>Modifica la región inicial donde comienza la infección.</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿Cómo cambia la propagación?</li>
+<li>¿Influye la posición de la región en la red?</li>
+<li>¿Qué regiones parecen más “centrales”?</li>
+</ul>
+</section>
+<section id="ejercicio-5-tiempo-hasta-el-pico" class="slide level2">
+<h2>Ejercicio 5 — Tiempo hasta el pico</h2>
+<p>Calcula el tiempo en el que cada región alcanza su pico de infectados.</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿Están sincronizadas las regiones?</li>
+<li>¿Qué factores explican las diferencias?</li>
+</ul>
+</section></section>
+<section>
+<section id="ejercicios-avanzados" class="title-slide slide level1 center">
+<h1>EJERCICIOS AVANZADOS</h1>
+
+</section>
+<section id="ejercicio-6-relación-con-la-movilidad" class="slide level2">
+<h2>Ejercicio 6 — Relación con la movilidad</h2>
+<p>Analiza qué regiones:</p>
+<ul>
+<li>se infectan antes</li>
+<li>tienen mayor número de casos</li>
+</ul>
+<p>Hipótesis:</p>
+<ul>
+<li>regiones con mayor conectividad o movilidad reciben antes la infección</li>
+</ul>
+<p>¿Se confirma en la simulación?</p>
+</section>
+<section id="ejercicio-7-relación-con-la-movilidad" class="slide level2">
+<h2>Ejercicio 7 — Relación con la movilidad</h2>
+<p>Analiza qué regiones:</p>
+<ul>
+<li>se infectan antes</li>
+<li>tienen mayor número de casos</li>
+</ul>
+<p>Hipótesis:</p>
+<ul>
+<li>regiones con mayor conectividad o movilidad reciben antes la infección</li>
+</ul>
+<p>¿Se confirma en la simulación?</p>
+</section>
+<section id="ejercicio-8-intervención" class="slide level2">
+<h2>Ejercicio 8 — Intervención</h2>
+<p>Reduce la movilidad entre regiones.</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿Cómo cambia el pico de la epidemia?</li>
+<li>¿Se retrasa la propagación?</li>
+<li>¿Se reduce el número total de infectados?</li>
+</ul>
+</section>
+<section id="ejercicio-9-sensibilidad" class="slide level2">
+<h2>Ejercicio 9 — Sensibilidad</h2>
+<p>Modifica ligeramente el parámetro beta.</p>
+<p>Preguntas:</p>
+<ul>
+<li>¿El sistema es sensible a pequeños cambios?</li>
+<li>¿Cambian mucho los resultados?</li>
+</ul>
+</section>
+<section id="ejercicio-exploración-del-modelo" class="slide level2">
+<h2>Ejercicio — Exploración del modelo</h2>
+<p>Simula el modelo para distintos valores de beta.</p>
+<p>Representa:</p>
+<ul>
+<li>el pico de infectados en función de beta</li>
+</ul>
+<p>Preguntas:</p>
+<ul>
+<li>¿Cómo cambia el comportamiento del sistema?</li>
+<li>¿Existe un umbral?</li>
+</ul>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -252,19 +386,19 @@ Cell <span class="ansi-green-fg">In[11], line 2</span>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

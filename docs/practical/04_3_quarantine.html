@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.21">
 
   <meta name="author" content="Miguel Ponce de Leon miguel.ponce@bsc.es">
   <meta name="dcterms.date" content="2026-05-05">
-  <title>Mini Course – 4 Test case</title>
+  <title>Mini Course – 3 Quarantine</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,12 +30,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
-  <link rel="stylesheet" href="../../../lectures/css/styles.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link rel="stylesheet" href="../lectures/css/styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -123,17 +123,13 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-  
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-  <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../../../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
-  <h1 class="title">4 Test case</h1>
+<section id="title-slide" data-background-image="../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
+  <h1 class="title">3 Quarantine</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -147,103 +143,141 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 </section>
 <section class="slide level2">
 
-<p>This notebook runs a basic parametrization of the model.</p>
-<p>We simulate an SIR epidemic in a system of M subpopulations.</p>
+<p>Here we show how quarantine is implemented in the model and how it affects the model.</p>
 </section>
-<section id="initialize-model" class="slide level2">
-<h2>Initialize model</h2>
-<p>Here we set the parameters of the model, and use some dummy data</p>
-<div id="cell-4" class="cell" data-execution_count="4">
+<section>
+<section id="model-setup" class="title-slide slide level1 center">
+<h1>Model setup</h1>
+<p>We again use a simple system, with a random mobility <code>mobility_baseline</code>.</p>
+<p>Now we assume that mobility has been reduced due to lockdown measures. The new mobility is given by the matrix <code>mobility_current</code>, which is simply the baseline mobility flows reduced by random factors.</p>
+<div id="cell-5" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>array([[0.74112467, 0.19767503, 0.73237817, 0.70785095, 0.60291429,
+        0.16560208, 0.44042665, 0.93765138, 0.37054686, 0.07295182,
+        0.68456184, 0.51746623, 0.48246143, 0.69263706, 0.06905228,
+        0.37519765, 0.3263449 , 0.80186188, 0.64448624, 0.23002356],
+       [0.55699889, 0.09097804, 0.36133934, 0.61319439, 0.52165992,
+        0.90144423, 0.54089197, 0.19075767, 0.00457712, 0.85014729,
+        0.00765036, 0.03556816, 0.31098042, 0.66762617, 0.60645637,
+        0.80042893, 0.71020249, 0.41046787, 0.66698057, 0.40838158],
+       [0.51299271, 0.05875887, 0.77592886, 0.56765983, 0.68570427,
+        0.82191303, 0.10995445, 0.10558844, 0.23629991, 0.79193077,
+        0.84162264, 0.12023483, 0.32517879, 0.42740847, 0.58678505,
+        0.68330026, 0.08461898, 0.68802826, 0.1089146 , 0.92446262],
+       [0.12569143, 0.72358114, 0.65660252, 0.61851801, 0.9906327 ,
+        0.09912517, 0.76942154, 0.35381681, 0.1426842 , 0.17129432,
+        0.40605097, 0.27133228, 0.98203906, 0.50714483, 0.5428598 ,
+        0.33349168, 0.0175995 , 0.30040723, 0.23600249, 0.35002887],
+       [0.680301  , 0.16813449, 0.16642604, 0.72946884, 0.21463083,
+        0.69288504, 0.45389586, 0.25459952, 0.96427631, 0.36297098,
+        0.17677525, 0.82204124, 0.965172  , 0.51151351, 0.21797374,
+        0.72656728, 0.97689889, 0.42966437, 0.12864701, 0.75806246],
+       [0.11931081, 0.20937143, 0.25075468, 0.93787664, 0.04736917,
+        0.93727484, 0.31561591, 0.58358177, 0.09670679, 0.96436961,
+        0.03725617, 0.18448947, 0.83294281, 0.54078269, 0.78012975,
+        0.24917095, 0.3850594 , 0.55496132, 0.46089389, 0.17029617],
+       [0.27463858, 0.40953641, 0.74937544, 0.82871089, 0.40733841,
+        0.72674666, 0.92779505, 0.03872068, 0.90329438, 0.81014467,
+        0.01216931, 0.1358107 , 0.83659456, 0.11456961, 0.76632556,
+        0.13004634, 0.06783702, 0.01299961, 0.29494657, 0.39612122],
+       [0.78577957, 0.44533605, 0.79113044, 0.18772008, 0.37181126,
+        0.97149093, 0.88699013, 0.6718301 , 0.58401509, 0.51856143,
+        0.75279728, 0.38308976, 0.772723  , 0.22456197, 0.11812028,
+        0.80838311, 0.1914556 , 0.23828297, 0.6803191 , 0.06221087],
+       [0.30961415, 0.92109882, 0.49018405, 0.10776057, 0.53493245,
+        0.29592975, 0.68313726, 0.39638546, 0.24082306, 0.4739154 ,
+        0.56906878, 0.49061444, 0.76407654, 0.7384493 , 0.21651261,
+        0.34544193, 0.91859907, 0.98148621, 0.53226669, 0.35279607],
+       [0.75480433, 0.22626868, 0.09439525, 0.50417776, 0.06208079,
+        0.12575566, 0.81327476, 0.75884058, 0.53256864, 0.74151109,
+        0.16755524, 0.85105349, 0.34208724, 0.48784102, 0.82419791,
+        0.04502567, 0.22862226, 0.90021002, 0.11720136, 0.95689916],
+       [0.08185328, 0.41165867, 0.58831688, 0.61013428, 0.74186023,
+        0.28147276, 0.20481283, 0.68418678, 0.39724659, 0.40944821,
+        0.99745364, 0.86436335, 0.56017886, 0.86645955, 0.69789561,
+        0.87928119, 0.35809293, 0.46798326, 0.36794342, 0.68547574],
+       [0.75809531, 0.43847462, 0.16526389, 0.17517864, 0.42909638,
+        0.78158554, 0.59502269, 0.72655919, 0.53102987, 0.38809246,
+        0.17571004, 0.33401251, 0.98638547, 0.73110772, 0.30458576,
+        0.31947192, 0.05203328, 0.53690851, 0.71388375, 0.93778345],
+       [0.54272189, 0.53589851, 0.90245551, 0.6366592 , 0.35380788,
+        0.34781558, 0.44827542, 0.76630363, 0.88476788, 0.49792005,
+        0.52326563, 0.45795742, 0.35176425, 0.93391556, 0.55416852,
+        0.85395043, 0.81947663, 0.54858063, 0.83336927, 0.63449114],
+       [0.88097153, 0.29450634, 0.81351757, 0.07832882, 0.27542745,
+        0.56995861, 0.73496728, 0.12162319, 0.07452108, 0.18539243,
+        0.70270021, 0.90873299, 0.21102943, 0.61702408, 0.68272528,
+        0.32231144, 0.67590863, 0.61563579, 0.1138016 , 0.69135685],
+       [0.27118676, 0.66244968, 0.73303976, 0.77914634, 0.76084709,
+        0.67662155, 0.37584367, 0.22853573, 0.05079409, 0.17074622,
+        0.14323545, 0.35728415, 0.24864311, 0.06300884, 0.41797535,
+        0.70343406, 0.89406426, 0.68328247, 0.03165507, 0.13830967],
+       [0.34344024, 0.5053935 , 0.94127586, 0.01580976, 0.59836163,
+        0.80485083, 0.43497453, 0.7680815 , 0.4740992 , 0.12168025,
+        0.9162932 , 0.12390186, 0.35685528, 0.25477302, 0.27264343,
+        0.93856476, 0.25984918, 0.95438474, 0.06144174, 0.41129611],
+       [0.82955469, 0.43298168, 0.07222358, 0.66647619, 0.89984133,
+        0.791552  , 0.94175939, 0.35539067, 0.42895031, 0.38738354,
+        0.29452366, 0.11409806, 0.05237056, 0.99518594, 0.99884078,
+        0.07174434, 0.90880076, 0.17750381, 0.23893083, 0.43244762],
+       [0.69120555, 0.49993699, 0.09960759, 0.69744037, 0.61562021,
+        0.03638535, 0.73482221, 0.27853297, 0.38044625, 0.95973372,
+        0.75184357, 0.61697972, 0.6986805 , 0.74267797, 0.5730267 ,
+        0.36245577, 0.02050795, 0.41104585, 0.68263041, 0.42186289],
+       [0.26541271, 0.99636377, 0.94786269, 0.74601348, 0.76818351,
+        0.2749986 , 0.76286132, 0.79793954, 0.96402254, 0.13384304,
+        0.85158151, 0.76011805, 0.29095579, 0.16324564, 0.98424765,
+        0.31062265, 0.8551972 , 0.28129178, 0.35048309, 0.58770582],
+       [0.20489805, 0.66300482, 0.74332727, 0.75772574, 0.82913505,
+        0.38319957, 0.46227891, 0.01964447, 0.96224515, 0.45427109,
+        0.00882257, 0.72696088, 0.05584514, 0.84706968, 0.53078009,
+        0.80713883, 0.18621917, 0.05524342, 0.32281863, 0.47566647]])</code></pre>
+</div>
+</div>
+</section>
+<section id="quarantine-scenarios" class="slide level2">
+<h2>Quarantine scenarios</h2>
+<p>Quarantine is implemented in two different ways in the model:</p>
+<ul>
+<li>The <code>isolation</code> scenario assumes that the reduced mobility means that individual stay at home, and are effectively removed from the dynamices.</li>
+<li>The <code>distancing</code> scenario instead assumes that the reduced mobility corresponds to a reduction in contacts between individuals.</li>
+</ul>
+<p>More detailed descriptions of both scenarios are given in the manuscript.</p>
+</section>
+<section id="initialize-and-run-scenarios" class="slide level2">
+<h2>Initialize and run scenarios</h2>
+<p>We now initialize and run three different variations of the model: no quarantine, isolation, and distancing.</p>
+<p>Run simulations</p>
+<div id="cell-11" class="cell" data-tags="[]" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
-<pre><code>[[192  96  72]
- [ 45 135   0]
- [ 20   0 100]]
-[120   0   0]
-[0.18181818 0.         0.        ]</code></pre>
+<pre><code>Starting Simulation ...
+Simulation completed
+Time: 0min 2.34s</code></pre>
 </div>
 </div>
-</section>
-<section id="run-simulation" class="slide level2">
-<h2>Run simulation</h2>
-<div id="cell-6" class="cell" data-execution_count="5">
+<div id="cell-12" class="cell" data-tags="[]" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
-<pre><code>[[63.51 31.9  24.59]
- [ 0.    0.    0.  ]
- [ 0.    0.    0.  ]]
-[0.66666667 0.         0.        ] [0.66666667 0.         0.        ]
-[0.49805447 0.27705628 0.27906977] [0.49805447 0.27705628 0.27906977]
-[[1.16472114 0.94372294 0.94573643]
- [0.49805447 0.27705628 0.27906977]
- [0.49805447 0.27705628 0.27906977]] [[1.16472114 0.94372294 0.94573643]
- [0.49805447 0.27705628 0.27906977]
- [0.49805447 0.27705628 0.27906977]]</code></pre>
+<pre><code>Starting Simulation ...
+Simulation completed
+Time: 0min 2.01s</code></pre>
 </div>
 </div>
-</section>
-<section id="show-results" class="slide level2">
-<h2>Show results</h2>
-<h3 id="epidemic-curve">Epidemic curve</h3>
-<div id="cell-11" class="cell" data-execution_count="8">
-
+<div id="cell-13" class="cell" data-tags="[]" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
-<pre><code>[np.float64(0.18181818181818182), np.float64(0.21515151515151515), np.float64(0.10151515151515152), np.float64(0.025757575757575757), np.float64(0.006060606060606061), np.float64(0.0), np.float64(0.0)]</code></pre>
+<pre><code>Starting Simulation ...
+Simulation completed
+Time: 0min 2.39s</code></pre>
 </div>
 </div>
-<img data-src="4_test_case_files/figure-revealjs/cell-7-output-1.png" class="r-stretch"><h3 id="arrival-times">Arrival times</h3>
-<p>The arrival time of the disease in the subpopulations</p>
-<div id="cell-15" class="cell" data-execution_count="13">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[13], line 22</span>
-<span class="ansi-green-fg ansi-bold">     10</span> model_kwargs <span style="color:rgb(98,98,98)">=</span> {
-<span class="ansi-green-fg ansi-bold">     11</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">flux_matrix</span><span style="color:rgb(175,0,0)">'</span>: _F,
-<span class="ansi-green-fg ansi-bold">     12</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">population_numbers</span><span style="color:rgb(175,0,0)">'</span>: np<span style="color:rgb(98,98,98)">.</span>array([<span style="color:rgb(98,98,98)">360.</span>,<span style="color:rgb(98,98,98)">180.</span>,<span style="color:rgb(98,98,98)">120.</span>]),
-<span class="ansi-green-fg ansi-bold">     13</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">infection_rate</span><span style="color:rgb(175,0,0)">'</span>: _beta,
-<span class="ansi-green-fg ansi-bold">     14</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">recovery_rate</span><span style="color:rgb(175,0,0)">'</span>: _mu,
-<span class="ansi-green-fg ansi-bold">     15</span>                 }
-<span class="ansi-green-fg ansi-bold">     16</span> init_kwargs <span style="color:rgb(98,98,98)">=</span> {
-<span class="ansi-green-fg ansi-bold">     17</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">outbreak_location</span><span style="color:rgb(175,0,0)">'</span>: <span style="color:rgb(98,98,98)">0</span>,
-<span class="ansi-green-fg ansi-bold">     18</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">i0</span><span style="color:rgb(175,0,0)">'</span>: <span style="color:rgb(98,98,98)">120</span>,
-<span class="ansi-green-fg ansi-bold">     19</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">initial_condition_is_integer_number</span><span style="color:rgb(175,0,0)">'</span>: <span style="font-weight:bold;color:rgb(0,135,0)">True</span>
-<span class="ansi-green-fg ansi-bold">     20</span>             }
-<span class="ansi-green-fg">---&gt; 22</span> model2 <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">SIRModel</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">model_kwargs</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">     23</span> model2<span style="color:rgb(98,98,98)">.</span>set_initial_conditions(<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>init_kwargs)
-<span class="ansi-green-fg ansi-bold">     24</span> t <span style="color:rgb(98,98,98)">=</span> np<span style="color:rgb(98,98,98)">.</span>linspace(<span style="color:rgb(98,98,98)">0</span>,T_max,<span style="color:rgb(0,135,0)">int</span>(T_max<span style="color:rgb(98,98,98)">/</span>dt_save)<span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">1</span>)
-
-<span class="ansi-red-fg">TypeError</span>: SIRModel.__init__() got an unexpected keyword argument 'flux_matrix'</pre>
-</div>
-</div>
-</div>
-<div id="cell-16" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> figure <span style="color:rgb(98,98,98)">=</span> plt<span style="color:rgb(98,98,98)">.</span>figure(figsize<span style="color:rgb(98,98,98)">=</span>(<span style="color:rgb(98,98,98)">3.5</span>,<span style="color:rgb(98,98,98)">2</span>))
-<span class="ansi-green-fg">----&gt; 2</span> plt<span style="color:rgb(98,98,98)">.</span>plot(<span class="ansi-yellow-bg">t</span>, all_frank_I, label<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">I</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">firebrick</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      3</span> plt<span style="color:rgb(98,98,98)">.</span>plot(t, all_ben_I<span style="color:rgb(98,98,98)">/</span>_Npop_home<span style="color:rgb(98,98,98)">.</span>sum(), <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">:</span><span style="color:rgb(175,0,0)">'</span>, lw<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>,label<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">I</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">k</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      4</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(98,98,98)">120</span><span style="color:rgb(98,98,98)">/</span>(<span style="color:rgb(98,98,98)">360</span><span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">180</span><span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">120</span>))
-
-<span class="ansi-red-fg">NameError</span>: name 't' is not defined</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 700x400 with 0 Axes&gt;</code></pre>
-</div>
-</div>
-<div id="cell-17" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"1989d119240147de86e2aa6935b7a221","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-</div>
-
-
 </section>
+<section id="comparison-of-results" class="slide level2">
+<h2>Comparison of results</h2>
+<p>We can see that both quarantine-scenarios “flatten the curve”.</p>
+<p>The <code>isolation</code> scenario shows a flatter curve on average (but as we only run one simulation this doesn’t have to be the case.</p>
+
+
+
+<img data-src="04_3_quarantine_files/figure-revealjs/cell-9-output-1.png" class="r-stretch"></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -252,19 +286,19 @@ Cell <span class="ansi-green-fg">In[11], line 2</span>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

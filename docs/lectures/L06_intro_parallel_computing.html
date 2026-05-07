@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.21">
 
   <meta name="author" content="Miguel Ponce de Leon miguel.ponce@bsc.es">
   <meta name="dcterms.date" content="2026-05-05">
-  <title>Mini Course – 4 Test case</title>
+  <title>Mini Course – Breve introducción computación paralela</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,13 +29,79 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
-  <link rel="stylesheet" href="../../../lectures/css/styles.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link rel="stylesheet" href="../lectures/css/styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -123,17 +189,14 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-  
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-  <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../../../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
-  <h1 class="title">4 Test case</h1>
+<section id="title-slide" data-background-image="../lectures/img/bsc_logo.jpg" data-background-position="top left" data-background-size="280px" class="quarto-title-block center">
+  <h1 class="title">Breve introducción computación paralela</h1>
+  <p class="subtitle">Paradigmas de paralelización</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -145,102 +208,273 @@ Miguel Ponce de Leon miguel.ponce@bsc.es
 
   <p class="date">2026-05-05</p>
 </section>
+<section id="por-qué-computación-paralela" class="slide level2">
+<h2>¿Por qué computación paralela?</h2>
+<p>Muchos problemas científicos requieren:</p>
+<ul>
+<li>ejecutar modelos muchas veces<br>
+</li>
+<li>explorar grandes espacios de parámetros<br>
+</li>
+<li>procesar grandes volúmenes de datos</li>
+</ul>
+<p><strong>Ejemplo:</strong></p>
+<p>Simular una epidemia para 1000 combinaciones de parámetros</p>
+</section>
+<section id="computación-secuencial-vs-paralela" class="slide level2">
+<h2>Computación secuencial vs paralela</h2>
+<h3 id="secuencial">Secuencial</h3>
+<ul>
+<li>una tarea cada vez</li>
+</ul>
+<h3 id="paralela">Paralela</h3>
+<ul>
+<li>múltiples tareas al mismo tiempo</li>
+</ul>
+<blockquote>
+<p>objetivo: reducir el tiempo total de ejecución</p>
+</blockquote>
+</section>
+<section id="computacion-secuencial" class="slide level2 figure-slide">
+<h2>Computacion Secuencial</h2>
+<hr>
+<div class="content">
+<p><img data-src="img/serialProblem.gif" width="800"></p>
+</div>
+<div class="footer">
+<p>Source: https://hpc.llnl.gov/documentation</p>
+</div>
+</section>
+<section id="computacion-paralela" class="slide level2 figure-slide">
+<h2>Computacion Paralela</h2>
+<hr>
+<div class="content">
+<p><img data-src="img/parallelProblem.gif" width="800"></p>
+</div>
+<div class="footer">
+<p>Source: https://hpc.llnl.gov/documentation</p>
+</div>
+</section>
+<section id="idea-clave" class="slide level2">
+<h2>Idea clave</h2>
+<h3 id="dividir-un-problema-grande-en-tareas-más-pequeñas-hpc">Dividir un problema grande en tareas más pequeñas (HPC):</h3>
+<ul>
+<li>independientes<br>
+</li>
+<li>ejecutables simultáneamente</li>
+</ul>
+<h3 id="repetir-mcuchas-tareas-htc">Repetir mcuchas tareas (HTC):</h3>
+<ul>
+<li>evaluar difereentes sets de parametros</li>
+<li>ejecutables simultáneamente</li>
+</ul>
+<blockquote>
+<p><em>divide and conquer</em></p>
+</blockquote>
+</section>
+<section id="paradigmas-de-paralelización" class="slide level2">
+<h2>Paradigmas de paralelización</h2>
+<hr>
+<div class="columns">
+<div class="column">
+<p><img data-src="img/shared_mem.gif"></p>
+</div><div class="column">
+<p><img data-src="img/distributed_memory.png"></p>
+</div></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Memoria</th>
+<th>Escalabilidad</th>
+<th>Complejidad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compartida</td>
+<td>común</td>
+<td>baja-media</td>
+<td>baja</td>
+</tr>
+<tr class="even">
+<td>Distribuida</td>
+<td>separada</td>
+<td>alta</td>
+<td>alta</td>
+</tr>
+</tbody>
+</table>
+<div class="footer">
+<p>Source: https://hpc.llnl.gov/documentation</p>
+</div>
+</section>
+<section id="memoria-compartida" class="slide level2">
+<h2>Memoria compartida</h2>
+<hr>
+<ul>
+<li>múltiples procesos/threads<br>
+</li>
+<li>comparten la misma memoria<br>
+</li>
+<li>CPU multicore</li>
+<li>Multiprocessing (python)</li>
+</ul>
+<p><strong>Ventaja:</strong></p>
+<ul>
+<li>fácil de programar</li>
+</ul>
+<p><strong>Limitación:</strong></p>
+<ul>
+<li>escalabilidad limitada a un solo ordenador</li>
+</ul>
+</section>
+<section id="memoria-distribuida" class="slide level2">
+<h2>Memoria distribuida</h2>
+<hr>
+<ul>
+<li>múltiples nodos (máquinas)<br>
+</li>
+<li>cada uno con su propia memoria<br>
+</li>
+<li>comunicación explícita:</li>
+<li>MPI (Message Passing Interface)</li>
+</ul>
+<p><strong>Ventaja</strong>:</p>
+<ul>
+<li>alta escalabilidad</li>
+</ul>
+<p><em>Limitación:</em></p>
+<ul>
+<li>mayor complejidad</li>
+</ul>
+</section>
+<section id="problemas-paralelizables" class="slide level2">
+<h2>Problemas paralelizables</h2>
+<hr>
+<p><strong>No todos los problemas se paralelizan igual.</strong></p>
+<h3 id="dependencias">Dependencias:</h3>
+<ul>
+<li><p>tareas independientes → fácil<br>
+</p></li>
+<li><p>tareas acopladas → difícil</p></li>
+<li><p>Problemas paralelizables:</p>
+<ul>
+<li>Muchas operaciones independientes</li>
+</ul></li>
+<li><p>Problemas no paralelizables:</p>
+<ul>
+<li>Dependencias fuertes entre pasos</li>
+</ul></li>
+</ul>
+</section>
+<section id="embarrassingly-parallel" class="slide level2">
+<h2>Embarrassingly parallel</h2>
+<hr>
+<p><strong>Problemas donde:</strong></p>
+<ul>
+<li>las tareas son completamente independientes<br>
+</li>
+<li>no requieren comunicación</li>
+</ul>
+</section>
 <section class="slide level2">
 
-<p>This notebook runs a basic parametrization of the model.</p>
-<p>We simulate an SIR epidemic in a system of M subpopulations.</p>
+<h3 id="problema-difícil-de-paralelizar">❌ Problema difícil de paralelizar</h3>
+<p><strong>Serie de Fibonacci (recursiva clásica)</strong></p>
+<p><span class="math display">\[
+F(n) = F(n-1) + F(n-2)
+\]</span></p>
+<blockquote>
+<p>Cada cálculo depende de los anteriores</p>
+</blockquote>
+<ul>
+<li>No se puede avanzar sin conocer resultados previos</li>
+<li>Fuerte dependencia secuencial</li>
+<li>No es posible paralelizar</li>
+</ul>
+<p>–</p>
 </section>
-<section id="initialize-model" class="slide level2">
-<h2>Initialize model</h2>
-<p>Here we set the parameters of the model, and use some dummy data</p>
-<div id="cell-4" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>[[192  96  72]
- [ 45 135   0]
- [ 20   0 100]]
-[120   0   0]
-[0.18181818 0.         0.        ]</code></pre>
-</div>
-</div>
+<section id="ejemplos-de-paralelización-i" class="slide level2">
+<h2>Ejemplos de paralelización (I)</h2>
+<h3 id="problema-fácilmente-paralelizable">Problema fácilmente paralelizable</h3>
+<p><strong>Multiplicación de matrices</strong></p>
+<p>Dadas dos matrices (A) y (B), cada elemento de la matriz resultado (C) se calcula como:</p>
+<p><span class="math display">\[
+C_{ij} = \sum_k A_{ik} B_{kj}
+\]</span></p>
+<p>Cada elemento (C_{ij}) se puede calcular de forma independiente</p>
+<ul>
+<li>Se pueden asignar diferentes elementos a distintos procesadores</li>
+<li>Muy eficiente en paralelo (GPU, HPC)</li>
+</ul>
 </section>
-<section id="run-simulation" class="slide level2">
-<h2>Run simulation</h2>
-<div id="cell-6" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-stdout">
-<pre><code>[[63.51 31.9  24.59]
- [ 0.    0.    0.  ]
- [ 0.    0.    0.  ]]
-[0.66666667 0.         0.        ] [0.66666667 0.         0.        ]
-[0.49805447 0.27705628 0.27906977] [0.49805447 0.27705628 0.27906977]
-[[1.16472114 0.94372294 0.94573643]
- [0.49805447 0.27705628 0.27906977]
- [0.49805447 0.27705628 0.27906977]] [[1.16472114 0.94372294 0.94573643]
- [0.49805447 0.27705628 0.27906977]
- [0.49805447 0.27705628 0.27906977]]</code></pre>
-</div>
-</div>
+<section id="ejemplos-de-paralelización-ii" class="slide level2">
+<h2>Ejemplos de paralelización (II)</h2>
+<p><strong>Barrido de parámetros</strong></p>
+<p>Cada conjunto de parámetros <span class="math inline">\(p_i\)</span> se peude evaluar de forma independiente</p>
+<ul>
+<li>Se pueden asignar distintas simulaciones a distintos procesadores</li>
+</ul>
+<blockquote>
+<p>caso ideal para paralelización</p>
+</blockquote>
 </section>
-<section id="show-results" class="slide level2">
-<h2>Show results</h2>
-<h3 id="epidemic-curve">Epidemic curve</h3>
-<div id="cell-11" class="cell" data-execution_count="8">
+<section id="en-este-curso" class="slide level2">
+<h2>En este curso</h2>
+<hr>
+<p>Ya hemos visto:</p>
+<ul>
+<li>simulaciones de epidemias<br>
+</li>
+<li>exploración de parámetros</li>
+</ul>
+<p><strong>Ejemplo:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="cf">for</span> beta <span class="kw">in</span> betas:</span>
+<span id="cb1-2"><a></a>    simular(beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="problema" class="slide level2">
+<h2>Problema</h2>
+<hr>
+<p>Queremos explorar muchos parámetros:</p>
+<ul>
+<li>beta<br>
+</li>
+<li>movilidad<br>
+</li>
+<li>condiciones iniciales</li>
+</ul>
+<blockquote>
+<p>el coste computacional crece rápidamente</p>
+</blockquote>
+</section>
+<section id="solución" class="slide level2">
+<h2>Solución</h2>
+<hr>
+<p>Ejecutar simulaciones en paralelo:</p>
+<ul>
+<li>cada simulación es independiente<br>
+</li>
+<li>podemos distribuirlas</li>
+</ul>
+<blockquote>
+<p>problema “embarrassingly parallel”</p>
+</blockquote>
+</section>
+<section id="próximo-paso" class="slide level2">
+<h2>Próximo paso</h2>
+<hr>
+<p>Vamos a:</p>
+<ul>
+<li>ejecutar múltiples simulaciones<br>
+</li>
+<li>en paralelo<br>
+</li>
+<li>explorar parámetros</li>
+</ul>
+</section>
+<section class="slide level2">
 
-<div class="cell-output cell-output-stdout">
-<pre><code>[np.float64(0.18181818181818182), np.float64(0.21515151515151515), np.float64(0.10151515151515152), np.float64(0.025757575757575757), np.float64(0.006060606060606061), np.float64(0.0), np.float64(0.0)]</code></pre>
-</div>
-</div>
-<img data-src="4_test_case_files/figure-revealjs/cell-7-output-1.png" class="r-stretch"><h3 id="arrival-times">Arrival times</h3>
-<p>The arrival time of the disease in the subpopulations</p>
-<div id="cell-15" class="cell" data-execution_count="13">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[13], line 22</span>
-<span class="ansi-green-fg ansi-bold">     10</span> model_kwargs <span style="color:rgb(98,98,98)">=</span> {
-<span class="ansi-green-fg ansi-bold">     11</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">flux_matrix</span><span style="color:rgb(175,0,0)">'</span>: _F,
-<span class="ansi-green-fg ansi-bold">     12</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">population_numbers</span><span style="color:rgb(175,0,0)">'</span>: np<span style="color:rgb(98,98,98)">.</span>array([<span style="color:rgb(98,98,98)">360.</span>,<span style="color:rgb(98,98,98)">180.</span>,<span style="color:rgb(98,98,98)">120.</span>]),
-<span class="ansi-green-fg ansi-bold">     13</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">infection_rate</span><span style="color:rgb(175,0,0)">'</span>: _beta,
-<span class="ansi-green-fg ansi-bold">     14</span>                 <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">recovery_rate</span><span style="color:rgb(175,0,0)">'</span>: _mu,
-<span class="ansi-green-fg ansi-bold">     15</span>                 }
-<span class="ansi-green-fg ansi-bold">     16</span> init_kwargs <span style="color:rgb(98,98,98)">=</span> {
-<span class="ansi-green-fg ansi-bold">     17</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">outbreak_location</span><span style="color:rgb(175,0,0)">'</span>: <span style="color:rgb(98,98,98)">0</span>,
-<span class="ansi-green-fg ansi-bold">     18</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">i0</span><span style="color:rgb(175,0,0)">'</span>: <span style="color:rgb(98,98,98)">120</span>,
-<span class="ansi-green-fg ansi-bold">     19</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">initial_condition_is_integer_number</span><span style="color:rgb(175,0,0)">'</span>: <span style="font-weight:bold;color:rgb(0,135,0)">True</span>
-<span class="ansi-green-fg ansi-bold">     20</span>             }
-<span class="ansi-green-fg">---&gt; 22</span> model2 <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">SIRModel</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">model_kwargs</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">     23</span> model2<span style="color:rgb(98,98,98)">.</span>set_initial_conditions(<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>init_kwargs)
-<span class="ansi-green-fg ansi-bold">     24</span> t <span style="color:rgb(98,98,98)">=</span> np<span style="color:rgb(98,98,98)">.</span>linspace(<span style="color:rgb(98,98,98)">0</span>,T_max,<span style="color:rgb(0,135,0)">int</span>(T_max<span style="color:rgb(98,98,98)">/</span>dt_save)<span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">1</span>)
-
-<span class="ansi-red-fg">TypeError</span>: SIRModel.__init__() got an unexpected keyword argument 'flux_matrix'</pre>
-</div>
-</div>
-</div>
-<div id="cell-16" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> figure <span style="color:rgb(98,98,98)">=</span> plt<span style="color:rgb(98,98,98)">.</span>figure(figsize<span style="color:rgb(98,98,98)">=</span>(<span style="color:rgb(98,98,98)">3.5</span>,<span style="color:rgb(98,98,98)">2</span>))
-<span class="ansi-green-fg">----&gt; 2</span> plt<span style="color:rgb(98,98,98)">.</span>plot(<span class="ansi-yellow-bg">t</span>, all_frank_I, label<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">I</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">firebrick</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      3</span> plt<span style="color:rgb(98,98,98)">.</span>plot(t, all_ben_I<span style="color:rgb(98,98,98)">/</span>_Npop_home<span style="color:rgb(98,98,98)">.</span>sum(), <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">:</span><span style="color:rgb(175,0,0)">'</span>, lw<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>,label<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">I</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">k</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      4</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(98,98,98)">120</span><span style="color:rgb(98,98,98)">/</span>(<span style="color:rgb(98,98,98)">360</span><span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">180</span><span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">120</span>))
-
-<span class="ansi-red-fg">NameError</span>: name 't' is not defined</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 700x400 with 0 Axes&gt;</code></pre>
-</div>
-</div>
-<div id="cell-17" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"1989d119240147de86e2aa6935b7a221","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-</div>
 
 
 </section>
@@ -252,19 +486,19 @@ Cell <span class="ansi-green-fg">In[11], line 2</span>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
