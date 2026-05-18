@@ -1,0 +1,85 @@
+---
+title: "Course Lectures"
+---
+
+
+# Lecture Slides
+
+This section contains the lecture slides for the Scientific Computing mini-course.
+
+
+::: {.grid}
+
+::: {.g-col-6}
+## 0. Environment Setup
+
+Introduction to the course environment and tools.
+
+[Open Slides](lectures/day1_setup.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 1. Introduction
+
+General Motivation, Complex Systems, and Course Structure
+
+[Open Slides](lectures/L01_intro.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 2. N-D Arrays
+
+Introduction to Multidimensional Arrays
+
+[Open Slides](lectures/L02_nd_arrays.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 3. Massive Data
+
+Handling large-scale datasets and efficient workflows.
+
+[Open Slides](lectures/L03_massive_data.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 4. Computer simulations
+
+Introduction to computational simulations: 
+
+[Open Slides](lectures/L04_simulations.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 5. Epidemic Models
+
+Compartmental and metapopulation epidemic models.
+
+[Open Slides](lectures/L05_epidemic_models.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 6. Parallel Computing
+
+Brief Introduction to Parallel Computing
+
+[Open Slides](lectures/L06_intro_parallel_computing.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 7. Evolutionary Algorithms
+
+Optimization and evolutionary strategies.
+
+[Open Slides](lectures/L07_evolutionary_algorithms.html){.btn .btn-primary target="_blank"}
+:::
+
+::: {.g-col-6}
+## 8. Extreme-scale model exploration
+
+Large-scale model exploration workflows.
+
+[Open Slides](lectures/L08_emews.html){.btn .btn-primary target="_blank"}
+:::
+
+:::

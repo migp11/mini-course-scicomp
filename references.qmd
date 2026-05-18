@@ -1,0 +1,70 @@
+---
+title: "References"
+format:
+  html:
+    theme: default
+page-layout: article
+---
+
+## Recommended Bibliography
+
+VanderPlas, J. (2016). Python Data Science Handbook. O’Reilly Media.
+
+Harrison, M. (2021). Effective Pandas: Patterns for Data Manipulation. Treading on Python.
+
+Downey, A. (2023). Modeling and Simulation in Python.
+
+Wilson, G., Bryan, J., Cranston, K., Kitzes, J., Nederbragt, L., & Teal, T. K. (2017). Good enough practices in scientific computing. PLOS Computational Biology, 13(6), e1005510.
+
+Ponce-de-Leon, M., et al. (2021). COVID-19 Flow-Maps: An open geographic information system on COVID-19 and human mobility for Spain. Scientific Data, 8(1), 310.
+
+Sunnåker, M., Busetto, A. G., Numminen, E., Corander, J., Foll, M., & Dessimoz, C. (2013). Approximate Bayesian computation. PLOS Computational Biology, 9(1), e1002803.
+
+Akasiadis, C., Ponce-de-Leon, M., Montagud, A., et al. (2022). Parallel model exploration for tumor treatment simulations. Computational Intelligence.
+
+Collier, N., Wozniak, J. M., Fadikar, A., Stevens, A., & Ozik, J. (2024). Distributed model exploration with EMEWS. In Winter Simulation Conference (pp. 72–86). IEEE.
+
+Ozik, J., Wozniak, J. M., Collier, N., Macal, C. M., & Binois, M. (2021). A population data-driven workflow for COVID-19 modeling and learning. The International Journal of High Performance Computing Applications, 35(5), 483–499.
+
+Cranmer, K., Brehmer, J., & Louppe, G. (2020). The frontier of simulation-based inference. Proceedings of the National Academy of Sciences, 117(48), 30055–30062.
+
+
+## Computational tools
+
+**Data analysis**
+- pandas, polars, dask, pyarrow, xarray
+
+**Modeling and computing**
+- numpy, xarray, scipy  
+
+**Visualization**
+- seaborn, matplotlib, plotly  
+
+**Machine learning**
+- scikit-learn, statsmodels  
+
+**Environments**
+- Jupyter notebooks / JupyterLab
+
+**Simulations**
+- EpiSim, EpiCommute, Repast, NetLogo, EMEWS
+
+## Datasets
+
+### Dataset Movilidad (MITMA v1) Spain
+Mobile phone-based mobility dataset used during the COVID-19 pandemic to monitor changes in population mobility and support epidemiological models and was release by the Ministry of Transportation and Sustainable Mobility.
+
+The dataset includes daily journeys between geographical areas of Spain (municipalities and census tracts), aggregated by origin, destination, date, time, distance, and place of residence.
+
+The period covered runs from February 2020 to May 2021 and include two different indicators:
+
+**Maestra 1**: Matriz Origen-Destino para la capa de movilidad, con resolución horaria. Cada entrada incluye una fecha y un periodo horario (el intervalo entre dos horas consecutivas), las zonas de origen y destino, y el número de viajes entre el origen y el destino. Las zonas de origen y destino corresponden a geometrías de la capa de movilidad de MITMA, y también se registran los viajes internos (dentro de la misma capa de origen y destino).**Master 1**: Origin-Destination Matrix for the mobility layer, with hourly resolution. Each entry includes a date and time period (the interval between two consecutive hours), the origin and destination zones, and the number of trips between the origin and destination. The origin and destination zones correspond to geometries of the MITMA mobility layer, and internal trips (within the same origin and destination layer) are also recorded.
+
+**Master 2**: Matrix of trips per person in each mobility area, with daily data. This indicator reports on the daily mobility behavior of the population. For each date and zone in the MITMA mobility layer, the indicator shows how many people have made 0, 1, 2, or more than 2 trips. While the indicator does not provide the destination of the trips, it does take into account the proportion of people who make at least one trip or none, as well as the total estimated population inesa zona para la fecha indicada (considerando como población a las personas que pernoctan en la zona en esa fecha).
+
+Source: [https://www.transportes.gob.es/ministerio/proyectos-singulares/estudios-de-movilidad-con-big-data/estudios-de-movilidad-anteriores/covid-19]()
+
+### Dataset COVID-19 España
+Descripción: Datos desde el inicio de la pandemia, para todas las edades, hasta el 28 de marzo de 2022. Número de casos, número de hospitalizaciones, número de ingresos en UCI y número de defunciones por sexo, edad y provincia de residencia.
+Source: [https://cnecovid.isciii.es/covid19/#documentaci%C3%B3n-y-datos]()
+

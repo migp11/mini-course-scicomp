@@ -1,0 +1,107 @@
+---
+title: "Practicals"
+---
+
+# Practical Sessions
+
+Hands-on notebooks and exercises for the course.
+
+::: {.grid}
+
+::: {.g-col-6}
+## Pandas Basics
+
+Introduction to tabular data manipulation with Pandas.
+
+[Open Notebook](practical/00_pandas_basics.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Plot Basics
+
+Basic scientific visualization techniques.
+
+[Open Notebook](practical/00_plot_basisc.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## DataFrames
+
+Working with structured datasets and transformations.
+
+[Open Notebook](practical/01_dataframes.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Xarray in 45 Minutes
+
+Introduction to xarray for multidimensional labeled data.
+
+[Open Notebook](practical/02_xarray_in_45_min.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Xarray + Flowmaps
+
+Spatial mobility analysis with xarray and flowmaps.
+
+[Open Notebook](practical/03_xarray_flowmaps.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Basic SIR Model
+
+First epidemic simulation using SIR dynamics.
+
+[Open Notebook](practical/04_0_SIR_basic.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Basic Example
+
+Simple epidemic simulation example.
+
+[Open Notebook](practical/04_1_basic_example.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Lattice Mobility
+
+Spatial epidemic spreading on mobility lattices.
+
+[Open Notebook](practical/04_2_lattice_mobility.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Quarantine Strategies
+
+Modeling interventions and quarantine dynamics.
+
+[Open Notebook](practical/04_3_quarantine.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Parallel Computing
+
+Parallel execution examples and HPC workflows.
+
+[Open Notebook](practical/05_parallel_computing.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Evolutionary Algorithms
+
+Optimization using CMA-ES and evolutionary methods.
+
+[Open Notebook](practical/06_evolutionary_algorithms.html){.btn .btn-success}
+:::
+
+::: {.g-col-6}
+## Processing Zones
+
+Utilities for processing spatial zones and datasets.
+
+[Open Notebook](practical/process_zones.html){.btn .btn-success}
+:::
+
+:::
