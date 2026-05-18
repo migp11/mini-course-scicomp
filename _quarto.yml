@@ -1,32 +1,28 @@
 project:
   type: website
-  output-dir: docs   # important for GitHub Pages (optional)
+  output-dir: docs
 
 website:
-  title: "Mini Course"
+  title: "Scientific Computing and Model Exploration"
+  site-url: "https://migp11.github.io/mini-course-scicomp/"
+
+  navbar:
+    search: true
+
+  page-footer:
+    center: |
+      Scientific Computing Mini-Course · Miguel Ponce de Leon · 2026
+
   sidebar:
-    style: "docked"
+    style: docked
+    collapse-level: 2
     contents:
-      - lectures/lectures/L01_intro.qmd
-      - lectures/lectures/L02_nd_arrays.qmd
-      - lectures/lectures/L03_massive_data.qmd
-      - lectures/lectures/L04_simulations.qmd
-      - lectures/lectures/L05_epidemic_models.qmd
-      - lectures/lectures/L06_intro_parallel_computing.qmd
-      - lectures/lectures/L07_emews.qmd
+      - index.qmd
+      - lectures.qmd
+      - practical.qmd
+      - references.qmd
 
 format:
-  revealjs:
-    theme: simple
-    css: lectures/css/styles.css
-    slide-number: true
+  html:
+    theme: flatly
     toc: false
-    transition: fade
-    title-slide-attributes:
-      data-background-image: lectures/img/bsc_logo.jpg
-      data-background-size: 280px
-      data-background-position: top left
-
-# 👇 shared across all lectures
-author: "Miguel Ponce de Leon miguel.ponce@bsc.es"
-date: "05-05-2026"
