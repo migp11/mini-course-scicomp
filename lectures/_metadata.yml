@@ -1,0 +1,15 @@
+author: "Miguel Ponce de Leon miguel.ponce@bsc.es"
+date: "05-05-2026"
+
+
+format:
+  revealjs:
+    theme: simple
+    css: css/styles.css
+    slide-number: true
+    toc: false
+    transition: fade
+    title-slide-attributes:
+      data-background-image: img/bsc_logo.jpg
+      data-background-size: 280px
+      data-background-position: top left
