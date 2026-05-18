@@ -1,0 +1,1 @@
+Sitemap: https://migp11.github.io/mini-course-scicomp/sitemap.xml

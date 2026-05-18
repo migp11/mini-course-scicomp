@@ -2,15 +2,14 @@
 .quarto/
 
 # Build output (keep if deploying with GitHub Pages)
-# If you use docs/ for publishing → DO NOT ignore it
 # docs/
 
-# If NOT publishing:
-docs/
-_site/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# logs
+*.log
 
 # Python
 __pycache__/
@@ -25,5 +24,10 @@ venv/
 # Optional: large raw data (be careful here)
 practical/data/mitma_v1/personas/
 practical/data/mitma_v1/viajes/
-/.quarto/
+
 **/*.quarto_ipynb
+
+/.quarto/
+
+lectures/.Rhistory
+practical/outcmaes/*
