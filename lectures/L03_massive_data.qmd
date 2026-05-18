@@ -1,21 +1,6 @@
 ---
-title: "Taller de computación científica y exploración de modelos complejos"
-subtitle: |
-  Miguel Ponce de León \<<miguel.ponce@bsc.es>\>\ 
-  _Barcelona Supercomputing Center_  
-  
-date: "05-05-2026"
-format:
-  revealjs:
-    theme: "simple"
-    slide-number: true
-    toc: false
-    center: true
-    transition: fade
-    title-slide-attributes:
-        data-background-image: img/bsc_logo.jpg
-        data-background-size: 280px
-        data-background-position: top left
+title: "Datos masivos"
+subtitle: "Técnicas para el procesamiento y análisis de datos masivos"
 ---
 
 ## ¿Que son los datos masivos?

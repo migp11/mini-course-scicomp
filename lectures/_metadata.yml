@@ -9,7 +9,3 @@ format:
     slide-number: true
     toc: false
     transition: fade
-    title-slide-attributes:
-      data-background-image: img/bsc_logo.jpg
-      data-background-size: 280px
-      data-background-position: top left
